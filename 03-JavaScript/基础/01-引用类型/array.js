@@ -66,11 +66,11 @@ let arr = [1, 1, [2, 3, [4]], "a", "b", ["c", "d"], "f", [["d"], "e"]];
 // }
 
 /* 应用 */
-// // 数组去重
-// function unique (arr) {
-//   return arr.filter(function (item, index, arr) {
-//     // 只在当前元素第一次出现时为真
-//     return arr.indexOf(item, 0) === index
-//   })
-// }
-// console.log(unique(arr));
+// 数组去重
+function unique (arr) {
+  return arr.filter(function (item, index, arr) {
+    // 只在当前元素第一次出现时为真
+    return arr.indexOf(item, 0) === index
+  })
+}
+console.log(unique(arr));

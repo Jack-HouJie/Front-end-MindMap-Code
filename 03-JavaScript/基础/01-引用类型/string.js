@@ -1,22 +1,22 @@
-
 /* 应用 */
 // // 数组展开
 // let arr = [1, 1, [2, 3, [4]], "a", "b", ["c", "d"], "f", [["d"], "e"]];
-// arr.toString().split(',')
+// console.log(arr.toString().split(','))
 
-// 判断回文
-function valid (str) {
-  if (typeof str !== 'string') {
-    return false
-  }
-  return str.split('').reverse().join('') === str
-}
-
+// // 判断回文
+// function valid (str) {
+//   if (typeof str !== 'string') {
+//     return false
+//   }
+//   return str.split('').reverse().join('') === str
+// }
+// console.log(valid("1abcba"))
 // 处理查询字符串
+// const q_str = location.search
+const q_str = 'name=zhangsan&age=14&school=s1&school=s2&student'
 function getQueryString () {
   // 判断是否存在*，通过BOM得到查询字符串*
   // const q_str = location.search.length > 0 ? location.search.slice(1) : ''
-  q_str = 'name=zhangsan&age=14&school=s1&student'
   const items = q_str.length > 0 ? q_str.split('&') : []
   const length = items.length
   let map = {}
@@ -37,6 +37,7 @@ function getQueryString () {
       map[name] = true
     }
   }
-  // console.log(map)
+  console.log(map)
   return map
 }
+getQueryString()
