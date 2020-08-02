@@ -1,0 +1,39 @@
+body{
+    background-color: gray;
+    margin: 60px auto;
+    font-family: "Helvetica", "Arial", sans-serif ;
+    font-size: 10pt;
+    padding: 0px 20px 20px 20px;
+    border: #333333 5px solid;
+}
+h1{
+    margin: 0px;
+    text-shadow: 2px 2px 1px black;
+    color: #333333;
+}
+a {
+    color: #cc6600;
+    font-weight: bold;
+    text-decoration: none;
+}
+ul{
+    padding: 0;
+}
+li{
+    float: left;
+    padding: 1em;
+}
+image{
+    display: block;
+    margin: 0px auto;
+    clear: both;
+}
+#imagegallery li {
+    display: inline;
+}
+
+abbr{
+    text-decoration: none;
+    border: 0;
+    font-style: normal;
+}

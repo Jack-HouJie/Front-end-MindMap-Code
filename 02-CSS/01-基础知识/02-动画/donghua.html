@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>动画</title>
+</head>
+<style>
+  p {
+    animation: 3s infinite alternate slidein;
+  }
+
+  @keyframes slidein {
+    from {
+      margin-left: 100%;
+      width: 300%;
+    }
+
+    75% {
+      font-size: 300%;
+      margin-left: 25%;
+      width: 150%;
+    }
+
+    to {
+      margin-left: 0%;
+      width: 100%;
+    }
+  }
+</style>
+
+<body>
+  <p>
+    The Caterpillar and Alice looked at each other for some time in silence:
+    at last the Caterpillar took the hookah out of its mouth, and addressed
+    her in a languid, sleepy voice.
+  </p>
+</body>
+
+</html>

@@ -1,0 +1,146 @@
+/* General setup */
+
+* {
+  box-sizing: border-box;
+  font-size: 10px;
+}
+
+body {
+  margin: 0 auto;
+  min-width: 1000px;
+  max-width: 1400px;
+  font-family: serif;
+  font-size: 1.2rem;
+  line-height: 1.5rem;
+  letter-spacing: 0.1px;
+  word-spacing: 0.5px;
+}
+
+/* Layout */
+
+section {
+  float: left;
+  width: 50%;
+}
+
+aside {
+  float: left;
+  width: 30%;
+}
+
+nav {
+  float: left;
+  width: 20%;
+}
+
+footer {
+  clear: both;
+}
+
+header,
+section,
+aside,
+nav,
+footer {
+  padding: 20px;
+}
+
+/* header and footer */
+
+header,
+footer {
+  border-top: 5px solid #a66;
+  border-bottom: 5px solid #a66;
+}
+
+/* WRITE YOUR CODE BELOW HERE */
+h1,
+h2 {
+  font-family: sans-serif;
+  font-size: 2rem;
+  letter-spacing: 0.1px;
+  word-spacing: 0.05px;
+}
+
+h1 {
+  text-align: center;
+}
+
+p {
+  text-indent: 20px;
+}
+
+/* 设置链接 */
+a {
+  text-decoration: underline;
+}
+
+a:link {
+  color: #a66;
+}
+
+a:visited {
+  color: #a66;
+}
+
+a:focus {
+  color: #a66;
+  text-decoration: none;
+  outline: none;
+}
+
+a:hover {
+  color: #a66;
+  text-decoration: none;
+}
+
+a:active {
+  color: white;
+  background-color: black;
+}
+
+a[href*="http"] {
+  padding-right: 20px;
+  background-image: url(../images/idcard.jpg);
+  background-size: 20px;
+  background-position: right;
+  background-repeat: no-repeat;
+}
+
+/* 设置列表 */
+p,
+ul li,
+ol li {
+  line-height: 1.5rem;
+}
+
+p,
+ul,
+ol {
+  margin-top: 3px;
+  margin-bottom: 3px;
+}
+
+ul li {
+  list-style-type: square;
+}
+
+ol li {
+  list-style-type: lower-alpha;
+}
+
+/* 导航菜单 */
+nav li {
+  list-style-type: none;
+
+  border: solid #a66;
+  text-align: center;
+  line-height: 3rem;
+  padding: 0px;
+  margin: 20px;
+}
+
+nav a {
+  font-size: 1.5rem;
+  text-decoration: none;
+}

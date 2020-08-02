@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>表格模版</title>
+  <link href="styles/table.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+  <h1>Table template</h1>
+  <!-- 基本行列标题 -->
+  <table>
+    <tr>
+      <th>&nbsp;</th>
+      <th scope="col">Knocky</td>
+      <th scope="col">Flor</th>
+      <th scope="col">Ella</th>
+      <th scope="col">Juan</th>
+    </tr>
+    <tr>
+      <th scope="row">Breed</th>
+      <td>Jack Russell</td>
+      <td>Poodle</td>
+      <td>Streetdog</td>
+      <td>Cocker Spaniel</td>
+    </tr>
+    <tr>
+      <th scope="row">Age</th>
+      <td>16</td>
+      <td>9</td>
+      <td>10</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th scope="row">Owner</th>
+      <td>Mother-in-law</td>
+      <td>Me</td>
+      <td>Me</td>
+      <td>Sister-in-law</td>
+    </tr>
+    <tr>
+      <th scope="row">Eating Habits</th>
+      <td>Eats everyone's leftovers</td>
+      <td>Nibbles at food</td>
+      <td>Hearty eater</td>
+      <td>Will eat till he explodes</td>
+    </tr>
+  </table>
+  <br>
+  <!-- 多行多列 -->
+  <table>
+    <tr>
+      <th scope="colgroup" colspan="2">Animals</th>
+    </tr>
+    <tr>
+      <th scope="colgroup" colspan="2">Hippopotamus</th>
+    </tr>
+    <tr>
+      <th scope="rowgroup" rowspan="2">Horse</th>
+      <td>Mare</td>
+    </tr>
+    <tr>
+      <td>Stallion</td>
+    </tr>
+    <tr>
+      <th scope="colgroup" colspan="2">Crocodile</th>
+    </tr>
+    <tr>
+      <th scope="rowgroup" rowspan="2">Chicken</th>
+      <td>Cock</td>
+    </tr>
+    <tr>
+      <td>Rooster</td>
+    </tr>
+  </table>
+  <br>
+  <!-- 按列样式 -->
+  <table>
+    <colgroup>
+      <col>
+      <col>
+      <col style="background-color: #97db9A;">
+      <col style="width: 42px;">
+      <col style="background-color: #97DB9A">
+      <col style="background-color:#DCC48E; border:4px solid #C1437A">
+      <col style="width: 42px">
+      <col style="width: 42px">
+    </colgroup>
+    <caption>School timetable</caption>
+    <tr>
+      <td>&nbsp;</td>
+      <th>Mon</th>
+      <th>Tues</th>
+      <th>Wed</th>
+      <th>Thurs</th>
+      <th>Fri</th>
+      <th>Sat</th>
+      <th>Sun</th>
+    </tr>
+    <tr>
+      <th>1st period</th>
+      <td>English</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>German</td>
+      <td>Dutch</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <th>2nd period</th>
+      <td>English</td>
+      <td>English</td>
+      <td>&nbsp;</td>
+      <td>German</td>
+      <td>Dutch</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <th>3rd period</th>
+      <td>&nbsp;</td>
+      <td>German</td>
+      <td>&nbsp;</td>
+      <td>German</td>
+      <td>Dutch</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <th>4th period</th>
+      <td>&nbsp;</td>
+      <td>English</td>
+      <td>&nbsp;</td>
+      <td>English</td>
+      <td>Dutch</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+    </tr>
+
+
+  </table>
+</body>
+
+</html>

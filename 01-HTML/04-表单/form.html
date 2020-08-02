@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <title>My test page</title>
+    <link rel="stylesheet" href="styles/form.css">
+  </head>
+  <body>
+    <p>This is my page</p>
+    <form action="/myhandling" method="post">
+      <div>
+        <label for="name">Name:</label>
+        <input type="text" id="name" value="在此处输入姓名" name="usr_name">
+      </div>
+      <div>
+        <label for="mail">E-mail:</label>
+        <input type="email" id="mail" value="在此处输入邮件地址" name="usr_mail">
+      </div>
+      <div>
+        <label for="msg">Message：</label>
+        <textarea id="msg" cols="30" rows="10" name="usr_msg">在此处输入邮件内容</textarea>
+      </div>
+      <fieldset>
+        <legend>Fruit juice size</legend>
+        <p>
+          <input type="radio" name="size" id="size_1" value="small">
+          <label for="size_1">Small</label>
+        </p>
+        <p>
+          <input type="radio" name="size" id="size_2" value="medium">
+          <label for="size_2">Medium</label>
+        </p>
+        <p>
+          <input type="radio" name="size" id="size_3" value="large">
+          <label for="size_3">Large</label>
+        </p>
+      </fieldset>
+
+      <p>
+        <label for="taste_1">I like cherry</label>
+        <input type="checkbox" id="taste_1" name="taste_cherry" value="1">
+      </p>
+      <p>
+        <label for="taste_2">I like banana</label>
+        <input type="checkbox" id="taste_2" name="taste_banana" value="2">
+      </p>
+      <p>
+        <label for="taste_2">I like banana</label>
+        <input type="checkbox" id="taste_2" name="taste_banana" value="2">
+      </p>
+      
+      <div class="button">
+        <button type="submit">发送邮件</button>
+      </div>
+
+     
+    </form>
+
+
+
+  </body>
+</html>

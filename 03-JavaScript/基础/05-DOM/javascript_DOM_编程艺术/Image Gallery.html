@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Image Gallery</title>
+    <link rel="stylesheet" href="styles/layout.css" media="screen"/>
+</head>
+<body>
+  
+  <br>
+  <br>
+  
+    <h1>Snapshots</h1>
+    <ul id="imagegallery">
+        <li>
+            <a href="images/off.gif" title="Guan Deng" >Guan Deng</a>
+        </li>
+        <li>
+            <a href="images/on.gif" title="Kai Deng">Kai Deng</a>
+        </li>
+<!--        //因为是针对showPic函数的所以分离到prepare.js动态创建标记-->
+<!--        <img id="placeholder" src="images/kongbai.PNG" alt="My Image Gallery"/>-->
+<!--        <p id="description">Choose an image.</p>-->
+    </ul>
+    <hr/>
+    <div id="test"></div>
+    <div id="Ajax_test"></div>
+    <hr/>
+    <h1>What is the Document Object Model?</h1>
+    <p>
+        The <abbr title="World Wide Web Consortium">W3C</abbr> defines
+        the <abbr title="Document Object Model">DOM</abbr> as:
+    </p>
+
+    <blockquote cite="http://www.w3.org/DOM/">
+    <p>
+        A platform and language-neutral interface that will allow programs
+        and scripts to dynamically access and update the
+        content, structure and style of documents.
+    </p>
+    </blockquote>
+
+    <p>
+        It is an <abbr title="Application Programming Interface">API</abbr>
+        that can be used to navigate <abbr title="HyperText Markup Language">HTML</abbr>
+        and <abbr title="eXtensible Markup Language">XML</abbr> documents.
+    </p>
+
+    <hr/>
+<!--    <script type="text/javascript" src="Scripts/prepare.js"></script>-->
+<!--    <script type="text/javascript" src="Scripts/popUp.js"></script>-->
+    <script type="text/javascript" src="Scripts/showPic.js"></script>
+    <script type="text/javascript" src="Scripts/getHTTPObject.js"></script>
+    <script type="text/javascript" src="Scripts/getNewContent.js"></script>
+    <script type="text/javascript" src="Scripts/displayAbbreviations.js"></script>
+    <script type="text/javascript" src="Scripts/displayCitations.js"></script>
+</body>
+</html>
