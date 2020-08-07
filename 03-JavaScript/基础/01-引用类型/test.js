@@ -67,3 +67,9 @@ function getQueryString (str) {
 }
 
 console.log(getQueryString(q_str));
+
+
+console.log(+new Date());
+setTimeout(() => {
+  console.log(+new Date());
+}, 1000);

@@ -1,14 +1,14 @@
 // 创建自定义对象
-//动态原型模式
+// 动态原型模式
 function Person (name, age, job) {
-  //实例属性
+  // 实例属性
   this.name = name
   this.age = age
   this.job = job
   this.friends = ["liming", "chensen"]
-  //共享属性和方法
+  // 共享属性和方法
   if (typeof this.sayName != "function") {
-    //此处不能用对象字面量重写原型，会切断联系
+    // 此处不能用对象字面量重写原型，会切断联系
     Person.prototype.sayName = function () {
       console.log(this.name)
     }
@@ -69,7 +69,6 @@ inheritPrototype(Subtype, Supertype)
 Subtype.prototype.sayAge = function () {
   console.log(this.age)
 }
-
 
 /* 创建自定义对象 */
 
