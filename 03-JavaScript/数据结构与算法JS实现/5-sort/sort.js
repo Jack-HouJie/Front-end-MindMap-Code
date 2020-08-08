@@ -35,7 +35,7 @@ function insertSort (array) {
   for (let i = 1; i < length; i++) {
     // 比前一个小则交换
     for (let j = i - 1; j >= 0; j--) {
-      array[j] > array[j + 1]{
+      if (array[j] > array[j + 1]) {
         swap(array, j, j + 1)
       }
     }
@@ -106,8 +106,8 @@ function quickSort (array) {
   // 保存每次递归的较大、较小值
   let less = []
   let more = []
-   // 将中位项的值作为tag
-  let tag_idx = Math.floor(length / 2) 
+  // 将中位项的值作为tag
+  let tag_idx = Math.floor(length / 2)
   let tag_val = array[tag_idx]
   // 找到比tag小的值和大的值,加入对应数组
   for (let i = 0; i < length; i++) {
