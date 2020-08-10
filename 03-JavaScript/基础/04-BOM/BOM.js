@@ -1,5 +1,6 @@
 window.moveTo(200, 200);
 
+
 var leftPos =
   typeof window.screenLeft == "number" ? window.screenLeft : window.screenX;
 var topPos =
@@ -49,30 +50,38 @@ if (typeof pageWidth != "number") {
 //   console.log("welcome !" + username + "!");
 // }
 
-// //解析查询字符串
-// function getQueryStringArgs() {
-//   //取得查询字符串并去掉开头问号
-//   var qs = location.search.length > 0 ? location.search.substring(1) : "";
-//   //保存数据的对象
-//   args = {};
-//   //取得每一项
-//   items = qs.length ? qs.split("&") : [];
-//   //声明用到的参数
-//   item = null;
-//   name = null;
-//   value = null;
-//   i = 0;
-//   len = items.length;
-//   for (i = 0; i < len; i++) {
-//     item = items[i].split("=");
-//     name = decodeURIComponent(item[0]);
-//     value = decodeURIComponent(item[1]);
-//     if (name.length) {
-//       args[name] = value;
-//     }
-//   }
-//   return args;
-// }
+// 处理查询字符串
+// const q_str = location.search
+const q_str = 'name=zhangsan&age=14&school=s1&school=s2&student'
+function getQueryString () {
+  // 判断是否存在*，通过BOM得到查询字符串*
+  // const q_str = location.search.length > 0 ? location.search.slice(1) : ''
+  const items = q_str.length > 0 ? q_str.split('&') : []
+  const length = items.length
+  let map = {}
+  for (let i = 0; i < length; i++) {
+    // 每项是一个数组*
+    let item = items[i].split('=')
+    // 进行URI解码
+    let name = decodeURIComponent(item[0])
+    if (item[1]) {
+      let value = decodeURIComponent(item[1])
+      if (map[name]) {
+        // 第二次后变为数组
+        map[name] = [].concat(map[name], `${value}`)
+      } else {
+        map[name] = value
+      }
+    } else {
+      map[name] = true
+    }
+  }
+  console.log(map)
+  return map
+}
+getQueryString()
+
+
 
 // 检测浏览器插件
 function hasPlugin (name) {
