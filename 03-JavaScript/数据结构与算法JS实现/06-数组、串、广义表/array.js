@@ -82,15 +82,109 @@ function findContinuousSequence (sum) {
 
 /** n 个数的和问题 */
 /**
- * 找到数组中两个数的和为sum
+ * 数组中两个数的和为sum
  * @param {Array} array 
  * @param {Number} sum 
  */
 function twoSum (array, sum) {
   // 鲁棒性*
   if (Array.isArray(array)) {
-    let small_idx = 0
-    let big_idx = 1
-    
+    // 保存已经遍历过的 值 及其 索引
+    let map = {}
+    for (let i = 0; i < array.length; i++) {
+      // 如果有合适的值
+      if (map[sum - array[i]] != undefined) {
+        return [map[sum - array[i]], i] // 返回结果
+      }
+      else {
+        map[array[i]] = i // 当前值存入map
+      }
+    }
+  }
+  return []
+}
+
+/**
+ * 数组中所有三数合为0的不重复情况
+ * @param {Array} array 
+ */
+function threeSum (array) {
+  let result = []
+  if (array && Array.isArray(array)) {
+    // 1.数组去重
+    let arr = array.filter((item, index) => {
+      return index === array.indexOf(item, 0)
+    })
+    // 2.数组排序*排序函数
+    arr.sort((a, b) => a - b)
+    // 3.找到所有结果
+    for (let i = 0; i < arr.length; i++) {
+      let small = i + 1
+      let big = arr.length - 1
+      // 循环停止条件：small big 重合
+      while (small < big) {
+        let sum = arr[small] + arr[big] + arr[i]
+        if (sum < 0) {
+          small++
+        }
+        else if (sum > 0) {
+          big--
+        }
+        else if (sum === 0) {
+          // 保存一个结果
+          result.push([arr[small], arr[big], arr[i]])
+          // 跳过重复(继续检查)*
+          while (array[small] == array[small - 1]) {
+            small++
+          }
+          while (array[big] == array[big + 1]) {
+            big--
+          }
+        }
+      }
+    }
+  }
+  return result
+}
+
+/**
+ * 数组中所有四数合为0的不重复情况
+ * @param {Array} array 
+ */
+function fourSum (array) {
+  // 0.鲁棒性*
+  if (array.length < 4) {
+    return []
+  }
+  // 1.数组去重排序
+  let arr = array.filter((item, index, array) => {
+    return index == array.indexOf(item)
+  })
+  arr.sort((a, b) => a - b)
+  // 2.找到所有情况
+  let result = []
+  for (let i = 0; i < array.length; i++) {
+    for (let j = i; j < array.length; j++) {
+      let small = j + 1
+      let big = array.length - 1
+      while (small < big) {
+        let sum = array[i] + array[j] + array[small] + array[big]
+        if (sum < 0) {
+          small++
+        }
+        else if (sum > 0) {
+          big--
+        }
+        else if (sum == 0) {
+          result.push([array[i], array[j], array[small], array[big]])
+          while (array[small] == array[small - 1]) {
+            small++
+          }
+          while (array[big] == array[big + 1]) {
+            big--
+          }
+        }
+      }
+    }
   }
 }
