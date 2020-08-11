@@ -81,8 +81,8 @@ function findContinuousSequence (sum) {
 }
 
 /** n 个数的和问题 */
-/**
- * 数组中两个数的和为sum
+/** 数组中两个数的和为sum
+ * 
  * @param {Array} array 
  * @param {Number} sum 
  */
@@ -104,8 +104,8 @@ function twoSum (array, sum) {
   return []
 }
 
-/**
- * 数组中所有三数合为0的不重复情况
+/** 数组中所有三数合为0的不重复情况
+ * 
  * @param {Array} array 
  */
 function threeSum (array) {
@@ -147,8 +147,8 @@ function threeSum (array) {
   return result
 }
 
-/**
- * 数组中所有四数合为sum的不重复情况
+/** 数组中所有四数合为sum的不重复情况
+ * 
  * @param {Array} array 
  * @param {Number} sum 
  */
@@ -206,5 +206,183 @@ function fourSum (array, sum) {
   }
   return result
 }
+// console.log(fourSum([1, 2, 3, -1, -2, -3, -3, 1, 3]))
 
-console.log(fourSum([1, 2, 3, -1, -2, -3, -3, 1, 3]))
+/** 二维数组问题 */
+/** 构建乘积数组
+ * 
+ * @param {Array} array 
+ */
+function multiply (array_a) {
+  // 定长的数组才能fill*
+  let array_b = new Array(array_a.length)
+  array_b.fill(1)
+  // 鲁棒性*
+  if (Array.isArray(array_a) && array_a.length > 0) {
+    // 当前计算的B的下标
+    for (let i = 0; i < array_a.length; i++) {
+      for (let j = 0; j < i; j++) {
+        array_b[i] *= +array_a[j]
+      }
+      for (let j = array_a.length - 1; j > i; j--) {
+        array_b[i] *= +array_a[j]
+      }
+    }
+  }
+  return array_b
+}
+// let result = multiply([1, 2, 3, 4, 5]);
+
+/** 顺时针打印矩阵
+ * 
+ * @param {Array} matrix 
+ */
+function printMatrix (matrix) {
+  let circle = 0  // 第几圈
+  let rows = matrix.length // 矩阵行数
+  let colums = matrix[0].length // 矩阵列数
+  let result = [] // 结果
+  // 当矩阵足够打印时
+  while (rows > circle * 2 - 1 && colums > circle * 2 - 1) {
+    printCircle(matrix, rows, colums, circle, result) // 打印一圈
+    circle++ // 更新当前圈
+  }
+  return result
+}
+/** 矩阵顺时针打印一圈
+ *
+ * @param {Array} matrix
+ * @param {Number} rows
+ * @param {Number} coloums
+ * @param {Number} circle
+ * @param {Array} result 
+ */
+function printCircle (matrix, rows, colums, circle, result) {
+  // 本圈剩余矩阵大小
+  let cur_rows = rows - circle << 1
+  let cur_colums = colums - circle << 1
+  // 从左至右打印一行
+  for (let i = 0; i < colums - circle * 2; i++) {
+    result.push(matrix[circle][i])
+  }
+  if (cur_rows > 2) {
+    // 从上至下打印一列
+    for (let i = circle + 1; i < rows - circle; i++) {
+      result.push(matrix[i][colums - circle - 1])
+    }
+    if (cur_colums > 2) {
+      // 从右至左打印一行
+      for (let i = colums - circle - 2; i > circle - 1; i--) {
+        result.push(matrix[rows - circle - 1][i])
+      }
+      if (cur_rows > 3) {
+        // 从下至上打印一行
+        for (let i = rows - circle - 2; i > circle; i--) {
+          result.push(matrix[i][circle])
+        }
+      }
+    }
+  }
+
+}
+// let result = printMatrix([[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12], [13, 14, 15, 16]])
+
+/** 数据统计问题 */
+/** 找出数组中的一个数字，其出现的次数超过数组长度的一半
+ * 
+ * @param {Array} array 
+ */
+function moreThanHalfNum (array) {
+  let num_count = {}
+  for (let num in array) {
+    let old = num_count[array[num]]
+    num_count[array[num]] = old ? old + 1 : 1
+    if (num_count[array[num]] > array.length >> 1) {
+      return array[num]
+    }
+  }
+  return 0
+}
+// let result = moreThanHalfNum([1, 1, 1, 3, 2, 1, 1, 5])
+/** 连续子数组的最大和
+ * 
+ * @param {Array} array 
+ */
+function findGreatestSumOfSubArray (array) {
+  // 鲁棒性
+  if (Array.isArray(array) && array.length > 0) {
+    let cur_sum = array[0]
+    let max = array[0]
+    for (let i = 1; i < array.length; i++) {
+      if (cur_sum < 0) {
+        cur_sum = array[i]
+      }
+      else {
+        cur_sum = cur_sum + array[i]
+        max = cur_sum > max ? cur_sum : max
+      }
+    }
+    return max
+  }
+  return 0
+}
+// let result = findGreatestSumOfSubArray([-1, 2, -1, 3, -1])
+/** 判断扑克牌顺子
+ * 
+ * @param {Array} array 0-13 0为大小王 
+ */
+function isContinuous (array) {
+  if (Array.isArray(array) && array.length > 1) {
+    let arr = array
+    arr.sort((a, b) => a - b)
+    let space_num = 0
+    let joker_num = 0
+    for (let i = 0; i < arr.length; i++) {
+      // 判断大小王
+      if (arr[i] == 0) {
+        joker_num += 1
+      }
+      // 除第一项
+      else if (i > 0) {
+        let cur_space = arr[i] - arr[i - 1] - 1
+        if (cur_space == -1) {
+          return false
+        }
+        // 要考虑前一项是王的情况*
+        else if (cur_space != arr[i] - 1) {
+          space_num += cur_space
+        }
+      }
+    }
+    if (space_num <= joker_num) {
+      return true
+    } else {
+      return false
+    }
+  }
+  return false
+}
+// let result = isContinuous([3, 8, 4, 0])
+/** 第一个只出现一次的字符
+ * 
+ * @param {String} str 
+ */
+function firstNotRepeatingChar (str) {
+  if (str) {
+    let arr = str.split("")
+    console.log(arr);
+    let char_count = {}
+    for (let idx in arr) {
+      let old_count = char_count[arr[idx]]
+      char_count[arr[idx]] = old_count ? old_count + 1 : 1
+    }
+    for (let char in char_count) {
+      if (char_count[char] == 1) {
+        return char
+      }
+    }
+  }
+  return ""
+}
+// let result = firstNotRepeatingChar("123ssd123f")
+console.log(result)
