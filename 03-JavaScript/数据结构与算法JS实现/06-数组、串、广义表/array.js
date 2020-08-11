@@ -148,10 +148,11 @@ function threeSum (array) {
 }
 
 /**
- * 数组中所有四数合为0的不重复情况
+ * 数组中所有四数合为sum的不重复情况
  * @param {Array} array 
+ * @param {Number} sum 
  */
-function fourSum (array) {
+function fourSum (array, sum) {
   // 0.鲁棒性*
   if (array.length < 4) {
     return []
@@ -161,30 +162,49 @@ function fourSum (array) {
     return index == array.indexOf(item)
   })
   arr.sort((a, b) => a - b)
+  // console.log(arr);
   // 2.找到所有情况
   let result = []
-  for (let i = 0; i < array.length; i++) {
-    for (let j = i; j < array.length; j++) {
-      let small = j + 1
-      let big = array.length - 1
+  // i要留出三个数的位置*
+  for (let i = 0; i < arr.length - 3; i++) {
+    // 如果i后数字重复则continu
+    if (i > 0 && arr[i] === arr[i - 1]) {
+      continue
+    }
+    // 如果最小的四个数都比0大
+    if (arr[i] + arr[i + 1] + arr[i + 2] + arr[i + 3] > 0) {
+      break
+    }
+    // j 留出两个数的位置
+    for (let j = i + 1; j < arr.length - 2; j++) {
+      // 开头跳过重复数字
+      if (j > i + 1 && arr[j] === arr[j - 1]) {
+        continue
+      }
+      let small = j + 1,
+        big = arr.length - 1
       while (small < big) {
-        let sum = array[i] + array[j] + array[small] + array[big]
-        if (sum < 0) {
-          small++
+        let sum = arr[i] + arr[j] + arr[small] + arr[big]
+        // console.log("i："+i+"，j:"+j+"，sum:"+sum);
+        if (sum == 0) {
+          result.push([arr[i], arr[j], arr[small], arr[big]])
+        }
+        if (sum <= 0) {
+          // 跳过重复
+          do {
+            small++
+          } while (arr[small] === arr[small + 1])
         }
         else if (sum > 0) {
-          big--
-        }
-        else if (sum == 0) {
-          result.push([array[i], array[j], array[small], array[big]])
-          while (array[small] == array[small - 1]) {
-            small++
-          }
-          while (array[big] == array[big + 1]) {
+          // 跳过重复
+          do {
             big--
-          }
+          } while (arr[big] === arr[big - 1])
         }
       }
     }
   }
+  return result
 }
+
+console.log(fourSum([1, 2, 3, -1, -2, -3, -3, 1, 3]))
