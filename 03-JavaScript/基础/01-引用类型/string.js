@@ -12,3 +12,21 @@
 // }
 // console.log(valid("1abcba"))
 
+/** 替换空格*
+ * 
+ * @param {String} str 
+ */
+function replaceSpace (str) {
+  return str.split(" ").join("%20")
+}
+let result = replaceSpace("123123  12 3123")
+
+/** 反转单词顺序
+ * 
+ * @param {String} str 
+ */
+function reverseSentence (str) {
+  return str.split(" ").reverse().join(" ")
+}
+// console.log(reverseSentence("hello world!"));
+

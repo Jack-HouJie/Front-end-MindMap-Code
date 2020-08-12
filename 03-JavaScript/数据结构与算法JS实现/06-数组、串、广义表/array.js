@@ -384,5 +384,5 @@ function firstNotRepeatingChar (str) {
   }
   return ""
 }
-// let result = firstNotRepeatingChar("123ssd123f")
+let result = firstNotRepeatingChar("123ssd36123f")
 console.log(result)

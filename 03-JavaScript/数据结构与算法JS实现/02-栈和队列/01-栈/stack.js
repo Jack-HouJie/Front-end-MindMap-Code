@@ -1,7 +1,8 @@
 /* 栈实现 */
-class Stack {
+class MyStack {
   constructor() {
     this.stack = []
+    this.min = []
   }
   /**
    * 入栈
@@ -9,12 +10,21 @@ class Stack {
    */
   push (item) {
     this.stack.push(item)
+    if (!this.min[0]) {
+      this.min[0] = item
+    }
+    else {
+      let cur_min = this.min[this.min.length - 1]
+      cur_min = item < cur_min ? item : cur_min
+      this.min.push(cur_min)
+    }
   }
   /**
    * 出栈
    */
   pop () {
     this.stack.pop()
+    this.min.pop()
   }
   /**
    * 得到长度
@@ -34,7 +44,19 @@ class Stack {
   isEmpty () {
     return this.getCount() === 0
   }
+  /**
+   * 返回最小元素值
+   */
+  getMin () {
+    return this.min[this.min.length - 1]
+  }
 }
+
+let stack = new MyStack()
+// stack.push(5)
+// stack.push(3)
+// stack.push(4)
+// console.log(stack.getMin());
 
 
 /* 栈应用 */
@@ -72,7 +94,7 @@ function isValid (str) {
   // 恰好全部匹配时为true
   return stack.length === 0 ? true : false
 }
-console.log(isValid("()([{}])([}])"))
+// console.log(isValid("()([{}])([}])"))
 
 /**
  * 算术表达式问题：计算表达式
