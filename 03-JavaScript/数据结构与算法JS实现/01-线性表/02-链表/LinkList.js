@@ -6,27 +6,12 @@ class ListNode {
   }
 }
 class LinkList {
-  constructor(size, dummyNode) {
+  constructor(size, pre_head) {
     this.size = size // 链表长度
-    this.dummyNode = dummyNode
+    this.pre_head = pre_head
   }
-
-  /**
-   * 得到指定位置节点
-   * @param {ListNode} first 开始遍历的节点
-   * @param {Number} index 目的结点索引
-   * @param {Number} cur_index 开始遍历的节点索引
-   */
-  find (first, index, cur_index) {
-    if (index === cur_index) {
-      return first
-    } else {
-      return find(first.next, index, cur_index + 1)
-    }
-  }
-
-  /**
-   * 检查越界
+  /** 检查越界
+   * 
    * @param {Number} index 索引值
    */
   checkIndex (index) {
@@ -35,34 +20,52 @@ class LinkList {
     }
   }
 
-  /**
-   * 添加节点在index位置后
+  /** 得到节点(指定索引)
+   * 
+   * @param {ListNode} cur_node 
+   * @param {Number} cur_index 
+   * @param {Number} tar_index 
+   */
+  findNode (cur_node, cur_index, tar_index) {
+    this.checkIndex(cur_idx)
+    this.checkIndex(tar_idx)
+    if (tar_index === cur_index) {
+      return cur_node
+    } else {
+      return this.findNode(cur_node.next, cur_index + 1, tar_index)
+    }
+  }
+
+  /** 添加节点(给定value、前一个位置index)
+   * 
    * @param {*} value 添加节点值
-   * @param {Number} index 添加节点索引
+   * @param {*} index 添加节点索引-1
    */
   addNode (value, index) {
     this.checkIndex(index) // 检查越界
-    let pre_node = find(this.dummyNode, index, 0) // 当前index位置节点作为前驱节点
-    pre_node.next = new ListNode(value, pre_node.next) // 创建插入节点并插入
+    let pre = this.findNode(this.pre_head, 0, index) // 当前index位置节点作为前驱节点
+    let new_node = new ListNode(value, pre.next) // 创建插入节点
+    pre.next = new_node // 插入
     this.size++ // 更新链表长度
-    return pre_node.next
+    return new_node
   }
 
-  /**
-   * 删除指定index后节点
+  /** 删除指定index后节点
+   * 
    * @param {Number} index 删除节点索引-1
    */
   rmNode (index) {
     this.checkIndex(index + 1) // 检查越界
-    let pre_node = find(this.dummyNode, index, 0) // 当前index位置节点作为前驱节点
-    let node = pre_node.next // 临时存储要删除节点
-    pre_node.next = node.next // 链表中删除指定节点
-    node.next = null // 删除的节点更新指针域
-    this.size-- // 更新长度
-    return node
+    let pre = this.findNode(this.pre_head, 0, index) // 当前index位置节点作为前驱节点
+    let del_node = pre.next // 临时存储要删除节点
+    pre.next = del_node.next // 链表中删除指定节点
+    del_node.next = null // 删除的节点更新指针域
+    this.size-- // 更新长度*
+    return del_node
   }
-
 }
+
+
 
 /* 基本应用 */
 /** 从尾到头打印链表
@@ -70,13 +73,27 @@ class LinkList {
  * @param {ListNode} head 链表头节点
  */
 function printListFromTailToHead (head) {
-  const ary = []
-  while (head) {
-    ary.unshift(head.value) // 数组头入当前节点
-    head = head.next
+  if (!head) return false
+  let temp = []
+  let cur_node = head
+  // 遍历用while而不是if
+  while (cur_node) {
+    // 队头入队用unshift 而不是shift
+    temp.unshift(cur_node)
+    cur_node = cur_node.next
   }
-  return console.log(ary)
+  console.log(temp)
+  return true
 }
+// let pre_head = new ListNode(undefined, null)
+// let link_list = new LinkList(1, pre_head)
+// link_list.addNode(1, 0)
+// link_list.addNode(2, 1)
+// link_list.addNode(3, 2)
+// link_list.addNode(4, 3)
+// let head = link_list.findNode(link_list.pre_head, 0, 1)
+// console.log(printListFromTailToHead(head))
+
 /** 反转链表
  * 
  * @param {ListNode} head 链表头节点
