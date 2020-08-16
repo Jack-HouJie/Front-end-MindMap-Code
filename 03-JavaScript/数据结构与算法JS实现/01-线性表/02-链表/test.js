@@ -96,22 +96,46 @@ link_list.addNode(1, 0)
 link_list.addNode(2, 1)
 link_list.addNode(3, 2)
 let head = link_list.findNode(link_list.pre_head, 0, 1)
-console.log(printListFromTailToHead(head))
+// console.log(printListFromTailToHead(head))
 
 
 /** 反转链表
+ * 
+ * @param {ListNode} head 链表头节点
  */
-function reverseList () {
+function reverseList (head) {
+  if (!head || !head.next) {
+    return head
+  }
+  let pre = null
+  let cur = head
+  let next = cur.next
+  while (cur) {
+    // 每次先更新next*
+    next = cur.next
+    cur.next = pre
+    pre = cur
+    cur = next
+  }
+  return pre
 }
+// let reverse_head = reverseList(head)
+// while(reverse_head){
+//   console.log(reverse_head.value);
+//   reverse_head = reverse_head.next
+// }
+
 /** 复杂链表复制
+ * 
+ * @param {ListNode} pHead 
  */
-function clone () {
+function clone (pHead) {
 }
-function cloneNodes () {
+function cloneNodes (pHead) {
 }
-function cloneRandom () {
+function cloneRandom (pHead) {
 }
-function reconnetNodes () {
+function reconnetNodes (pHead) {
 }
 /** 删除链表重复节点
  */

@@ -65,8 +65,6 @@ class LinkList {
   }
 }
 
-
-
 /* 基本应用 */
 /** 从尾到头打印链表
  * 
@@ -106,7 +104,7 @@ function reverseList (head) {
   // 当前节点初始化为头节点
   let pre = null
   let cur = head
-  let next = head.newt
+  let next = head.next
   // 当 当前节点 存在时
   while (cur) {
     next = cur.next // 拿到后继节点
