@@ -136,12 +136,11 @@ function cloneNodes (pHead) {
 }
 function cloneRandom (pHead) {
   let cur_node = pHead
-  let clone_node = cur_node.next
   while (cur_node) {
     // 这里cur_node.random.next 而不是cur_node.random
     // 因为要随机指向新链表中的节点
-    clone_node.random = cur_node.random.next
-    cur_node = clone_node.next
+    cur_node.next.random = cur_node.random.next
+    cur_node = cur_node.next.next
   }
 }
 function reconnetNodes (pHead) {
@@ -157,7 +156,7 @@ function reconnetNodes (pHead) {
   return clone_head
 }
 /** 删除链表重复节点
- * 
+ * 出现次数大于1的节点
  * @param {ListNode} pHead 
  */
 function deleteDuplication (pHead) {
@@ -168,39 +167,56 @@ function deleteDuplication (pHead) {
     map[cur_node.value] = count ? count + 1 : 1
     cur_node = cur_node.next
   }
-  // 第一个节点也有可能是重复节点
-  let cur_node = pHead
+  cur_node = pHead
+
   while (cur_node) {
-    // 如果当前节点不止一个
-    if (map[cur_node] > 1) {
-      // 如存在下一个节点*
+    // 如果当前是重复节点
+    if (map[cur_node.value] > 1) {
+      // 如果不是链表末尾节点
       if (cur_node.next) {
         // 下一个节点覆盖当前节点
         cur_node.value = cur_node.next.value
-        cur_node.next = cur_node.next.next
+        let next_node = cur_node.next
+        cur_node.next = next_node.next
+        next_node.next = null
       }
-      // 如最后只剩一个重复节点
-      else if (cur_node == pHead) {
-        // 将其删除
-        cur_node = null
-        pHead = null
-      }
-      // 如为最后一个节点
+      // 如果是链表末尾节点
       else {
-        // 找到倒数第二个节点
-        cur_node = pHead
-        while (cur_node.next.next) {
-          cur_node = cur_node.next
+        // 如果是唯一节点
+        if (cur_node == pHead) {
+          // 将其删除
+          cur_node = null
+          // 上一步只是解除了cur_node和pHead的关系
+          pHead = null
         }
-        cur_node.next = null // 删除最后一个节点
-        cur_node = null
+        // 如果不是唯一节点
+        else {
+          // 找到倒数第二个节点
+          let pre = pHead
+          while (pre.next) {
+            pre = pre.next
+          }
+          cur_node.next = null
+          // 删除最后一个节点*
+          cur_node = null
+          pre.next = null
+        }
       }
-    } else {
+    }
+    // 如果当前不是重复节点
+    else {
       cur_node = cur_node.next
     }
   }
   return pHead
 }
+// let clean_head = deleteDuplication(head)
+// while (clean_head) {
+//   console.log(clean_head.value);
+//   clean_head = clean_head.next
+// }
+
+
 /** 合并两个有序链表
  * 
  * @param {ListNode} pHead1 
@@ -233,25 +249,33 @@ function merge (pHead1, pHead2) {
  * @param {Number} k 
  */
 function findKthToTail (head, k) {
-  // 应考虑k为0*
-  if (!head || !k) {
+  // 鲁棒性：考虑k为0或head不存在**
+  if (!head || k == 0) {
     return null
   }
-  let cur_node = head
+  let after_node = head
   let k_node = head
-  for (let i = 0; i < k; i++) {
-    k_node = k_node.next
-    // 应考虑k比链表长*
-    if (!k_node) {
+  let i = 0
+  for (i = 0; i < k - 1; i++) {
+    after_node = after_node.next
+    // 鲁棒性：考虑k比链表长**
+    if (!after_node) {
       return null
     }
   }
-  while (k_node.next) {
-    cur_node = cur_node.next
+  while (after_node.next) {
+    after_node = after_node.next
     k_node = k_node.next
   }
-  return cur_node
+  return k_node
 }
+console.log(findKthToTail(head, 0))
+console.log(findKthToTail(head, 1))
+console.log(findKthToTail(head, 2))
+console.log(findKthToTail(head, 3))
+console.log(findKthToTail(head, 4))
+console.log(findKthToTail(head, 5))
+
 /** 找到第一个公共节点
  * 
  * @param {ListNode} pHead1 
