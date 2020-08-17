@@ -315,45 +315,50 @@ function findFirstCommonNode (pHead1, pHead2) {
 
 /* 环类题目 */
 /** 链表中环的入口节点
- * 
+ * 给一个链表，若其中包含环，请找出该链表的环的入口结点，否则，输出null
  * @param {ListNode} pHead 
  */
 function entryNodeOfLoop (pHead) {
-  // 考虑鲁棒性*
+  // 0.鲁棒性*
   if (!pHead || !pHead.next) {
     return null
   }
-  // 1.判断是否有环
-  let p1 = pHead
-  let p2 = pHead
+  // 1.判断链表是否有环： 
+  // P1 P2 从头部出发，P1走两步，P2走一步，
+  // 如果可以相遇，则环存在
+  let node1 = pHead
+  let node2 = pHead
   do {
-    p1 = p1.next
-    p2 = p2.next.next
-    // 如果p2没进入环
+    node1 = node1.next
+    node2 = node2.next.next
+    // 如果p2没进入环(代表没环)
     if (!p2 || !p2.next) {
       return null
     }
-  } while (p1 != p2); // 如有环p1p2在出环点相遇
-
-  // 2.获取环长度
+  } while (node1 != node2); // 如有环p1p2在出环点相遇*
+  // 2.得到链表环的长度:
+  // 从出环点开始计数，
+  // 再回到此节点时的步数即为环长*
   let loop_length = 0
   do {
-    p2 = p2.next
     loop_length++
-  } while (p1 != p1);
+    node2 = node2.next
+  } while (node1 != node2);
 
   // 3.找到入环点
-  // p1 p2 回到原点*
-  p1 = p2 = pHead
+  // 从原地开始**，
+  // 让node2比node1先走一个环长
+  //（恰好比node1多走一个环）
+  // 二者第一次相遇点即为入环点
+  node1 = node2 = pHead
   for (let i = 0; i < loop_length; i++) {
-    p2 = p2.next // 让p2 先走一个环长
+    node2 = node2.next
   }
-  // p1p2在入环点相遇（跨度都为1时p2多走了一个环）
-  while (p1 != p2) {
-    p1 = p1.next
-    p2 = p2.next
+  while (node1 != node2) {
+    node1 = node1.next
+    node2 = node2.next
   }
-  return p1
+  return node1
 }
 /** 圆圈中最后剩下的数/约瑟夫环问题
  * 
@@ -361,26 +366,25 @@ function entryNodeOfLoop (pHead) {
  * @param {Number} m 跨度
  */
 function lastRemainingSolution (n, m) {
-  // 鲁棒性*
-  if (!n || !m) {
-    return -1
-  }
-  // 创建环形链表
+  // 1.构造环形链表*
   let head = { value: 0 }
   let cur_node = head
-  for (let i = 1; i < n; i++) {
+  for (let i = 0; i < n; i++) {
     let node = { value: i }
     cur_node.next = node
-    cur_node = node
+    cur_node = cur_node.next
   }
   cur_node.next = head
+  //2.循环删除节点
+  // 从头开始
+  cur_node = head
   // 当链表不止一个节点
   while (cur_node != cur_node.next) {
-    // 找到第m-1个节点
-    for (let i = 0; i < m; i++) {
+    // 每次找到当前节点后m-1个节点
+    for (let i = 0; i < m - 1; i++) {
       cur_node = cur_node.next
     }
-    // 直接指向m+1个节点
+    // 直接指向m+1个节点(删除第m个节点)
     cur_node.next = cur_node.next.next
   }
   // 返回剩下节点的value

@@ -377,7 +377,7 @@ function entryNodeOfLoop (pHead) {
  * @param {Number} m 跨度
  */
 function lastRemainingSolution (n, m) {
-  // 1.构造链表*
+  // 1.构造环形链表*
   let head = { value: 0 }
   let cur_node = head
   for (let i = 0; i < n; i++) {
@@ -398,5 +398,6 @@ function lastRemainingSolution (n, m) {
     // 直接指向m+1个节点(删除第m个节点)
     cur_node.next = cur_node.next.next
   }
+  // 返回剩下节点的value
   return cur_node.value
 }
