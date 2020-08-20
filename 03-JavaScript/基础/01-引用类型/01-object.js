@@ -1,5 +1,4 @@
 /** 实现new
- * 
  * https://zhuanlan.zhihu.com/p/84605717
  */
 function myNew () {
@@ -20,7 +19,6 @@ function myNew () {
 }
 
 /** 实现instansof
- * 
  * @param {Object} left 实例对象 
  * @param {Object} right 构造函数 
  */
