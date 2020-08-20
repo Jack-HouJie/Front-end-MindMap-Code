@@ -7,7 +7,7 @@ const RESOLVED = 'resolved'
  * 
  * @param {Funciton} func // 异步处理的函数 
  */
-function  (func) {
+function MyPromise (func) {
   const that = this
   // 状态初始化为pending
   that.state = PENDING
@@ -57,7 +57,7 @@ MyPromise.prototype.then = function (onResolve, onReject) {
   // 无参数时设置默认函数
   const onResolve = typeof onResolve === 'Function' ? onResolve : v => v
   const onReject = typeof onReject === 'Function' ? onReject : err => console.log(err)
-    
+
   // 调用then时如果Promise为等待态
   // 异步函数func中的异步操作未结束（未执行resolve()或reject()）
   if (that.state == PENDING) {
