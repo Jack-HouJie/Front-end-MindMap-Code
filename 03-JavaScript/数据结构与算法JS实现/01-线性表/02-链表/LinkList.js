@@ -215,8 +215,6 @@ function deleteDuplication (pHead) {
 //   console.log(clean_head.value);
 //   clean_head = clean_head.next
 // }
-
-
 /** 合并两个有序链表
  * 
  * @param {ListNode} pHead1 
@@ -269,12 +267,12 @@ function findKthToTail (head, k) {
   }
   return k_node
 }
-console.log(findKthToTail(head, 0))
-console.log(findKthToTail(head, 1))
-console.log(findKthToTail(head, 2))
-console.log(findKthToTail(head, 3))
-console.log(findKthToTail(head, 4))
-console.log(findKthToTail(head, 5))
+// console.log(findKthToTail(head, 0))
+// console.log(findKthToTail(head, 1))
+// console.log(findKthToTail(head, 2))
+// console.log(findKthToTail(head, 3))
+// console.log(findKthToTail(head, 4))
+// console.log(findKthToTail(head, 5))
 
 /** 找到第一个公共节点
  * 

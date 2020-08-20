@@ -13,15 +13,15 @@ class BST {
     this.root = null
     this.size = 0
   }
-  /**
-   * 添加节点
+  /** 添加节点
+   * 
    * @param {*} val 
    */
   addNode (val) {
-    return node = this._addNode(this.root, val)
+    return this._addNode(this.root, val)
   }
-  /**
-   * 添加节点：指定起始节点插入新节点
+  /** 添加节点：指定起始节点插入新节点
+   * 
    * @param {TNode} cur_node 
    * @param {*} value 
    */
@@ -41,14 +41,14 @@ class BST {
     }
   }
 
-  /**
-   * 确定树深度
+  /** 确定树深度
+   * 
    */
   maxDepth () {
     return this._maxHeight(this.root) // 返回根节点高度
   }
-  /**
-   * 计算指定节点高度
+  /** 计算指定节点高度
+   * 
    * @param {TNode} node 
    */
   _maxHeight (node) {
@@ -62,14 +62,14 @@ class BST {
   }
 
   /* 深度优先遍历 */
-  /**
-   * 先序遍历当前树（递归）
+  /** 先序遍历当前树（递归）
+   * 
    */
   preTravesal () {
     return this._preTravesal(this.root)
   }
-  /**
-   * 指定开始节点先序遍历
+  /** 指定开始节点先序遍历
+   * 
    * @param {TNode} cur_node 
    */
   _preTravesal (cur_node) {
@@ -80,8 +80,8 @@ class BST {
       this._preTravesal(cur_node.right)
     }
   }
-  /**
-   * 指定开始节点先序遍历（非递归）
+  /** 指定开始节点先序遍历（非递归）
+   * 
    * @param {TNode} root 
    */
   preTrav (root) {
@@ -109,14 +109,14 @@ class BST {
     }
   }
 
-  /**
-   * 中序遍历当前树（递归）
+  /** 中序遍历当前树（递归）
+   * 
    */
   midTravesal () {
     return this._midTravesal(this.root)
   }
-  /**
-   * 指定开始节点中序遍历
+  /** 指定开始节点中序遍历
+   * 
    * @param {TNode} cur_node 
    */
   _midTravesal (cur_node) {
@@ -126,8 +126,8 @@ class BST {
       this._midTravesal(cur_node.right)
     }
   }
-  /**
-   * 指定开始节点中序遍历（非递归）
+  /** 指定开始节点中序遍历（非递归）
+   * 
    * @param {TNode} root 
    */
   midTrav (root) {
@@ -157,14 +157,14 @@ class BST {
     }
   }
 
-  /**
-   * 后序遍历当前树（递归）
+  /** 后序遍历当前树（递归）
+   * 
    */
   backTravesal () {
     return this._backTravesal(this.root)
   }
-  /**
-   * 指定开始节点后序遍历
+  /** 指定开始节点后序遍历
+   * 
    * @param {TNode} cur_node 
    */
   _backTravesal (cur_node) {
@@ -174,8 +174,8 @@ class BST {
       console.log(cur_node)
     }
   }
-  /**
-   * 指定开始节点后序遍历（非递归）
+  /** 指定开始节点后序遍历（非递归）
+   * 
    * 思路：逆先序遍历，结果再逆序
    * @param {TNode} root 
    */
@@ -214,8 +214,8 @@ class BST {
   breTravesal () {
     this._breTravesal(this.root)
   }
-  /**
-   * 从当前节点开始广度遍历
+  /** 从当前节点开始广度遍历
+   * 
    * @param {TNode} cur_node 
    */
   _breTravesal (cur_node) {
@@ -241,3 +241,14 @@ class BST {
     }
   }
 }
+
+/** 二叉树遍历 */
+
+
+/** 二叉树的对称性 */
+
+
+/** 二叉搜索树 */
+
+
+/** 二叉树的深度 */
