@@ -45,7 +45,6 @@ function MyPromise (func) {
   }
 }
 
-
 /** MyPromise方法.then()
  * 用于链式添加新回调函数
  * @param {*} onResolve 成功结果的处理函数（可选），参数：结果值（可选）
