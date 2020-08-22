@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>float+absolute</title>
+  <style type="text/css">
+    .contailer {
+      position: relative;
+    }
+
+    .left {
+      overflow: hidden;
+      margin-right: 100px;
+
+      height: 100px;
+      background-color: green;
+      line-height: 100px;
+      text-align: center;
+    }
+
+    .right {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 100px;
+
+      height: 200px;
+      background-color: blue;
+      line-height: 100px;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body style="margin:0;">
+  <div class="container">
+    <!-- 没有优先渲染限制 -->
+    <div class="left">I am left</div>
+    <div class="right">I am right</div>
+  </div>
+  <!--footer会显示异常 -->
+  <div style="height: 100px; background-color: red;">
+  </div>
+</body>
+
+</html>

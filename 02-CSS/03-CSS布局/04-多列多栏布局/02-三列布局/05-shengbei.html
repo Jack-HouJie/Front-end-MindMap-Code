@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./styles/reset.css">
+  <title>圣杯布局</title>
+  <!-- 初始化 -->
+  <style>
+    .container-root {
+      width: 100%;
+      background-color: azure;
+      font-size: 20px;
+      text-align: center;
+    }
+
+    header,
+    footer {
+      width: 100%;
+      height: 30px;
+      background-color: aqua;
+    }
+
+    .left {
+      width: 100px;
+      height: 150px;
+      background: red;
+    }
+
+    .center {
+      height: 100px;
+      background: yellow;
+    }
+
+    .right {
+      width: 100px;
+      height: 130px;
+      background: greenyellow;
+    }
+  </style>
+
+  <!-- 圣杯布局 -->
+  <style>
+    /* 左中右区域一行显示 */
+    .center,
+    .left,
+    .right {
+      float: left;
+    }
+
+    /* 创建BFC使底部换行(不受浮动影响) */
+    .container {
+      overflow: hidden;
+    }
+
+    /* 中间区域宽度占满 */
+    .center {
+      width: 100%;
+    }
+
+    /* 给左右区域留出空间 */
+    .container {
+      padding: 0 100px;
+    }
+
+    /* 左区域移到指定位置 */
+    .left {
+      margin-left: -100%;
+      position: relative;
+      left: -100px;
+    }
+
+    /* 右区域移到指定位置 */
+    .right {
+      margin-left: -100px;
+      position: relative;
+      right: -100px;
+    }
+  </style>
+
+</head>
+
+<body>
+  <div class="container-root">
+    <!-- 圣杯布局 -->
+    <header>头部</header>
+    <div class="container">
+      <!-- 主区域在前 -->
+      <div class="center">主区域</div>
+      <div class="left">左区域</div>
+      <div class="right">右区域</div>
+    </div>
+    <footer>底部</footer>
+  </div>
+</body>
+
+</html>

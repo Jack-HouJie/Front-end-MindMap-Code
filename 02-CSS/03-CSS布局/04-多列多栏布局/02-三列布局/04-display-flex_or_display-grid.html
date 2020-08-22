@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./styles/reset.css">
+  <title>04-display-flex_or_display-grid</title>
+  <!-- 初始化 -->
+  <style>
+    .container {
+      width: 100%;
+      background-color: azure;
+      font-size: 20px;
+      text-align: center;
+    }
+
+    header,
+    footer {
+      width: 100%;
+      height: 30px;
+      background-color: aqua;
+    }
+
+    .left {
+      width: 100px;
+      height: 150px;
+      background: red;
+    }
+
+    .center {
+      height: 100px;
+      background: yellow;
+    }
+
+    .right {
+      width: 100px;
+      height: 130px;
+      background: greenyellow;
+    }
+  </style>
+
+  <style>
+    /* 弹性布局  */
+    .container {
+      display: flex;
+    }
+
+    .center {
+      flex: 1;
+    }
+
+
+    /* 网格布局  */
+    .container {
+      display: grid;
+      /* 行高需等于最高的列 */
+      grid-template-rows: 150px;
+      grid-template-columns: 100px auto 100px;
+    }
+  </style>
+
+</head>
+
+<body>
+  <div class="container">
+    <!-- 必须按顺序 -->
+    <div class="left">左区域</div>
+    <div class="center">主区域</div>
+    <div class="right">右区域</div>
+  </div>
+  <footer>底部</footer>
+</body>
+
+</html>
