@@ -49,9 +49,13 @@
       float: left;
     }
 
-    /* 创建BFC使底部换行(不受浮动影响) */
-    .container {
-      overflow: hidden;
+    /* 清除浮动 */
+    .container::after {
+      content: "";
+      display: block;
+      height: 0;
+      clear: both;
+      visibility: hidden;
     }
 
     /* 中间区域宽度占满 */
