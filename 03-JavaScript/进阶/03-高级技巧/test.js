@@ -55,7 +55,7 @@ function debounce (func, wait_time) {
 }
 setInterval(debounce(() => {
   // 某些操作
-  console.log("debounce1s"+ new Date())
+  console.log("debounce1s" + new Date())
 }, 1000), 1000)
 
 
@@ -75,6 +75,4 @@ function throttle (func, wait_time) {
 //   console.log(new Date())
 // }, 2000), 500)
 
-// 实现Promise
 
-// 实现then

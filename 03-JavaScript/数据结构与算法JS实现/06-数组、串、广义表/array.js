@@ -4,29 +4,29 @@
  * @param {Array} array 
  */
 function reOrderArray (array) {
-  // 鲁棒性*
-  if (Array.isArray(array)) {
-    let start = 0
-    let end = arr.length - 1
-    while (start != end) {
-      // 从前往后找到下一个偶数的下标
-      while (array[start] % 2 === 1) {
-        start++
+  let left = 0
+  let right = array.length - 1
+  while (left < right) {
+    if (array[left] % 2 == 0) {
+      // 交换值简写*
+      [array[left], array[right]] = [array[right], array[left]]
+      right--
+    }
+    else {
+      left++
+      if (array[right] % 2 !== 0) {
+        [array[left], array[right]] = [array[right], array[left]]
+        left++
       }
-      // 从后往前找到下一个奇数的下标
-      while (array[end] % 2 === 0) {
-        end--
-      }
-      // 如果顺序错误
-      if (start < end) {
-        // 交换值*
-        [array[start], array[end]] = [array[end], array[start]]
+      else {
+        right--
       }
     }
-    return array
   }
-
+  return array
 }
+let result = reOrderArray([1,2,3,4,5,7])
+
 /** 找到和为sum的两个数字（多种情况取乘积最小）
  * 
  * @param {Array} array 
@@ -35,19 +35,21 @@ function reOrderArray (array) {
 function findNumbersWithSum (array, sum) {
   let left = 0
   let right = array.length - 1
-  // 循环到所有数全试过一次*
-  while (left < right) {
-    if (left + right < sum) {
+  while (array[left] + array[right] != sum) {
+    if (array[left] + array[right] < sum) {
       left++
     }
-    else if (left + right > sum) {
+    else if (array[left] + array[right] > sum) {
       right--
-    } else {
-      return [array[left], array[right]]
+    }
+    if (left == right) {
+      return null
     }
   }
-  return []
+  return [array[left], array[right]]
 }
+// let result = findNumbersWithSum([1, 2, 3, 4, 5], 3)
+
 /** 输出和为sum的连续正整数序列
  * 
  * @param {Number} sum 
@@ -109,42 +111,34 @@ function twoSum (array, sum) {
  * @param {Array} array 
  */
 function threeSum (array) {
-  let result = []
-  if (array && Array.isArray(array)) {
-    // 1.数组去重
-    let arr = array.filter((item, index) => {
-      return index === array.indexOf(item, 0)
-    })
-    // 2.数组排序*排序函数
-    arr.sort((a, b) => a - b)
-    // 3.找到所有结果
-    for (let i = 0; i < arr.length; i++) {
-      let small = i + 1
-      let big = arr.length - 1
-      // 循环停止条件：small big 重合
-      while (small < big) {
-        let sum = arr[small] + arr[big] + arr[i]
-        if (sum < 0) {
-          small++
+  // 数组排序
+  array.sort((a, b) => a - b);
+  let result = [];
+  for (let i = 0; i < array.length; i++) {
+    // 跳过重复数字
+    if (i && array[i] === array[i - 1]) { continue; }
+    let left = i + 1;
+    let right = array.length - 1;
+    while (left < right) {
+      let sum = array[i] + array[left] + array[right];
+      if (sum > 0) {
+        right--;
+      } else if (sum < 0) {
+        left++;
+      } else {
+        result.push([array[i], array[left++], array[right--]]);
+        // 跳过重复数字
+        while (array[left] === array[left - 1]) {
+          left++;
         }
-        else if (sum > 0) {
-          big--
-        }
-        else if (sum === 0) {
-          // 保存一个结果
-          result.push([arr[small], arr[big], arr[i]])
-          // 跳过重复(继续检查)*
-          while (array[small] == array[small - 1]) {
-            small++
-          }
-          while (array[big] == array[big + 1]) {
-            big--
-          }
+        // 跳过重复数字
+        while (array[right] === array[right + 1]) {
+          right--;
         }
       }
     }
   }
-  return result
+  return result;
 }
 
 /** 数组中所有四数合为sum的不重复情况
@@ -384,5 +378,5 @@ function firstNotRepeatingChar (str) {
   }
   return ""
 }
-let result = firstNotRepeatingChar("123ssd36123f")
+// let result = firstNotRepeatingChar("123ssd36123f")
 console.log(result)

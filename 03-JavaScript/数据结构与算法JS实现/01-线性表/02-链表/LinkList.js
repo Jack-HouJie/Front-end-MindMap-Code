@@ -136,12 +136,11 @@ function cloneNodes (pHead) {
 }
 function cloneRandom (pHead) {
   let cur_node = pHead
-  let clone_node = cur_node.next
   while (cur_node) {
     // 这里cur_node.random.next 而不是cur_node.random
     // 因为要随机指向新链表中的节点
-    clone_node.random = cur_node.random.next
-    cur_node = clone_node.next
+    cur_node.next.random = cur_node.random.next
+    cur_node = cur_node.next.next
   }
 }
 function reconnetNodes (pHead) {
@@ -157,7 +156,7 @@ function reconnetNodes (pHead) {
   return clone_head
 }
 /** 删除链表重复节点
- * 
+ * 出现次数大于1的节点
  * @param {ListNode} pHead 
  */
 function deleteDuplication (pHead) {
@@ -168,39 +167,54 @@ function deleteDuplication (pHead) {
     map[cur_node.value] = count ? count + 1 : 1
     cur_node = cur_node.next
   }
-  // 第一个节点也有可能是重复节点
-  let cur_node = pHead
+  cur_node = pHead
+
   while (cur_node) {
-    // 如果当前节点不止一个
-    if (map[cur_node] > 1) {
-      // 如存在下一个节点*
+    // 如果当前是重复节点
+    if (map[cur_node.value] > 1) {
+      // 如果不是链表末尾节点
       if (cur_node.next) {
         // 下一个节点覆盖当前节点
         cur_node.value = cur_node.next.value
-        cur_node.next = cur_node.next.next
+        let next_node = cur_node.next
+        cur_node.next = next_node.next
+        next_node.next = null
       }
-      // 如最后只剩一个重复节点
-      else if (cur_node == pHead) {
-        // 将其删除
-        cur_node = null
-        pHead = null
-      }
-      // 如为最后一个节点
+      // 如果是链表末尾节点
       else {
-        // 找到倒数第二个节点
-        cur_node = pHead
-        while (cur_node.next.next) {
-          cur_node = cur_node.next
+        // 如果是唯一节点
+        if (cur_node == pHead) {
+          // 将其删除
+          cur_node = null
+          // 上一步只是解除了cur_node和pHead的关系
+          pHead = null
         }
-        cur_node.next = null // 删除最后一个节点
-        cur_node = null
+        // 如果不是唯一节点
+        else {
+          // 找到倒数第二个节点
+          let pre = pHead
+          while (pre.next) {
+            pre = pre.next
+          }
+          cur_node.next = null
+          // 删除最后一个节点*
+          cur_node = null
+          pre.next = null
+        }
       }
-    } else {
+    }
+    // 如果当前不是重复节点
+    else {
       cur_node = cur_node.next
     }
   }
   return pHead
 }
+// let clean_head = deleteDuplication(head)
+// while (clean_head) {
+//   console.log(clean_head.value);
+//   clean_head = clean_head.next
+// }
 /** 合并两个有序链表
  * 
  * @param {ListNode} pHead1 
@@ -233,25 +247,33 @@ function merge (pHead1, pHead2) {
  * @param {Number} k 
  */
 function findKthToTail (head, k) {
-  // 应考虑k为0*
-  if (!head || !k) {
+  // 鲁棒性：考虑k为0或head不存在**
+  if (!head || k == 0) {
     return null
   }
-  let cur_node = head
+  let after_node = head
   let k_node = head
-  for (let i = 0; i < k; i++) {
-    k_node = k_node.next
-    // 应考虑k比链表长*
-    if (!k_node) {
+  let i = 0
+  for (i = 0; i < k - 1; i++) {
+    after_node = after_node.next
+    // 鲁棒性：考虑k比链表长**
+    if (!after_node) {
       return null
     }
   }
-  while (k_node.next) {
-    cur_node = cur_node.next
+  while (after_node.next) {
+    after_node = after_node.next
     k_node = k_node.next
   }
-  return cur_node
+  return k_node
 }
+// console.log(findKthToTail(head, 0))
+// console.log(findKthToTail(head, 1))
+// console.log(findKthToTail(head, 2))
+// console.log(findKthToTail(head, 3))
+// console.log(findKthToTail(head, 4))
+// console.log(findKthToTail(head, 5))
+
 /** 找到第一个公共节点
  * 
  * @param {ListNode} pHead1 
@@ -291,45 +313,50 @@ function findFirstCommonNode (pHead1, pHead2) {
 
 /* 环类题目 */
 /** 链表中环的入口节点
- * 
+ * 给一个链表，若其中包含环，请找出该链表的环的入口结点，否则，输出null
  * @param {ListNode} pHead 
  */
 function entryNodeOfLoop (pHead) {
-  // 考虑鲁棒性*
+  // 0.鲁棒性*
   if (!pHead || !pHead.next) {
     return null
   }
-  // 1.判断是否有环
-  let p1 = pHead
-  let p2 = pHead
+  // 1.判断链表是否有环： 
+  // P1 P2 从头部出发，P1走两步，P2走一步，
+  // 如果可以相遇，则环存在
+  let node1 = pHead
+  let node2 = pHead
   do {
-    p1 = p1.next
-    p2 = p2.next.next
-    // 如果p2没进入环
+    node1 = node1.next
+    node2 = node2.next.next
+    // 如果p2没进入环(代表没环)
     if (!p2 || !p2.next) {
       return null
     }
-  } while (p1 != p2); // 如有环p1p2在出环点相遇
-
-  // 2.获取环长度
+  } while (node1 != node2); // 如有环p1p2在出环点相遇*
+  // 2.得到链表环的长度:
+  // 从出环点开始计数，
+  // 再回到此节点时的步数即为环长*
   let loop_length = 0
   do {
-    p2 = p2.next
     loop_length++
-  } while (p1 != p1);
+    node2 = node2.next
+  } while (node1 != node2);
 
   // 3.找到入环点
-  // p1 p2 回到原点*
-  p1 = p2 = pHead
+  // 从原地开始**，
+  // 让node2比node1先走一个环长
+  //（恰好比node1多走一个环）
+  // 二者第一次相遇点即为入环点
+  node1 = node2 = pHead
   for (let i = 0; i < loop_length; i++) {
-    p2 = p2.next // 让p2 先走一个环长
+    node2 = node2.next
   }
-  // p1p2在入环点相遇（跨度都为1时p2多走了一个环）
-  while (p1 != p2) {
-    p1 = p1.next
-    p2 = p2.next
+  while (node1 != node2) {
+    node1 = node1.next
+    node2 = node2.next
   }
-  return p1
+  return node1
 }
 /** 圆圈中最后剩下的数/约瑟夫环问题
  * 
@@ -337,26 +364,25 @@ function entryNodeOfLoop (pHead) {
  * @param {Number} m 跨度
  */
 function lastRemainingSolution (n, m) {
-  // 鲁棒性*
-  if (!n || !m) {
-    return -1
-  }
-  // 创建环形链表
+  // 1.构造环形链表*
   let head = { value: 0 }
   let cur_node = head
-  for (let i = 1; i < n; i++) {
+  for (let i = 0; i < n; i++) {
     let node = { value: i }
     cur_node.next = node
-    cur_node = node
+    cur_node = cur_node.next
   }
   cur_node.next = head
+  //2.循环删除节点
+  // 从头开始
+  cur_node = head
   // 当链表不止一个节点
   while (cur_node != cur_node.next) {
-    // 找到第m-1个节点
-    for (let i = 0; i < m; i++) {
+    // 每次找到当前节点后m-1个节点
+    for (let i = 0; i < m - 1; i++) {
       cur_node = cur_node.next
     }
-    // 直接指向m+1个节点
+    // 直接指向m+1个节点(删除第m个节点)
     cur_node.next = cur_node.next.next
   }
   // 返回剩下节点的value
