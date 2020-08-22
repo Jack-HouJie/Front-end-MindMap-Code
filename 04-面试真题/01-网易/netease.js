@@ -123,3 +123,24 @@ for (var i = 0; i < n; i++) {
     }
   }
 }
+
+
+
+/**
+ * 
+ * @param {Array} arr 数组
+ * @param {Number} num 几等分
+ */
+function three (arr, num) {
+  let count = 0
+  for (let i = 0; i < arr.length; i += num) {
+    count++
+  }
+  let result = []
+  for (let i = 0; i < num; i++) {
+    result.push(count * i + '-' + count * (i + 1))
+  }
+  return result
+}
+
+
