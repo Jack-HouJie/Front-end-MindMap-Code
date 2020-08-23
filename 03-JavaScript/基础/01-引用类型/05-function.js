@@ -22,7 +22,7 @@ Function.prototype.myCall = function (ctx) {
  * @param {Array} arguments 执行的参数（可选）
  */
 Function.prototype.myApply = function (ctx) {
-  // 执行环境中创建临时函数
+  // 在执行环境创建临时方法
   ctx.func = this
   // 判断是否有参数*
   let result = null
@@ -45,15 +45,15 @@ Function.prototype.myApply = function (ctx) {
  * @param {Array} arguments 执行的参数（可选）
  */
 Function.prototype.myBind = function (ctx) {
-  // this指向函数对象
+  // 保存函数至内部变量
   const _this = this
-  // 得到参数
+  // 截取参数
   const args = [...arguments].slice(1)
   // 返回一个函数(闭包)：
   // 1.实现持有ctx，在被调用时使用
   // 2.实现柯里化，可以在F被调用时实现参数复用并添加额外参数
   return function F () {
-    // 如果通过new调用返回的函数
+    // 如果通过new调用此返回的函数F
     // this应指向 new 赋给的变量
     // (其是bindFun的实例，也就是F的实例)
     if (this instanceof F) {
