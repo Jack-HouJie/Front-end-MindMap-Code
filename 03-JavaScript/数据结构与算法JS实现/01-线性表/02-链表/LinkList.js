@@ -72,6 +72,7 @@ class LinkList {
  */
 function printListFromTailToHead (head) {
   if (!head) return false
+  // 辅助队列
   let temp = []
   let cur_node = head
   // 遍历用while而不是if
@@ -162,6 +163,7 @@ function reconnetNodes (pHead) {
 function deleteDuplication (pHead) {
   let map = {}
   let cur_node = pHead
+  // 统计次数
   while (cur_node) {
     let count = map[cur_node.value]
     map[cur_node.value] = count ? count + 1 : 1
@@ -221,15 +223,18 @@ function deleteDuplication (pHead) {
  * @param {ListNode} pHead2 
  */
 function merge (pHead1, pHead2) {
+  // 迭代停止：一方为空返回对方
   if (!pHead1) {
     return pHead2
   }
   if (!pHead2) {
     return pHead1
   }
-  let head
+  let head // 结果链表中每次迭代处理的节点
   if (pHead1.value < pHead2.value) {
+    // 小节点作为当前节点
     head = pHead1
+    // 递归：每次小节点作为下一个节点
     head.next = merge(pHead1.next, pHead2)
   }
   // 应考虑相等情况
@@ -344,7 +349,7 @@ function entryNodeOfLoop (pHead) {
   } while (node1 != node2);
 
   // 3.找到入环点
-  // 从原地开始**，
+  // 从原点开始，
   // 让node2比node1先走一个环长
   //（恰好比node1多走一个环）
   // 二者第一次相遇点即为入环点

@@ -126,7 +126,7 @@ class BST {
    */
   _midTravesal (cur_node) {
     // 递归停止条件：如果当前节点不存在
-    if (cur_node) {
+    if (!cur_node) {
       return
     }
     this._midTravesal(cur_node.left)
