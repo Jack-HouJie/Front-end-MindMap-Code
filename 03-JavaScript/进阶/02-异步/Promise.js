@@ -76,3 +76,15 @@ MyPromise.prototype.then = function (onResolve, onReject) {
     onReject(that.value)
   }
 }
+
+
+
+/** 支持延迟 .then 执行回调 的函数
+ * 
+ * @param {Number} time 延迟时间毫秒数 
+ */
+function timeout (time) {
+  return new Promise((resolve) => {
+    setTimeout(resolve, time)
+  })
+}
