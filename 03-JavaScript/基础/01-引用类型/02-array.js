@@ -1,4 +1,4 @@
-let arr = [1, 1, [2, 3, [4]], "a", "b", ["c", "d"], "f", [["d"], "e"]];
+let arr = [1, 1, 'true', 'true', true, true, 15, 15, false, false, undefined, undefined, null, null, NaN, NaN, 'NaN', 0, 0, 'a', 'a', {}, {}];
 
 /* 转换方法 */
 // console.log(arr.join("^"))
@@ -74,3 +74,15 @@ function unique (arr) {
   })
 }
 console.log(unique(arr));
+
+
+// 快速的让一个数组乱序
+// let arr = [1, 2, 3, 4, 5]
+// function randomArr (arr) {
+//   arr.sort(function () {
+//     return Math.random() - 0.5
+//   })
+
+// }
+// randomArr(arr)
+// console.log(arr)

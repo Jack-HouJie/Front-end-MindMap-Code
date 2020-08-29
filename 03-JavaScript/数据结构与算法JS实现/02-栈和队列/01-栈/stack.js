@@ -59,7 +59,7 @@ class MyStack1 {
     this.queue2 = []
   }
   /** 入栈
-   * @param {*}} item 
+   * @param {*} item 
    */
   push (item) {
     if (queue1.length === 0) {
