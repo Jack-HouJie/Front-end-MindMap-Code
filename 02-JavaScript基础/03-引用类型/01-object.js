@@ -35,3 +35,29 @@ function myInstanceof (left, right) {
   }
   return false
 }
+
+// 实现 Object对象基础方法： 克隆值
+// 复制调用此基础方法的对象的值
+// 支持的类型；Number、String、Object、Array、Boolean
+Object.prototype.myClone = function () {
+  let result
+  if (Array.isArray(this)) {
+    result = []
+    for (let i = 0; i < this.length; i++) {
+      result.push(this[i])
+    }
+  }
+  else if (typeof this == 'object') {
+    result = JSON.parse(JSON.stringify(this))
+  }
+  else {
+    result = this
+  }
+  return result
+}
+let num = 29489248
+console.log(num.myClone())
+console.log('123'.myClone())
+console.log({ a: 1, child: { b: 2 } }.myClone())
+console.log([123, 456].myClone())
+console.log(true.myClone())
