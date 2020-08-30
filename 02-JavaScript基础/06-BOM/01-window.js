@@ -26,20 +26,20 @@ function setView () {
   window.resizeTo(100, 500);
 }
 
-// 超时调用实现间歇调用
-function myInterval () {
-  var num = 0;
-  var max = 10;
-  function incrementNum () {
-    num++;
-    if (num < max) {
-      setTimeout(incrementNum, 500);
-    } else {
-      console.log("done");
-    }
+/** 超时调用实现间歇调用
+ * 
+ */
+function exec () {
+  curNum++
+  console.log(curNum) // 每次调用的操作
+  if (curNum < maxNum) {
+    setTimeout(exec, 1000)
+  } else {
   }
-  setTimeout(incrementNum, 500);
 }
+let curNum = 0
+let maxNum = 10
+setTimeout(exec, 100)
 
 // 设置系统对话框
 function setLog () {
