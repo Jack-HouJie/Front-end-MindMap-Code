@@ -30,3 +30,18 @@ function reverseSentence (str) {
 }
 // console.log(reverseSentence("hello world!"));
 
+/** 求字符串占字节数
+ * 
+ * @param {String} str 
+ */
+function GetBytes (str) {
+  let length = str.length
+  let bytes = length
+  for (let i = 0; i < length; i++) {
+    if (str.charCodeAt(i) > 255) {
+      bytes++
+    }
+  }
+  return bytes
+}
+console.log(GetBytes('12啊3123'));
