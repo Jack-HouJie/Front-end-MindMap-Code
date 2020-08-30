@@ -1,12 +1,21 @@
-/**
- * 辅助函数
+/** 辅助函数
+ * 检查数组是否存在
  * @param {Array} array 
  */
 function checkArray (array) {
+  if (!Array.isArray(array)) {
+    throw new Error('数据非数组')
+  }
   if (!array) {
-    throw 'array不存在'
+    throw new Error('数组不存在')
   }
 }
+/** 辅助函数
+ * 交换数组指定索引元素
+ * @param {Array} array 
+ * @param {Number} left 
+ * @param {Number} right 
+ */
 function swap (array, left, right) {
   let temp = array[right]
   array[right] = array[left]
@@ -14,8 +23,8 @@ function swap (array, left, right) {
 }
 
 /** 插入类排序 */
-/**
- * 直接插入排序
+/** 直接插入排序
+ * 
  * @param {Array} array 
  */
 function insertSort (array) {
@@ -36,23 +45,23 @@ function insertSort (array) {
   }
   return array
 }
-/**
- * 折半插入排序
+/** 折半插入排序
+ * 
  * 
  * @param {Array} array 
  */
-/**
- * 希尔排序
+/** 希尔排序
+ * 
  * 
  * @param {Array} array 
  */
 
 /** 交换类排序 */
-/**
- * 冒泡排序
+/** 冒泡排序
+ * 
  * @param {Array} array 
  */
-function bubble (array) {
+function bubbleSort (array) {
   checkArray(array)
   let length = array.length
   // 每趟确定一个最大值
@@ -64,44 +73,47 @@ function bubble (array) {
       // 如果前大后小
       if (array[j] > array[j + 1]) {
         // 则交换位置
-        swap(arr, j, j + 1)
+        swap(array, j, j + 1)
       }
     }
   }
   return array
 }
-/**
- * 快速排序
+/** 快速排序*
+ * （1）在数据集之中，找一个基准点
+ * （2）建立两个数组，分别存储左边和右边的数组
+ * （3）利用递归进行下次比较
  * @param {Array} array 
  */
-function quickSort (array) {
-  let length = array.length
-  // 递归到只有一个元素,此元素即为结果
-  if (length <= 1) {
-    return array
+function quickSort (arr) {
+  let length = arr.length
+  // 递归停止条件
+  if (length == 0) {
+    return []
   }
-  // 保存每次递归的较大、较小值
-  let less = []
-  let more = []
-  // 将中位项的值作为tag
-  let tag_idx = Math.floor(length / 2)
-  let tag_val = array[tag_idx]
-  // 找到比tag小的值和大的值,加入对应数组
-  for (let i = 0; i < length; i++) {
-    let cur_val = array[i]
-    if (cur_val < tag_val) {
-      less.push(cur_val)
-    } else if (cur_val > tag_val) {
-      more.push(cur_val)
+  // 参考值
+  let midIdx = Math.floor(length >> 1)
+  let midVal = arr.splice(midIdx, 1)
+  // 较小、较大值数组
+  let leftArr = []
+  let rightArr = []
+  // 找到较小、较大值
+  for (let i = 0; i < length - 1; i++) {
+    let curVal = arr[i]
+    if (curVal < midVal) {
+      leftArr.push(curVal)
+    }
+    else {
+      rightArr.push(curVal)
     }
   }
-  // 递归的将小数组、中位项、大数组拼接
-  return quickSort(less).concat(tag_idx, quickSort(more))
+  // 递归的拼接较小值数组、参考值、较大值数组
+  return quickSort(leftArr).concat(midVal, quickSort(rightArr))
 }
 
 /** 选择类排序 */
-/**
- * 简单选择排序
+/** 简单选择排序
+ * 
  * @param {Array} array 
  */
 function selectionSort (array) {
@@ -120,11 +132,10 @@ function selectionSort (array) {
   }
   return array
 }
-/**
- * 堆排序
+/** 堆排序
+ * 
  * @param {Array} array 
  */
-
 
 // 归并排序
 function Sort (array) {
