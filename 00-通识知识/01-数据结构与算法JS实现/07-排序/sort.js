@@ -24,7 +24,10 @@ function swap (array, left, right) {
 
 /** 插入类排序 */
 /** 直接插入排序
- * 
+ * 将左侧序列看成一个有序序列，
+ * 每次将一个数字插入该有序序列。
+ * 插入时，从有序序列最右侧开始比较，
+ * 若比较的数较大，后移一位。
  * @param {Array} array 
  */
 function insertSort (array) {
@@ -47,7 +50,6 @@ function insertSort (array) {
 }
 /** 折半插入排序
  * 
- * 
  * @param {Array} array 
  */
 /** 希尔排序
@@ -58,7 +60,9 @@ function insertSort (array) {
 
 /** 交换类排序 */
 /** 冒泡排序
- * 
+ * 循环数组，比较当前元素和下一个元素，
+ * 如果当前元素比下一个元素大，向上冒泡。
+ * 下一次循环继续上面的操作，不循环已经排序好的数。
  * @param {Array} array 
  */
 function bubbleSort (array) {
@@ -80,9 +84,9 @@ function bubbleSort (array) {
   return array
 }
 /** 快速排序*
- * （1）在数据集之中，找一个基准点
- * （2）建立两个数组，分别存储左边和右边的数组
- * （3）利用递归进行下次比较
+ * 选择一个目标值，
+ * 比目标值小的放左边，比目标值大的放右边，
+ * 目标值的位置已排好，将左右两侧再进行快排。
  * @param {Array} array 
  */
 function quickSort (arr) {
@@ -113,7 +117,7 @@ function quickSort (arr) {
 
 /** 选择类排序 */
 /** 简单选择排序
- * 
+ * 每次排序取一个最大或最小的数字放到前面的有序序列中。
  * @param {Array} array 
  */
 function selectionSort (array) {
@@ -133,11 +137,18 @@ function selectionSort (array) {
   return array
 }
 /** 堆排序
- * 
+ * 创建一个大顶堆，大顶堆的堆顶一定是最大的元素。
+ * 交换第一个元素和最后一个元素，
+ * 让剩余的元素继续调整为大顶堆。
+ * 从后往前以此和第一个元素交换并重新构建，排序完成。
  * @param {Array} array 
  */
 
-// 归并排序
+/** 归并排序
+ * 将大序列二分成小序列，
+ * 将小序列排序后再将排序后的小序列归并成大序列。
+ * @param {Array} array 
+ */
 function Sort (array) {
   checkArray(array)
   mergeSort(array, 0, array.length - 1)

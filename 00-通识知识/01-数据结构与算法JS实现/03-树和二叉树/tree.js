@@ -216,7 +216,8 @@ class BiTree {
     node.save(result)
     this.saveMidOrder(node.right)
   }
-  /** 找到第 k 小节点
+  /* 二叉搜索树应用 */
+  /** 找到E二叉搜索树第 k 小节点
    * 
    * @param {Number} k 
    */
@@ -225,6 +226,7 @@ class BiTree {
     tree.saveMidOrder(node, result)
     console.log(result[k - 1]);
   }
+
 }
 
 /** 二叉树遍历问题：
