@@ -9,6 +9,7 @@ Function.prototype.myCall = function (ctx) {
   delete ctx.func
   return result
 }
+
 // 实现apply
 Function.prototype.myApply = function (ctx) {
   // 创建临时方法
@@ -26,6 +27,7 @@ Function.prototype.myApply = function (ctx) {
   delete ctx.func
   return result
 }
+
 // 实现bind
 Function.prototype.myBind = function (ctx) {
   let _this = this // 保存函数
@@ -41,6 +43,7 @@ Function.prototype.myBind = function (ctx) {
     return _this.myApply(ctx, args.concat(...arguments))
   }
 }
+
 // 实现防抖
 function debounce (func, wait_time) {
   let timerId = 0
@@ -55,9 +58,8 @@ function debounce (func, wait_time) {
 }
 setInterval(debounce(() => {
   // 某些操作
-  console.log("debounce1s" + new Date())
+  console.log("debounce-1s" + new Date())
 }, 1000), 1000)
-
 
 // 实现节流
 function throttle (func, wait_time) {
@@ -74,5 +76,3 @@ function throttle (func, wait_time) {
 //   // 某些操作
 //   console.log(new Date())
 // }, 2000), 500)
-
-

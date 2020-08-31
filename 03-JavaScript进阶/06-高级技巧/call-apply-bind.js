@@ -5,7 +5,7 @@ Function.prototype.myCall = function (ctx) {
   // 截取参数(第二项之后)、用const因为不变
   const args = [...arguments].slice(1)
   // 得到结果
-  const result = ctx.func(args)
+  const result = ctx.func(...args)
   // 临时函数解引用 delete删除方法
   delete ctx.func
   return result
