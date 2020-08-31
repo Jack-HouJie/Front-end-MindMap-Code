@@ -11,7 +11,7 @@ function MyPromise (func) {
   const that = this
   // 状态初始化为pending
   that.state = PENDING
-  // 保存异步结果，将来传入resolve()和reject()
+  // 保存异步结果，将来传入成功失败回调函数
   that.value = []
   // 保存所有回调函数
   that.resolve_cbs = []
