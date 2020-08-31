@@ -335,3 +335,32 @@ tree.insert(tree.root, 105)
 // console.log(tree.getDeep(tree.root, 0));
 
 tree.getKthMin(tree.root, 1)
+
+/* 回溯问题 */
+/** 二叉树中和为某一值的路径
+ * 
+ * @param {TNode} root 
+ * @param {Number} expectNumber 
+ */
+function findPath (root, expectNumber) {
+  const result = []
+  if (root) {
+    findPathCore(root, expectNumber, [], 0, result)
+  }
+  return result
+}
+function findPathCore (node, expectNumber, stack, sum, result) {
+  stack.push(node.value)
+  sum += node.value
+  if (!node.left && !node.right && sum === expectNumber) {
+    // arr.slice(0)实现数组浅拷贝
+    result.push(stack.slice(0))
+  }
+  if (node.left) {
+    findPathCore(node.left, expectNumber, stack, sum, result)
+  }
+  if (node.right) {
+    findPathCore(node.right, expectNumber, stack, sum, result)
+  }
+  stack.pop()
+}
