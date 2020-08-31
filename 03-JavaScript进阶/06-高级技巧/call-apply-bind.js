@@ -32,7 +32,7 @@ Function.prototype.myApply = function (ctx) {
 
 // 实现bind
 Function.prototype.myBind = function (ctx) {
-  // 拿到getName
+  // 保存要绑定的函数
   const _this = this
   // 得到参数
   const args = [...arguments].slice(1)
@@ -41,11 +41,10 @@ Function.prototype.myBind = function (ctx) {
   // 2.实现柯里化，可以在F被调用时添加额外参数
   return function F () {
     // 如果返回的函数通过new调用
-    // this应指向new 赋给的变量
-    // 其是bindFun的实例，也就是F的实例
+    // this应指向new 赋给的变量：bindFun的实例，也就是F的实例
     if (this instanceof F) {
       // 此时不实现绑定ctx，
-      // 只实现补充参数
+      // 只实现柯里化
       return new _this(...args, ...arguments)
     }
     // 如果直接调用，则通过apply实现绑定ctx
