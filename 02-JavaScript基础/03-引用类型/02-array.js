@@ -86,3 +86,17 @@ console.log(unique(arr));
 // }
 // randomArr(arr)
 // console.log(arr)
+
+
+let arr = [1, 1, [2, 3, [4]], "a", "b", ["c", "d"], "f", [["d"], "e"]]
+/** 数组扁平化/数组展开/数组降维
+ * @param {Array} arr 
+ */
+function flatten (arr) {
+  if (!Array.isArray(arr)) {
+    throw new Error('not array')
+  }
+  //  toString() 方法返回一个表示该对象的字符串
+  return arr.toString().split(',')
+}
+let result = flatten(arr)
