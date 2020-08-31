@@ -349,6 +349,14 @@ function findPath (root, expectNumber) {
   }
   return result
 }
+/** 二叉树中和为某一值的路径
+ * 找到路径核心递归函数
+ * @param {TNode} node 
+ * @param {Number} expectNumber 
+ * @param {Array} stack 
+ * @param {Number} sum 
+ * @param {Array} result 
+ */
 function findPathCore (node, expectNumber, stack, sum, result) {
   stack.push(node.value)
   sum += node.value
