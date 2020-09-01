@@ -268,12 +268,12 @@ class BiTree {
   isBalanced (pRoot) {
     return balance(pRoot) != -1
   }
-  balance (node) {
+  isBalancedCore (node) {
     if (!node) {
       return 0
     }
-    let left = balance(node.left)
-    let right = balance(node.right)
+    let left = isBalancedCore(node.left)
+    let right = isBalancedCore(node.right)
     if (left == -1 || right == -1 || Math.abs(left - right) > 1) {
       return -1
     }
@@ -307,7 +307,6 @@ function reConstructBinaryTree (pre, mid) {
   node.right = reConstructBinaryTree(rightPre, rightMid)
   return node
 }
-
 /** 二叉树遍历问题：
  * 已知前中遍历，求后序遍
  * @param {String} pre 
@@ -332,7 +331,7 @@ function getHRD (pre, mid) {
  * 根据后序遍历判断是否是二叉搜索树
  * @param {Array} arr 
  */
-function VerifySquenceOfBST (arr) {
+function verifySquenceOfBST (arr) {
   // 递归停止：
   if (!arr) {
     return true
@@ -352,15 +351,107 @@ function VerifySquenceOfBST (arr) {
   }
   let left = true
   if (i > 0) {
-    left = VerifySquenceOfBST(arr.slice(0, i))
+    left = verifySquenceOfBST(arr.slice(0, i))
   }
   let right = true
   if (i < length - 1) {
-    right = VerifySquenceOfBST(arr.slice(i, length - 1))
+    right = verifySquenceOfBST(arr.slice(i, length - 1))
   }
   return left && right
 }
+/** 二叉树遍历问题
+ * 二叉树序列化
+ * @param {TNode} root 
+ */
+function serialize (root) {
+  if (!root) {
+    return "[]"
+  }
+  let queue = [root]
+  let result = ''
+  while (queue.length) {
+    let node = queue.shift()
+    if (node) {
+      result += `${node.value},`
+      queue.push(node.left)
+      queue.push(node.right)
+    } else {
+      result += '#,'
+    }
+    console.log(result);
+  }
+  return '[' + result.slice(0, -1) + ']'
+}
+/** 二叉树遍历问题
+ * 二叉树反序列化
+ * @param {string} str
+ * @return {TreeNode}
+ */
+var deserialize = function (str) {
+  if (str <= 2) {
+    return null
+  }
+  let nodes = str.slice(1, -1).split(',') // 序列化结果
+  let root = new TNode(+nodes.shift()) // 构建树的根
+  let queue = [root] // 将要构建的节点
+  while (queue.length) {
+    let node = queue.shift()
+    let leftVal = nodes.shift()
+    if (leftVal !== '#') {
+      node.left = new TNode(+leftVal)
+      queue.push(node.left)
+    }
+    let rightVal = nodes.shift()
+    if (rightVal !== '#') {
+      node.right = new TNode(+rightVal)
+      queue.push(node.right)
+    }
+  }
+  return root
+}
 
+/* 二叉树深度问题 */
+/** 二叉搜索树转换双向链表
+ * 原文地址：https://xxoo521.com/2020-02-06-btree-link/
+ * @param {Node} root
+ * @return {Node}
+ */
+function treeToDoublyList (root) {
+  if (!root) {
+    return
+  }
+  let head = null
+  let pre = head
+  treeToDoublyListCore(root)
+  // 完成中序遍历后，pre指向了最后一个节点
+  // 将其闭合成环状结构
+  head.left = pre
+  pre.right = head
+  return head
+}
+/** 
+ * @param {Node} node
+ */
+function treeToDoublyListCore (node) {
+  if (!node) {
+    return
+  }
+  // 遍历左子树
+  treeToDoublyListCore(node.left, pre)
+
+  // 处理当前节点
+  if (!pre) {
+    // 遍历到最左边节点，此时节点就是双向链表的head
+    head = node
+  } else {
+    pre.right = node
+  }
+  node.left = pre
+  pre = node
+
+  // 遍历右子树
+  treeToDoublyListCore(node.right, pre)
+}
 
 /** 对称性问题：
  * 判断二叉树是否对称
@@ -371,9 +462,9 @@ function isSymmetrical (pRoot) {
   if (!pRoot) {
     return false
   }
-  return isSymmetricalTree(pRoot, pRoot);
+  return isSymmetricalCore(pRoot, pRoot);
 }
-function isSymmetricalTree (node1, node2) {
+function isSymmetricalCore (node1, node2) {
   if (!node1 && !node2) {
     return true
   }
@@ -383,9 +474,8 @@ function isSymmetricalTree (node1, node2) {
   if (node1.value !== node2.value) {
     return false
   }
-  return isSymmetricalTree(node1.left, node2.right) && isSymmetricalTree(node1.right, node2.left)
+  return isSymmetricalCore(node1.left, node2.right) && isSymmetricalCore(node1.right, node2.left)
 }
-
 /** 对称性问题：
  * 二叉树镜像
  * @param {TNode} root 
@@ -401,26 +491,6 @@ function mirror (root) {
   mirror(root.right)
 }
 
-
-let tree = new BiTree(new TNode(10))
-
-tree.insert(tree.root, 1)
-tree.insert(tree.root, 100)
-tree.insert(tree.root, 50)
-tree.insert(tree.root, 105)
-// tree.preOrder(tree.root)
-// tree.midOrder(tree.root)
-// tree.backOrder(tree.root)
-// tree.preOrderNR(tree.root)
-// tree.midOrderNR(tree.root)
-// tree.backOrder(tree.root)
-// tree.breTravesal(tree.root)
-
-// console.log(tree.getDeep(tree.root, 0));
-
-
-tree.getKthMin(tree.root, 1)
-
 /* 回溯问题 */
 /** 二叉树中和为某一值的路径
  * 
@@ -434,7 +504,7 @@ function findPath (root, expectNumber) {
   }
   return result
 }
-/** 二叉树中和为某一值的路径
+/** 
  * 找到路径核心递归函数
  * @param {TNode} node 
  * @param {Number} expectNumber 
@@ -458,3 +528,17 @@ function findPathCore (node, expectNumber, stack, sum, result) {
   stack.pop()
 }
 
+let tree = new BiTree(new TNode(3))
+tree.insert(tree.root, 1)
+tree.insert(tree.root, 2)
+tree.insert(tree.root, 4)
+tree.insert(tree.root, 5)
+// tree.preOrder(tree.root)
+// tree.midOrder(tree.root)
+// tree.backOrder(tree.root)
+// tree.preOrderNR(tree.root)
+// tree.midOrderNR(tree.root)
+// tree.backOrder(tree.root)
+// tree.breTravesal(tree.root)
+// console.log(tree.getDeep(tree.root, 0))
+tree.midOrder(deserialize(serialize(tree.root)))
