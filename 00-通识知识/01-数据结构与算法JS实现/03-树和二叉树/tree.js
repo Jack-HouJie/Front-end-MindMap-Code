@@ -361,6 +361,7 @@ function verifySquenceOfBST (arr) {
 }
 /** 二叉树遍历问题
  * 二叉树序列化
+ * https://leetcode-cn.com/problems/xu-lie-hua-er-cha-shu-lcof/solution/ceng-xu-bian-li-si-lu-jiang-jie-javascriptshi-xian/
  * @param {TNode} root 
  */
 function serialize (root) {
@@ -387,21 +388,21 @@ function serialize (root) {
  * @param {string} str
  * @return {TreeNode}
  */
-var deserialize = function (str) {
+function deserialize (str) {
   if (str <= 2) {
     return null
   }
-  let nodes = str.slice(1, -1).split(',') // 序列化结果
-  let root = new TNode(+nodes.shift()) // 构建树的根
+  let serialQue = str.slice(1, -1).split(',') // 序列化结果
+  let root = new TNode(+serialQue.shift()) // 构建树的根
   let queue = [root] // 将要构建的节点
   while (queue.length) {
     let node = queue.shift()
-    let leftVal = nodes.shift()
+    let leftVal = serialQue.shift()
     if (leftVal !== '#') {
       node.left = new TNode(+leftVal)
       queue.push(node.left)
     }
-    let rightVal = nodes.shift()
+    let rightVal = serialQue.shift()
     if (rightVal !== '#') {
       node.right = new TNode(+rightVal)
       queue.push(node.right)
@@ -409,6 +410,46 @@ var deserialize = function (str) {
   }
   return root
 }
+/** 二叉树遍历问题：
+ * 找出当前节点 在中序遍历中的下一个节点
+ * 问题分解：
+ * 1.右节点不为空 - 取右节点的最左侧节点
+ * 2.右节点为空 - 如果节点是父亲节的左节点 取父节点
+ * 3.右节点为空 - 如果节点是父亲节的右节点 找到是左孩子的祖先节点 取其祖先
+ * 4.都不满足返回null
+ * @param {TNode} pNode  
+ */
+function getNext (pNode) {
+  if (!pNode) {
+    return null
+  }
+  // 1.
+  if (pNode.right) {
+    pNode = pNode.right
+    while (pNode.left) {
+      pNode = pNode.left
+    }
+    return pNode
+  }
+  else {
+    // 2.
+    if (pNode.parent.left === pNode) {
+      return pNode.parent
+    }
+    // 3.
+    else {
+      while (pNode.parent) {
+        if (pNode === pNode.parent.left) {
+          return pNode.parent
+        }
+        pNode = pNode.parent
+      }
+    }
+  }
+  // 4.
+  return null
+}
+
 
 /* 二叉树深度问题 */
 /** 二叉搜索树转换双向链表
