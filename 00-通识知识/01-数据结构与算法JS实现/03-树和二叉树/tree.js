@@ -449,6 +449,43 @@ function getNext (pNode) {
   // 4.
   return null
 }
+/** 二叉树遍历问题
+ * 比较两棵树是否相等
+ * @param {TNode} node1 
+ * @param {TNode} node2 
+ */
+function compare (node1, node2) {
+  if (node2 === null) {
+    return true
+  }
+  if (node1 === null) {
+    return false
+  }
+  if (node1.value !== node2.value) {
+    return false
+  }
+  return compare(node1.left, node2.left) && compare(node1.right, node2.right)
+}
+/** 二叉树遍历问题：
+ * 树的子结构
+ * @param {TNode} pRoot1 树根
+ * @param {TNode} pRoot2 判断的子结构根
+ */
+function hasSubtree (pRoot1, pRoot2) {
+  let result = false
+  if (pRoot1 && pRoot2) {
+    if (pRoot1.value === pRoot2.value) {
+      result = compare(pRoot1, pRoot2)
+    }
+    if (!result) {
+      result = hasSubtree(pRoo1.left, pRoot2)
+    }
+    if (!result) {
+      result = hasSubtree(pRoo1.right, pRoot2)
+    }
+  }
+  return result
+}
 
 
 /* 二叉树深度问题 */
