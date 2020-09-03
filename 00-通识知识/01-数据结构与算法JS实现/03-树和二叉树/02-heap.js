@@ -72,18 +72,16 @@ class MaxHeap {
   }
 }
 
-
-
 let arr = [1, 5, 3, 4, 6, 2]
 let heap = new MaxHeap(arr)
-console.log(heap);
+console.log(heap)
 heap.pop()
-console.log(heap);
+console.log(heap)
 heap.add(10)
-console.log(heap);
+console.log(heap)
 heap.add(8)
-console.log(heap);
+console.log(heap)
 heap.pop()
-console.log(heap);
+console.log(heap)
 heap.pop()
-console.log(heap);
+console.log(heap)
