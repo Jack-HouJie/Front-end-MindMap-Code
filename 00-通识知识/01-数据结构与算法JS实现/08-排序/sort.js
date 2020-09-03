@@ -24,20 +24,17 @@ function swap (array, left, right) {
 
 /** 插入类排序 */
 /** 直接插入排序
- * 将左侧序列看成一个有序序列，
- * 每次将一个数字插入该有序序列。
- * 插入时，从有序序列最右侧开始比较，
- * 若比较的数较大，后移一位。
+ * 将左侧序列看成增序序列，
+ * 每次将一个数字插入该增序列。
  * @param {Array} array 
  */
 function insertSort (array) {
   checkArray(array)
   let length = array.length
-  // 分别确定每一项的位置；
-  // 从第二个值开始，从前向后遍历
+  // 从第二项开始，从前向后确定每一项的位置
   for (let i = 1; i < length; i++) {
     // 找到当前项位置：
-    // 从当前值前一个位置开始，从后向前遍历
+    // 从当前项前一个位置开始，从后向前遍历
     for (let j = i - 1; j >= 0; j--) {
       // 如果前大后小
       if (array[j] > array[j + 1]) {
@@ -54,15 +51,13 @@ function insertSort (array) {
  */
 /** 希尔排序
  * 
- * 
  * @param {Array} array 
  */
 
 /** 交换类排序 */
 /** 冒泡排序
- * 循环数组，比较当前元素和下一个元素，
- * 如果当前元素比下一个元素大，向上冒泡。
- * 下一次循环继续上面的操作，不循环已经排序好的数。
+ * 循环数组，如果前大后小则交换位置。
+ * 每趟对未排序数 进行循环
  * @param {Array} array 
  */
 function bubbleSort (array) {
@@ -91,11 +86,11 @@ function bubbleSort (array) {
  */
 function quickSort (arr) {
   let length = arr.length
-  // 递归停止条件
+  // 递归停止条件：待排序数组为空
   if (length == 0) {
     return []
   }
-  // 参考值
+  // 取出参考值
   let midIdx = Math.floor(length >> 1)
   let midVal = arr.splice(midIdx, 1)
   // 较小、较大值数组
@@ -117,7 +112,7 @@ function quickSort (arr) {
 
 /** 选择类排序 */
 /** 简单选择排序
- * 每次排序取一个最大或最小的数字放到前面的有序序列中。
+ * 每次排序取一个最小的数字放到前面的增序序列中。
  * @param {Array} array 
  */
 function selectionSort (array) {
@@ -144,36 +139,60 @@ function selectionSort (array) {
  * @param {Array} array 
  */
 
-/** 归并排序
+/* 归并类排序 */
+/** 二路归并排序
  * 将大序列二分成小序列，
  * 将小序列排序后再将排序后的小序列归并成大序列。
  * @param {Array} array 
  */
-function Sort (array) {
+function mergeSort (array) {
   checkArray(array)
-  mergeSort(array, 0, array.length - 1)
+  mergeSortCore(array, 0, array.length - 1)
   return array
 }
-function mergeSort (array, left, right) {
+/** 归并排序核心
+ * 
+ * @param {Array} array 
+ * @param {Number} left 
+ * @param {Number} right 
+ */
+function mergeSortCore (array, left, right) {
+  // 迭代停止条件：只剩一个待排序数
   if (left === right) {
     return
   }
-  let mid = parseInt(left + ((left + right) >> 1))
-  mergeSort(array, left, mid)
-  mergeSort(array, mid + 1, right)
+  // 找到中间索引
+  let mid = Math.floor(left + ((left + right) >> 1))
+  // 递归的归并排序左右两边
+  // 递：只剩两个数时，排序好两个数
+  // 归：2、4、8、16······
+  mergeSortCore(array, left, mid)
+  mergeSortCore(array, mid + 1, right)
+  // 临时存放已排序数
   let temp = []
+  // 已排序数尾部索引
   let i = 0
+  // 左侧头索引
   let j = left
+  // 右侧头索引
   let k = mid + 1
+
+  // 当左右两侧都有剩余数时
   while (j !== mid && k !== right) {
+    // 左右两侧从前往右找到小值存入已排序数组
     temp[i++] = array[j] < array[k] ? array[j++] : array[k++]
   }
+  // 如果右侧排完，左侧还有剩余
   while (j !== mid) {
+    // 左侧顺序接入
     temp[i++] = array[j++]
   }
+  // 如果左侧排完，右侧还有剩余
   while (k !== right) {
+    // 右侧顺序接入
     temp[i++] = array[k++]
   }
+  // 将排序好的数写回原数组
   let length = temp.length
   for (let i = 0; i < length; i++) {
     array[left + i] = temp[i]
