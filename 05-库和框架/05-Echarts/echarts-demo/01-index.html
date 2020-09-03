@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>入门：基本过程、柱状图配置、通用配置</title>
+  <script src="https://cdn.bootcdn.net/ajax/libs/echarts/5.0.0-alpha.1/echarts.js"></script>
+</head>
+
+<body>
+  <div id="container" style="width:600px;height:400px;"></div>
+</body>
+<script>
+  // 基于准备好的dom，初始化echarts实例
+  const myChart = echarts.init(document.getElementById('container'))
+
+  const xDataArr = ['小明', '小红', '小黄']
+  // 指定图表的配置项和数据
+  const option = {
+    // 标题（通用配置）
+    title: {
+      text: 'ECharts 入门示例-数学成绩统计',
+      link: 'http://www.baidu.com', // 主标题超链接
+      textStyle: { // 主标题样式
+        color: 'red',
+        fontWeight: 1000
+      },
+      // 标题边框
+      borderWidth: 2,
+      borderColor: 'blue',
+      borderRadius: 3,
+      // 标题位置
+      left: 50,
+      top: 10,
+    },
+    // 图例（通用配置：筛选series）
+    legend: {
+      data: ['数学成绩', '语文成绩'],
+      bottom: 0
+    },
+    // 提示框组件（通用配置）
+    tooltip: {
+      // 触发类型
+      // trigger: 'item', // 移入柱内部
+      trigger: 'axis', // 柱所属区域
+      // 触发时机
+      triggerOn: 'mousemove', // 鼠标划过（默认）
+      // triggerOn: 'click', // 点击
+      // 格式化
+      // formatter: '{b} 的成绩是 {c}', // 字符串模版形式https://echarts.apache.org/zh/option.html#tooltip.formatter
+      formatter: arg => { // 回调函数形式
+        return arg[0].name + ' 的分数是: ' + arg[0].data
+      }
+    },
+    // 工具栏组件（通用配置）
+    toolbox: {
+      feature: {
+        saveAsImage: {}, // 导出图片
+        dataView: {}, //数据视图
+        restore: {}, // 重置：重置数据视图数据
+        dataZoom: {}, // 区域缩放
+        magicType: {
+          // 动态类型切换
+          type: ['bar', 'line']
+        }
+      }
+    },
+    // x轴
+    xAxis: {
+      type: 'category', // 类目轴
+      data: xDataArr
+    },
+    // y轴
+    yAxis: {
+      type: 'value', // 数值轴
+      // data: xDataArr
+      // 数值轴的data去series中的data找
+    },
+    // 系列列表：y轴数据
+    series: [
+      // 系列一
+      {
+        name: '数学成绩',
+        type: 'bar', // 当前系列图表类型：bar柱状图 line折线图 pie饼图
+        // 最大最小值
+        markPoint: {
+          data: [{
+              type: 'max',
+              name: '最大值'
+            },
+            {
+              type: 'min',
+              name: '最小值'
+            }
+          ]
+        },
+        // 平均值
+        markLine: {
+          data: [{
+            type: 'average',
+            name: '平均值'
+          }]
+        },
+        // 是否显示内容
+        label: {
+          show: true,
+          rotate: 60, // 旋转60度
+          position: 'inside' // 位置
+        },
+        // 柱宽度
+        // barWidth: '30%',
+        data: [80, 65, 90]
+      },
+      // 系列二
+      {
+        name: '语文成绩',
+        type: 'bar',
+        // 柱状图相关：标记点（最大最小值）
+        markPoint: {
+          data: [{
+              type: 'max',
+              name: '最大值'
+            },
+            {
+              type: 'min',
+              name: '最小值'
+            }
+          ]
+        },
+        // 柱状图相关：标记线（平均值）
+        markLine: {
+          data: [{
+            type: 'average',
+            name: '平均值'
+          }]
+        },
+        // 标签：显示具体数据
+        label: {
+          show: true,
+          rotate: 60, // 旋转角度
+          position: 'inside' // 位置
+        },
+        data: [50, 55, 65]
+      }
+    ]
+  }
+
+  // 使用刚指定的配置项和数据显示图表
+  myChart.setOption(option)
+</script>
+
+</html>
