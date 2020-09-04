@@ -22,28 +22,24 @@
         text: 'ECharts 折线图示例'
       },
       tooltip: {},
-      label: {
-
-      },
+      label: {},
       legend: {
         data: ['销量', '库存']
       },
       xAxis: {
         type: 'category',
         data: xData,
-        boundaryGap: false
+        boundaryGap: false // 紧挨边缘：第一个元素紧挨y轴
       },
       yAxis: {
         type: 'value',
-        scale: true
+        scale: true // 缩放：脱离0值比例
       },
-      series: [{
+      series: [
+        {
           name: '销量',
           type: 'line',
-          // data: [5, 20, 36, 10, 10, 20]
           data: [15, 18, 17, 16, 18, 17],
-          stack: 'all',
-          areaStyle: {},
           // 最大最小值
           markPoint: {
             data: [{
@@ -62,18 +58,46 @@
           },
           // 标注区域
           markArea: {
-            data:[
-              [],
+            data: [
+              // 区间一
+              [{
+                  xAxis: '1月' // 开始值
+                },
+                {
+                  xAxis: '2月' // 结束值
+                }
+              ],
+              // 区间二
+              [{
+                  xAxis: '5月'
+                },
+                {
+                  xAxis: '6月'
+                }
+              ],
             ],
-          }
+          },
+          // 线条平滑
+          smooth: true,
+          // 线条样式
+          lineStyle: {
+            color: 'green',
+            type: 'dashed',
+          },
+          // 填充风格
+          areaStyle: {
+            color: 'red',
+          },
+          // 堆叠图：同一stack数值累加
+          stack: 'all',
         },
         {
           name: '库存',
           type: 'line',
-          // data: [5, 20, 36, 10, 10, 20]
           data: [19, 16, 18, 15, 17, 18],
+          areaStyle: {},
+          // 堆叠图：同一stack数值累加
           stack: 'all',
-          areaStyle: {}
         }
       ]
     }
