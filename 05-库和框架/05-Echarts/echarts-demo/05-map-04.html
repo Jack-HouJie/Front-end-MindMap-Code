@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>地图-不同城市不同颜色</title>
+  <title>地图-结合散点图</title>
   <script src="https://cdn.bootcdn.net/ajax/libs/echarts/5.0.0-alpha.1/echarts.js"></script>
   <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.20.0-0/axios.js"></script>
 </head>
@@ -14,13 +14,13 @@
   <div id="main" style="width: 600px;height:400px;"></div>
   <script type="text/javascript">
     // 基于准备好的dom，初始化echarts实例
-    let myChart = echarts.init(document.getElementById('main'))
+    var myChart = echarts.init(document.getElementById('main'))
 
     //1. 显示基本的中国地图
     //2. 将空气质量的数据设置给series下的对象
     //3. 将series下的数据和geo关联起来
     //4. 配置visualMap
-    let airData = [{
+    var airData = [{
         name: '北京',
         value: 39.92
       },
@@ -161,10 +161,17 @@
         value: 55
       }
     ]
+    // 散点图数据
+    var scatterData = [{
+      value: [117.283042, 31.86119]
+    }]
     axios.get('http://huangjiangjun.top/echarts/china.json').then(res => {
       echarts.registerMap('chinaMap', res.data)
 
       const option = {
+        title: {
+          text: 'ECharts 地图示例'
+        },
         geo: {
           type: 'map',
           map: 'chinaMap',
@@ -173,16 +180,24 @@
             // show: true
           }
         },
-        // 设置序列数据：空气质量数据
         series: [{
-          data: airData,
-          geoIndex: 0, // 将空气质量的数据和第0个geo配置关联在一起
-          type: 'map'
-        }],
-        // 对象
+            data: airData,
+            geoIndex: 0, // 将空气质量的数据和第0个geo配置关联在一起
+            type: 'map'
+          },
+          // 散点图对象
+          {
+            data: scatterData, // 配置散点的坐标数据
+            type: 'effectScatter', // 涟漪特效散点图
+            coordinateSystem: 'geo', // 指明散点使用的坐标系统 geo的坐标系统
+            rippleEffect: { 
+              scale: 10 // 设置涟漪动画的缩放比例
+            }
+          }
+        ],
         visualMap: {
-          min: 0, // 最小值
-          max: 300, // 最大值
+          min: 0,
+          max: 300,
           inRange: {
             color: ['white', 'red'] // 控制颜色渐变的范围
           },
