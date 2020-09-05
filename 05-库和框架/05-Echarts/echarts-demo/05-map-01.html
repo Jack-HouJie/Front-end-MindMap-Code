@@ -17,19 +17,24 @@
     var myChart = echarts.init(document.getElementById('main'))
 
     axios.get('http://huangjiangjun.top/echarts/china.json').then(res => {
+      // 注册地图矢量数据
       echarts.registerMap('chinaMap', res.data)
-
       const option = {
+        // 地图数据（类似series）
         geo: {
-          type: 'map',
-          map: 'chinaMap',
+          type: 'map', // 地图
+          map: 'chinaMap', // 数据（需要与注册的矢量数据名一致）
           roam: true, // 设置允许缩放以及拖动的效果
+          // 区域的文本配置
           label: {
-            // show: true
-          }
+            // show: true // 是否显示
+          },
+          // 初始化缩放
+          // zoom: 2,
+          // 地图中心点
+          // center: [87, 43], // 新疆的经纬度(可通过地图矢量数据获取)
         }
       }
-
       // 使用刚指定的配置项和数据显示图表。
       myChart.setOption(option)
     })
