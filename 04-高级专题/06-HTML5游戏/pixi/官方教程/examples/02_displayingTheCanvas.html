@@ -1,0 +1,43 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Displaying the canvas</title>
+<body>
+<script src="../pixi/pixi.min.js"></script>
+<script>
+
+//Create a Pixi Application
+let app = new PIXI.Application({ 
+    width: 256, 
+    height: 256,                       
+    antialiasing: true, 
+    transparent: false, 
+    resolution: 1
+  }
+);
+
+//Add the canvas that Pixi automatically created for you to the HTML document
+document.body.appendChild(app.view);
+
+//If you want to make the canvas fill the entire window, you can apply this
+//CSS styling:
+/*
+app.renderer.view.style.position = "absolute"
+app.renderer.view.style.width = window.innerWidth + "px";
+app.renderer.view.style.height = window.innerHeight + "px";
+app.renderer.view.style.display = "block";
+*/
+
+//The `renderer.view` is just an ordinary `<canvas>` element.
+//Here's how you can reference to add an optional dashed 
+//border around the canvas 
+app.renderer.view.style.border = "1px dashed black";
+
+//To resize the canvas
+app.renderer.resize(512, 512);
+
+//To change the background color
+app.renderer.backgroundColor = 0x061639;
+
+</script>
+</body>
+

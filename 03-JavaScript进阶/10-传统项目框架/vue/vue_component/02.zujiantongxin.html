@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>组件通信</title>
+    <script src="./vue.js"></script>
+  </head>
+  <body>
+    <div id="blog-posts-events-demo">
+      <div :style="{ fontSize: postFontSize + 'em' }">
+        <blog-post
+          v-for="post in posts"
+          v-bind:key="post.id"
+          v-bind:post="post"
+          v-on:enlarge-text="onEnlargeText"
+        ></blog-post>
+      </div>
+    </div>
+    <script>
+      Vue.component("blog-post", {
+        props: ["post"],
+        template: `
+                    <div class="blog-post">
+                      <h3>{{ post.title }}</h3>
+                      <button v-on:click="$emit('enlarge-text', 0.1)">
+                        Enlarge text
+                      </button>
+                      <div v-html="post.content"></div>
+                    </div>
+                  `,
+      });
+      Vue.component("my-component", {
+        props: {
+          // 基础的类型检查
+          propA: Number,
+          // 多个可能的类型
+          propB: [String, Number],
+          // 必填的字符串
+          propC: {
+            type: String,
+            required: true,
+          },
+          // 带有默认值的数字
+          propD: {
+            type: Number,
+            default: 100,
+          },
+          // 带有默认值的对象
+          propE: {
+            type: Object,
+            // 对象或数组默认值必须从一个工厂函数获取
+            default: function () {
+              return { message: "hello" };
+            },
+          },
+          // 自定义验证函数
+          propF: {
+            validator: function (value) {
+              // 这个值必须匹配下列字符串中的一个
+              return ["success", "warning", "danger"].indexOf(value) !== -1;
+            },
+          },
+        },
+      });
+      new Vue({
+        el: "#blog-posts-events-demo",
+        data: {
+          posts: [
+            { id: 1, title: "My journey with Vue" },
+            { id: 2, title: "Blogging with Vue" },
+            { id: 3, title: "Why Vue is so fun" },
+          ],
+          postFontSize: 1,
+          methods: {
+            onEnlargeText: function (enlargeAmount) {
+              this.postFontSize += enlargeAmount;
+            },
+          },
+        },
+      });
+
+      Vue.component("base-input", {
+        inheritAttrs: false,
+        props: ["label", "value"],
+        computed: {
+          inputListeners: function () {
+            var vm = this;
+            // `Object.assign` 将所有的对象合并为一个新对象
+            return Object.assign(
+              {},
+              // 我们从父级添加所有的监听器
+              this.$listeners,
+              // 然后我们添加自定义监听器，
+              // 或覆写一些监听器的行为
+              {
+                // 这里确保组件配合 `v-model` 的工作
+                input: function (event) {
+                  vm.$emit("input", event.target.value);
+                },
+              }
+            );
+          },
+        },
+        template: `
+                    <label>
+                      {{ label }}
+                      <input
+                        v-bind="$attrs"
+                        v-bind:value="value"
+                        v-on="inputListeners"
+                      >
+                    </label>
+                  `,
+      });
+    </script>
+  </body>
+</html>

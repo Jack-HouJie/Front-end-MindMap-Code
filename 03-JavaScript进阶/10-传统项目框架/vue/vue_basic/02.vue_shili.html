@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>vue实例</title>
+    <script src="./vue.js"></script>
+  </head>
+  <body>
+    <div id="app1"></div>
+
+    <script>
+      let data = {
+        a: 1,
+        newTodoText: "",
+        visitCount: 0,
+        hideCompletedTodos: false,
+        todos: [],
+        error: null,
+      };
+      let vm = new Vue({
+        el: "#app1",
+        data: data,
+        created() {
+          console.log("a is " + this.a);
+        },
+      });
+
+      console.log(vm.$data == data);
+    </script>
+  </body>
+</html>

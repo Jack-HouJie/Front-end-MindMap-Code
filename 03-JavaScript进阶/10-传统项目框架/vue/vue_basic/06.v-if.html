@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>条件渲染</title>
+    <script src="./vue.js"></script>
+  </head>
+  <body>
+    <div id="app1">
+      <h1 v-if="awesome">{{ text }}</h1>
+      <h1 v-else>{{ placehold }}</h1>
+    </div>
+    <div id="app2">
+      <div>
+        <template v-if="list_seen">
+          <ol>
+            <li>待办1</li>
+            <li>待办2</li>
+            <li>待办3</li>
+          </ol>
+        </template>
+      </div>
+    </div>
+    <div id="app3">
+      <div v-if="type === 'A'">A</div>
+      <div v-else-if="type === 'B'">B</div>
+      <div v-else-if="type === 'C'">C</div>
+      <div v-else>Not A/B/C</div>
+    </div>
+    <div id="app4">
+      <div>
+        <!-- <template v-if="loginType === 'username'">
+          <label>Username</label>
+          <input placeholder="Enter your username" />
+        </template>
+        <template v-else>
+          <label>Email</label>
+          <input placeholder="Enter your email address" />
+        </template> -->
+      </div>
+    </div>
+    <script>
+      let vm1 = new Vue({
+        el: "#app1",
+        data: {
+          awesome: false,
+          text: "Vue is awesome!",
+          placehold: "Oh no 😢",
+        },
+      });
+      let vm2 = new Vue({
+        el: "#app2",
+        data: {
+          list_seen: false,
+        },
+      });
+      let vm3 = new Vue({
+        el: "#app3",
+        data: {
+          type: "A",
+        },
+      });
+      let vm4 = new Vue({
+        el: "#app4",
+        data: {
+          loginType: "username",
+        },
+      });
+    </script>
+  </body>
+</html>
