@@ -22,6 +22,13 @@
     const xDataArray = ['衬衫', '羊毛衫', '雪纺衫', '裤子', '高跟鞋', '袜子']
     const yDataArray = [5, 20, 36, 10, 10, 20]
     var option = {
+      animation: true, // 开启/关闭动画
+      animationDuration: function (arg) {
+        console.log(arg)
+        return 2000 * arg // 持续时间（毫秒单位）
+      },
+      animationEasing: 'liner', // 变化函数（liner、bounceOut）
+      animationThreshold: 10, // 动画元素阈值（单种动画数量超过阈值则关闭动画
       title: {
         text: 'ECharts 增量动画示例'
       },
@@ -50,7 +57,6 @@
           data: [5, 30, 40, 10, 10, 20]
         }]
       }
-
       myChart.setOption(option)
     }
 
@@ -66,7 +72,6 @@
           data: yDataArray
         }]
       }
-
       myChart.setOption(option)
     }
   </script>
