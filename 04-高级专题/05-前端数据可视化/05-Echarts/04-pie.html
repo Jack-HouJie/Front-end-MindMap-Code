@@ -11,6 +11,9 @@
 <body>
   <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
   <div id="main" style="width: 600px;height:400px;"></div>
+  <button id="clear">清空当前实例</button>
+  <button id="setOption">刷新实例</button>
+  <button id="dispose">销毁当前实例</button>
   <script type="text/javascript">
     // 基于准备好的dom，初始化echarts实例
     var myChart = echarts.init(document.getElementById('main'))
@@ -65,15 +68,39 @@
         // 配置半径（百分比参照容器宽高较小值、通过数组指定内外圆半径）
         // radius: ['50%', '75%'],
         // 使用南丁格尔图(数值大小决定半径)
-        roseType: 'radius',
+        // roseType: 'radius',
         // 选中模式（single点击单个偏离、multiple点击多个偏移）
-        selectedMode: 'multiple', 
+        selectedMode: 'multiple',
         data: pieData,
       }]
     }
 
     // 使用刚指定的配置项和数据显示图表。
     myChart.setOption(option)
+
+    // 触发行为
+    myChart.dispatchAction({
+      type: 'highlight', // 高亮
+      seriesIndex: 0, // 系列索引
+      dataIndex: 1, // 数据索引
+    })
+    myChart.dispatchAction({
+      type: 'showTip', // 显示提示框
+      seriesIndex: 0, // 系列索引
+      dataIndex: 1, // 数据索引
+    })
+    // 清空图标实例
+    document.getElementById('clear').addEventListener('click', function () {
+      myChart.clear()
+    })
+    // 刷新实例
+    document.getElementById('setOption').addEventListener('click', function () {
+      myChart.setOption(option)
+    })
+    // 销毁实例(无法重新展示)
+    document.getElementById('dispose').addEventListener('click', function () {
+      myChart.dispose()
+    })
   </script>
 </body>
 

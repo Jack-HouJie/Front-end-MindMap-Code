@@ -9,7 +9,7 @@
 </head>
 
 <body>
-  <div id="container" style="width:600px;height:400px;"></div>
+  <div id="container" style="width:100%;height:400px;"></div>
 </body>
 <script>
   // 基于准备好的dom，初始化echarts实例
@@ -115,7 +115,6 @@
       start: 60,
       end: 100
     }],
-
     /* 通用配置*/
     // 标题（通用配置）
     title: {
@@ -167,9 +166,18 @@
     },
 
   }
-
   // 使用刚指定的配置项和数据显示图表
   myChart.setOption(option)
+  // 自适应
+  window.addEventListener('resize', function () {
+    myChart.resize()
+  })
+  // 绑定/解绑事件
+  myChart.on('dblclick', function (arg) {
+    console.log(arg)
+  })
+  // myChart.off('dblclick')
+
 </script>
 
 </html>
