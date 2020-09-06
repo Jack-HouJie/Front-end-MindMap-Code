@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>饼图</title>
+  <title>调色盘</title>
   <script src="https://cdn.bootcdn.net/ajax/libs/echarts/5.0.0-alpha.1/echarts.js"></script>
   <script src="./theme/itcast.js"></script>
 </head>
@@ -19,15 +19,18 @@
     // 指定图表的配置项和数据
     var option = {
       title: {
-        text: 'ECharts 饼图示例'
+        text: 'ECharts 饼图示例',
+        color: 'red'
       },
       tooltip: {},
       legend: {
         data: ['购物清单']
       },
-      color: ['red', 'green', 'blue', 'skyblue', 'purple'], // 全局调色盘
+      // 全局调色盘（会覆盖主题调色盘）
+      color: ['red', 'green', 'blue', 'skyblue', 'purple'], 
       series: [{
-        color: ['pink', 'yellow', 'black', 'orange', 'red'], // 局部调色盘
+        // 局部调色盘（覆盖全局调色盘）
+        color: ['pink', 'yellow', 'black', 'orange', 'red'], 
         name: '购物清单',
         type: 'pie',
         label: {
@@ -42,7 +45,10 @@
         selectedMode: 'single',
         data: [{
             name: '淘宝',
-            value: 11231
+            value: 11231,
+            itemStyle:{
+              color: 'black'
+            }
           },
           {
             name: '京东',

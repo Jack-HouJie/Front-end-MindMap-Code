@@ -18,8 +18,12 @@
   // 3.在html中导入js文件
   // 4.在init方法中指明主题的名称
 
-  // 基于准备好的dom，初始化echarts实例
+  // 基于准备好的dom、图表主题（内置/自定义）初始化echarts实例  
+  // 内置主题
   // const myChart = echarts.init(document.getElementById('container'), 'dark')
+  // const myChart = echarts.init(document.getElementById('container'), 'light')
+  
+  // 自定义主题
   const myChart = echarts.init(document.getElementById('container'), 'itcast')
 
   // 指定图表的配置项和数据

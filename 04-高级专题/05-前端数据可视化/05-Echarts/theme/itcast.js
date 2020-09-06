@@ -19,8 +19,8 @@
         log('ECharts is not Loaded');
         return;
     }
-    echarts.registerTheme('itcast', {
-        "color": [
+    echarts.registerTheme('itcast', { // 注册主题
+        "color": [ // 主题调色盘
             "#c23531",
             "#2f4554",
             "#61a0a8",
