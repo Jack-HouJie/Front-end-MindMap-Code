@@ -58,17 +58,36 @@ function jumpFloorPlus (n) {
 
 
 /* 买卖股票类问题 */
-/** 买卖股票的最佳时机
+/**买卖股票的最佳时机
  * 
  * @param {Array} arr 
  */
 function maxProfit (arr) {
-  let minPrice = arr[0] // 已处理项的最小值
-  let maxProfit = 0
-  for (let i = 0; i < arr.length; i++) {
-    // 更新最小值
-    minPrice = Math.min(minPrice, arr[i])
-    maxProfit = Math.max(maxProfit, arr[i] - minPrice)
+  let dp = [0]
+  let min = [arr[0]]
+  for (let i = 1; i < arr.length; i++) {
+    dp[i] = Math.max(dp[i - 1], arr[i] - min[i - 1])
+    min[i] = Math.min(arr[i], min[i - 1])
   }
-  return maxProfit
+  return dp[arr.length - 1]
 }
+// console.log(maxProfit([4, 3, 2, 3, 4, 5, 7, 3, 5, 2]));
+
+/** 打家劫舍
+ * 
+ * @param {Array} arr 
+ */
+function rob (arr) {
+  let len = arr.length;
+  let dp = [];
+  if (len === 1) {
+    return arr[0];
+  }
+  dp[0] = 0
+  dp[1] = arr[0]
+  for (let i = 2; i <= len; i++) {
+    dp[i] = Math.max(dp[i - 1], dp[i - 2] + arr[i - 1]);
+  }
+  return dp[len]
+}
+console.log(rob([1, 2, 3, 4, 5]));
