@@ -75,12 +75,19 @@ function maxProfit (arr) {
 
 /** 打家劫舍
  * 
- * @param {Number} arr 
+ * @param {Array} arr 
  */
 function rob (arr) {
-  let dp = [0, arr[0]]
-  for (let i = 2; i < arr.length + 1; i++) {
-    dp[i] = Math.max(dp[i - 1], dp[i - 2] + arr[i])
+  let len = arr.length;
+  let dp = [];
+  if (len === 1) {
+    return arr[0];
   }
-  return dp[arr.length]
+  dp[0] = 0
+  dp[1] = arr[0]
+  for (let i = 2; i <= len; i++) {
+    dp[i] = Math.max(dp[i - 1], dp[i - 2] + arr[i - 1]);
+  }
+  return dp[len]
 }
+console.log(rob([1, 2, 3, 4, 5]));
