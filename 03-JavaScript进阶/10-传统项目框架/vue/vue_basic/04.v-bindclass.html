@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>绑定class</title>
+    <script src="./vue.js"></script>
+  </head>
+  <body>
+    <!-- 绑定对象 -->
+    <div
+      id="app1"
+      class="static"
+      v-bind:class="{ active: isActive, 'text-danger': hasError }"
+    >
+      Vue
+    </div>
+    <div id="app2" v-bind:class="classObject2">Vue</div>
+    <div id="app3" v-bind:class="classObject3">Vue</div>
+    <!-- 绑定数组 -->
+    <div id="app4" v-bind:class="[{ active: isActive }, errorClass]">Vue</div>
+    <script>
+      let vm1 = new Vue({
+        el: "#app1",
+        data: {
+          isActive: true,
+          hasError: false,
+        },
+      });
+      let vm2 = new Vue({
+        el: "#app2",
+        data: {
+          classObject2: {
+            active: true,
+            "text-danger": false,
+          },
+        },
+      });
+      let vm3 = new Vue({
+        el: "#app3",
+        computed: {
+          classObject3: function () {
+            return {
+              active: this.isActive && !this.error,
+              "text-danger": this.error && this.error.type === "fatal",
+            };
+          },
+        },
+      });
+      let vm4 = new Vue({
+        el: "#app4",
+        data: {
+          isActive: true,
+          errorClass: "text-danger",
+        },
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,267 @@
+html, body, div, p, ul, li, dl, dt, dd, h1, h2, h3, h4, h5, h6, form, input, select, button, textarea, iframe, table, th, td, span{ margin: 0; padding: 0; }
+ul,li{ list-style: none; }
+a,img{ display: inline-block; *display: inline; }
+html, body, div, p, ul, li, dl, dt, dd, h1, h2, h3, h4, h5, h6, form, input, select, button, textarea, iframe, table, th, td, span{ margin: 0; padding: 0; }
+ul,li{ list-style: none; }
+a,img{ display: inline-block; *display: inline; }
+a{ text-decoration: none; }
+img{ vertical-align: top; border: none; }
+body{ -webkit-tap-highlight-color: transparent;}
+html,body{ width: 100%; height:100%; font-family: "Microsoft YaHei", Arial, Helvetica, sans-serif; overflow: hidden;position: relative;}
+body{ -wibkit-touch-callout: default; -webkit-user-select: none;}
+#H5 {
+	width: 100%;
+	height: 100%;
+	position: relative;
+}
+#H5 .bg {
+	width: 750px;
+	height: 1464px;
+	background: url(../image/bj.jpg);
+	position: absolute;
+	top: 0;
+	
+}
+#H5 .chang {
+	width: 100%;
+	height: 100%;
+}
+#H5 .cj {
+	width: 100%;
+	height: 1464px;
+	position: absolute;
+	top: 50%;
+	margin-top: -732px;
+}
+#H5 .logo {
+	width: 363px;
+	height: 42px;
+	background: url(../image/logo.png);
+	position: absolute;
+	left: 50%;
+	margin-left: -347px;
+	top: 70px;
+}
+#H5 .wy {
+	width: 182px;
+	height: 38px;
+	background: url(../image/wy.png);
+	position: absolute;
+	left: 50%;
+	margin-left: 160px;
+	top: 67px;
+}
+#H5 .yuan {
+	width: 622px;
+	height: 622px;
+	position: absolute;
+	left: 50%;
+	margin-left: -311px;
+	background: url(../image/quan.png);
+	top: 50%;
+	margin-top: -130px;
+}
+#H5 .zhen {
+	width: 136px;
+	height: 181px;
+	background: url(../image/zhen.png);
+	position: absolute;
+	left: 50%;
+	margin-left: -68px;
+	top: 50%;
+	margin-top: 71px;
+}
+#H5 .rule {
+	font-size: 25px;
+	color: #ffffff;
+	position: absolute;
+	left: 50%;
+	margin-left: -50px;
+	top: 50%;
+	margin-top: 500px;
+	text-decoration:underline;
+}
+#H5 .pop {
+	width: 750px;
+	height: 1464px;
+	position: absolute;
+	top: 0;
+}
+#H5 .pop .black {
+	width: 100%;
+	height: 100%;
+	background: #000000;
+	opacity: 0.7;
+}
+#H5 .pop .conntent {
+	width: 750px;
+	height: 1206px;
+	position: absolute;
+	top: 50%;
+	margin-top: -683px;
+}
+#H5 .pop .tc0 {
+	width: 637px;
+	height: 742px;
+	background: url(../image/tc0.png);
+	position: absolute;
+	left: 50%;
+	margin-left: -318px;
+	top: 170px;
+}
+#H5 .pop .tc0 .close {
+	width: 406px;
+	height: 66px;
+	background: url(../image/close.png);
+	position: absolute;
+	left: 50%;
+	margin-left: -203px;
+	top: 620px;
+}
+#H5 .pop .tc1 {
+	width: 637px;
+	height: 276px;
+	background: url(../image/tc1.png);
+	position: absolute;
+	left: 50%;
+	margin-left: -318px;
+	top: 370px;
+}
+#H5 .pop .tc1 .close {
+	width: 406px;
+	height: 66px;
+	background: url(../image/close.png);
+	position: absolute;
+	left: 50%;
+	margin-left: -203px;
+	top: 160px;
+}
+#H5 .pop .tc2 {
+	width: 636px;
+	height: 357px;
+	background: url(../image/tc2.png);
+	position: absolute;
+	left: 50%;
+	margin-left: -318px;
+	top: 370px;
+}
+#H5 .pop .tc2 .close {
+	width: 406px;
+	height: 66px;
+	background: url(../image/close.png);
+	position: absolute;
+	left: 50%;
+	margin-left: -203px;
+	top: 250px;
+}
+#H5 .pop .share {
+	width: 335px;
+	height: 176px;
+	background: url(../image/share.png);
+	position: absolute;
+	right: 50px;	
+}
+#H5 .pop .tc3 {
+	width: 637px;
+	height: 939px;
+	background: url(../image/tc3.png);
+	position: absolute;
+	left: 50%;
+	margin-left: -318px;
+	top: 70px;
+}
+#H5 .pop .tc3 .close {
+	width: 406px;
+	height: 66px;
+	background: url(../image/close.png);
+	position: absolute;
+	left: 50%;
+	margin-left: -203px;
+	top: 810px;
+}
+#H5 .pop .tc3 img {
+	position: absolute;
+	left: 50%;
+	margin-left: -218px;
+	top: 285px;
+}
+#H5 .pop .tc4 {
+	width: 637px;
+	height: 678px;
+	background: url(../image/tc4.png);
+	position: absolute;
+	left: 50%;
+	margin-left: -318px;
+	top: 180px;
+}
+#H5 .pop .tc4 .close {
+	width: 406px;
+	height: 66px;
+	background: url(../image/close.png);
+	position: absolute;
+	left: 50%;
+	margin-left: -203px;
+	top: 810px;
+}
+#H5 .pop .tc4 p {
+	color: #cef0ff;
+	font-size: 50px;
+	text-align: center;
+	margin-top: 112px;
+}
+#H5 .pop .tc4 input {
+	border: none;
+	outline: none;
+	display: inline-block;
+	font-size: 45px;
+	text-align: center;
+	padding: 20px 0;
+	border-radius: 15px;
+	margin-left: 40px;
+	margin-top: 160px;
+}
+#H5 .pop .tc4 .submit {
+	width: 406px;
+	height: 66px;
+	background: url(../image/submit.png);
+	margin-left: 115px;
+	margin-top: 120px;
+}
+#H5 .pop .tc5 {
+	width: 596px;
+	height: 634px;
+	background: url(../image/tc5.png);
+	position: absolute;
+	left: 50%;
+	margin-left: -298px;
+	top: 180px;
+}
+#H5 .pop .tc5 .close {
+	width: 406px;
+	height: 66px;
+	background: url(../image/close.png);
+	position: absolute;
+	left: 50%;
+	margin-left: -203px;
+	top: 490px;
+}
+#H5 .pop .tc5 p {
+	color: #cef0ff;
+	font-size: 50px;
+	text-align: center;
+	margin-top: 166px;
+}
+#H5 .music {
+	width: 45px;
+	height: 45px;
+	background: red;
+	position: absolute;
+	top: 120px;
+	right: 40px;
+	background: url(../image/pause.png);
+	background-size: 100% 100%;
+}
+#H5 .play {
+	background: url(../image/play.png);
+	background-size: 100% 100%;
+}

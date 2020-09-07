@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CSS动画</title>
+  <link href="https://cdn.jsdelivr.net/npm/animate.css@3.5.1" rel="stylesheet" type="text/css" />
+  <!--
+      Velocity 和 jQuery.animate 的工作方式类似，也是用来实现 JavaScript 动画的一个很棒的选择
+      -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.2.3/velocity.min.js"></script>
+  <script src="./vue.js"></script>
+</head>
+
+<body>
+  <transition>
+    <button v-if="isEditing" key="save">
+      Save
+    </button>
+    <button v-else key="edit">
+      Edit
+    </button>
+  </transition>
+
+  <transition appear v-on:before-appear="customBeforeAppearHook" v-on:appear="customAppearHook"
+    v-on:after-appear="customAfterAppearHook" v-on:appear-cancelled="customAppearCancelledHook">
+    <!-- ... -->
+  </transition>
+  <!-- ... -->
+  </transition>
+  <div id="example-4">
+    <button @click="show = !show">
+      Toggle
+    </button>
+    <transition v-on:before-enter="beforeEnter" v-on:enter="enter" v-on:leave="leave" v-bind:css="false">
+      <p v-if="show">
+        Demo
+      </p>
+    </transition>
+  </div>
+
+  <script>
+    Vue.component('my-special-transition', {
+      template: '\
+                  <transition\
+                    name="very-special-transition"\
+                    mode="out-in"\
+                    v-on:before-enter="beforeEnter"\
+                    v-on:after-enter="afterEnter"\
+                  >\
+                    <slot></slot>\
+                  </transition>\
+                ',
+      methods: {
+        beforeEnter: function (el) {
+          // ...
+        },
+        afterEnter: function (el) {
+          // ...
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>

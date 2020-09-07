@@ -1,0 +1,52 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <title>项目标题</title>
+  <meta name="viewport" id="viewport" content="target-densitydpi=device-dpi,width=750,user-scalable=no" />
+  <link rel="stylesheet" type="text/css" href="./style/style.css">
+  <!-- 引用的库 -->
+  <!-- 操作DOM：jquery -->
+  <script type="text/javascript" src="https://fps-pro.ws.126.net/fps-pro/frontends/libs/jquery/jquery-3.2.1.min.js">
+  </script>
+  <!-- 微信分享：newsapp-share -->
+  <script src="//static.ws.126.net/163/activity/tools/newsapp-share/1.5.0/newsapp-share.min.js"></script>
+  <!-- 构建补间动画：TweenMax -->
+  <script src="http://fps-pro.ws.126.net/fps-pro/temp/1abe5bd219ff9f9fc3bb75c22d7ed901/TweenMax.min.js"></script>
+  <!-- 2D绘图：pixi -->
+  <script src="http://fps-pro.ws.126.net/fps-pro/temp/022656f98665a5655d677d338ecdbb53/pixi.min.js"></script>
+  <script src="http://fps-pro.ws.126.net/fps-pro/temp/1abb4eb3df521e3d2cbaee52e03d3492/pixi-display.js"></script>
+  <script src="http://fps-pro.ws.126.net/fps-pro/temp/7e149cc0cb33651a9fe72412d13e71d6/pixi-sound.js"></script>
+  <!-- 简化代码 -->
+  <script src="http://fps-pro.ws.126.net/fps-pro/temp/4eaf5fc74a503f7bbb617d280b62f927/lodash.min.js"></script>
+  <!-- 动画库 -->
+  <script src="http://fps-pro.ws.126.net/fps-pro/temp/a8fb35a68f7cc3bd9bf0aca6323ca2dc/Animate.js"></script>
+  <!-- 自定义滚动效果 -->
+  <script src="http://fps-pro.ws.126.net/fps-pro/temp/2a994879211679af6f0b6c673bdb0325/Scroller.js"></script>
+</head>
+
+<body>
+  <!-- 主页面 -->
+  <div id="H5">
+    <div class="chang"></div>
+    <div class="music"></div>
+  </div>
+  <!-- 背景音乐 -->
+  <audio src="http://fps-pro.ws.126.net/fps-pro/temp/68ec74cb2059a2687d9f13c44a3cf1cf/123.mp3" loop="loop"
+    class="bgm"></audio>
+  <!-- 微信分享 -->
+  <script type="text/javascript">
+    NewsappShare.config({
+      title: '疯了！领南星河荣誉万元好礼实力宠粉，免费送送送！',
+      desc: '共鉴南沙湾新精彩',
+      imgUrl: "http://fps-pro.ws.126.net/fps-pro/temp/f6d058c1e06bd3a3d3d1d7037f798e44/12.jpg", //分享图片
+      link: "http://m.house.163.com/fps/frontends/house_special_2019/nansha/index.html", //分享链接
+      shareDone: function () {}, //分享成功回调(仅客户端、微信和QQ浏览器有效）
+      onlyImg: false //是否图片分享(仅客户端有效)
+    })
+  </script>
+  <!-- <script type="text/javascript" src="./js/index.js"></script> -->
+  <!-- 用于微信环境调试（使用本地开发服务器动态更新js） -->
+  <script type="text/javascript" src="10.234.49.164:3008/···/js/index.js"></script>
+</body>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>计算属性与侦听器</title>
+    <script src="./vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <p>{{ numberlist }}</p>
+      <p>{{ reverselist }}</p>
+      <p>{{ reverseList() }}</p>
+    </div>
+    <script>
+      let vm = new Vue({
+        el:"#app",
+        data:{
+          numberlist:"12345",
+        },
+        computed: {
+          reverselist: function () {
+            return this.numberlist.split('').reverse().join('');
+          }
+        },
+        methods: {
+          reverseList: function () {
+            return this.numberlist.split('').reverse().join('');
+          }
+        }
+      });
+    </script>
+  </body>
+</html>

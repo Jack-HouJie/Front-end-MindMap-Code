@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>文档-入门</title>
+    <script src="./vue.js"></script>
+  </head>
+
+  <body>
+    <div id="app">
+      {{message}}
+    </div>
+    <hr />
+
+    <div id="app2" v-bind:title="message">
+      鼠标悬停三秒，可看动态绑定的提示信息
+    </div>
+    <hr />
+
+    <div id="app3">
+      <p v-if="seen">现在你看到我了</p>
+    </div>
+    <hr />
+
+    <div id="app4">
+      <ol>
+        <li v-for="todo in todos">
+          {{ todo.text }}
+        </li>
+      </ol>
+    </div>
+    <hr />
+
+    <div id="app5">
+      <p>{{ message }}</p>
+      <button v-on:click="reverseText">反转消息</button>
+    </div>
+    <hr />
+
+    <div id="app6">
+      <p>{{ message }}</p>
+      <input type="text" v-model="message" />
+    </div>
+    <hr />
+
+    <div id="app7">
+      <ol>
+        <todo-item
+          v-for="item in itemList"
+          v-bind:todo="item"
+          v-bind:key="item.id"
+        >
+        </todo-item>
+      </ol>
+    </div>
+    <hr />
+
+    <script>
+      // 原生DOM
+      // let dom = document.getElementById("app");
+      // dom.innerHTML = "hello world";
+
+      // {{ msg }} 文本插值
+      let app = new Vue({
+        el: "#app",
+        data: {
+          message: "hello world",
+        },
+      });
+
+      //v-bind 绑定元素属性
+      let app2 = new Vue({
+        el: "#app2",
+        data: {
+          message: "页面加载于 " + new Date().toLocaleString(),
+        },
+      });
+
+      //v-if 显示隐藏元素
+      var app3 = new Vue({
+        el: "#app3",
+        data: {
+          seen: true,
+        },
+      });
+
+      //v-for 绑定数组，渲染列表
+      let app4 = new Vue({
+        el: "#app4",
+        data: {
+          todos: [
+            { text: "待办事件1" },
+            { text: "待办事件2" },
+            { text: "待办事件3" },
+            { text: "待办事件4" },
+          ],
+        },
+      });
+
+      //v-on添加事件侦听器
+      let app5 = new Vue({
+        el: "#app5",
+        data: {
+          message: "Hello Vue.js!",
+        },
+        methods: {
+          reverseText: function () {
+            this.message = this.message.split("").reverse().join("");
+          },
+        },
+      });
+
+      //v-model实现双向绑定
+      let app6 = new Vue({
+        el: "#app6",
+        data: {
+          message: "双向绑定测试",
+        },
+      });
+
+      //prop 父子单元接口 、 component组件
+      Vue.component("todo-item", {
+        props: ["todo"], //接收父元素数据
+        template: "<li>{{ todo.text }}</li>", //模板替换当前组件
+      });
+      let app7 = new Vue({
+        el: "#app7",
+        data: {
+          itemList: [
+            { id: 0, text: "蔬菜" },
+            { id: 1, text: "奶酪" },
+            { id: 2, text: "随便其它什么人吃的东西" },
+          ],
+        },
+      });
+    </script>
+  </body>
+</html>
