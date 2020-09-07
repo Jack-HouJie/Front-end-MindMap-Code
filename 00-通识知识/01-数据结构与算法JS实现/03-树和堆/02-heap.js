@@ -1,10 +1,15 @@
-class MaxHeap {
+class Heap {
+  constructor(arr) {
+    this.arr = arr
+    this.length = arr.length
+  }
+}
+class MaxHeap extends Heap {
   /** 大顶堆构造函数
    * @param {Array} arr 待调整二叉树（存储结构：数组）
    */
   constructor(arr) {
-    this.arr = arr
-    this.length = arr.length
+    super(arr)
     // 从第一个非叶子节点开始逐层向上
     // 遍历每层的元素进行下沉操作
     for (let i = Math.floor(this.length >> 1) - 1; i >= 0; i--) {
@@ -31,7 +36,7 @@ class MaxHeap {
       }
     }
   }
-  /** 大顶堆的插入
+  /** 插入
    * @param {Number} value 
    */
   add (value) {
@@ -54,7 +59,7 @@ class MaxHeap {
     }
     return this.arr
   }
-  /** 大顶堆删除（弹出最大值）
+  /** 删除（弹出最大值）
    */
   pop () {
     if (this.length === 0) {
@@ -71,9 +76,14 @@ class MaxHeap {
     return maxVal
   }
 }
+/**
+ * 
+ * @param {Number} num 
+ */
+function insert (num) {
+}
 
-let arr = [1, 5, 3, 4, 6, 2]
-let heap = new MaxHeap(arr)
+let heap = new MaxHeap([1, 5, 3, 4, 6, 2])
 console.log(heap)
 heap.pop()
 console.log(heap)
