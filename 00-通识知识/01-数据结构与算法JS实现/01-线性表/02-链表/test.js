@@ -6,9 +6,9 @@ class ListNode {
   }
 }
 class LinkList {
-  constructor(size, pre_head) {
+  constructor(size, preHead) {
     this.size = size
-    this.pre_head = pre_head
+    this.preHead = preHead
   }
 
   /** 检查越界
@@ -50,7 +50,7 @@ class LinkList {
    */
   addNode (value, index) {
     this.checkIndex(index)
-    let pre = this.findNode(this.pre_head, 0, index)
+    let pre = this.findNode(this.preHead, 0, index)
     let new_node = new ListNode(value, pre.next)
     pre.next = new_node
     // 更新链表长度
@@ -64,7 +64,7 @@ class LinkList {
    */
   rmNode (index) {
     this.checkIndex(index + 1)
-    let pre = this.findNode(this.pre_head, 0, index)
+    let pre = this.findNode(this.preHead, 0, index)
     let del_node = pre.next
     pre.next = del_node.next
     del_node.next = null
@@ -90,13 +90,14 @@ function printListFromTailToHead (head) {
   console.log(temp)
   return true
 }
-let pre_head = new ListNode(undefined, null)
-let link_list = new LinkList(1, pre_head)
-link_list.addNode(1, 0)
-link_list.addNode(2, 1)
-link_list.addNode(3, 2)
-link_list.addNode(3, 3)
-let head = link_list.findNode(link_list.pre_head, 0, 1)
+let preHead = new ListNode(undefined, null)
+let linkList = new LinkList(1, preHead)
+linkList.addNode(1, 0)
+linkList.addNode(2, 1)
+linkList.addNode(3, 2)
+linkList.addNode(3, 3)
+linkList.addNode(4, 4)
+let head = linkList.findNode(linkList.preHead, 0, 1)
 // console.log(printListFromTailToHead(head))
 
 /** 反转链表*
@@ -118,11 +119,11 @@ function reverseList (head) {
   }
   return pre
 }
-let reverse_head = reverseList(head)
-while(reverse_head){
-  console.log(reverse_head.value);
-  reverse_head = reverse_head.next
-}
+// let reverse_head = reverseList(head)
+// while(reverse_head){
+//   console.log(reverse_head.value);
+//   reverse_head = reverse_head.next
+// }
 
 /** 复杂链表复制
  * 输入一个复杂链表（每个节点中有节点值，以及两个指针，一个指向下一个节点，另一个特殊指针指向任意一个节点），返回结果为复制后复杂链表的head。
@@ -164,50 +165,46 @@ function reconnetNodes (pHead) {
 }
 
 
-/** 删除链表重复节点
+/** 删除链表重复节点*
  * 出现次数大于1的节点
  * @param {ListNode} pHead 
  */
 function deleteDuplication (pHead) {
   let map = {}
   let curNode = pHead
+  // 统计次数
   while (curNode) {
     let count = map[curNode.value]
     map[curNode.value] = count ? count + 1 : 1
     curNode = curNode.next
   }
   curNode = pHead
-
   while (curNode) {
     // 如果当前是重复节点
     if (map[curNode.value] > 1) {
       // 如果不是链表末尾节点
       if (curNode.next) {
-        // 下一个节点覆盖当前节点
+        // 下一个节点覆盖当前节点*
         curNode.value = curNode.next.value
-        let next_node = curNode.next
-        curNode.next = next_node.next
-        next_node.next = null
+        curNode.next = curNode.next.next
       }
       // 如果是链表末尾节点
       else {
         // 如果是唯一节点
         if (curNode == pHead) {
-          // 将其删除
+          // 解除curNode和pHead的关系
           curNode = null
-          // 上一步只是解除了curNode和pHead的关系
+          // 删除节点
           pHead = null
         }
         // 如果不是唯一节点
         else {
           // 找到倒数第二个节点
           let pre = pHead
-          while (pre.next) {
+          while (pre.next.next) {
             pre = pre.next
           }
-          curNode.next = null
           // 删除最后一个节点*
-          curNode = null
           pre.next = null
         }
       }
@@ -219,11 +216,12 @@ function deleteDuplication (pHead) {
   }
   return pHead
 }
-// let clean_head = deleteDuplication(head)
-// while (clean_head) {
-//   console.log(clean_head.value);
-//   clean_head = clean_head.next
-// }
+
+let cleanHead = deleteDuplication(head)
+while (cleanHead) {
+  console.log(cleanHead.value);
+  cleanHead = cleanHead.next
+}
 
 /** 合并两个有序链表
  * 

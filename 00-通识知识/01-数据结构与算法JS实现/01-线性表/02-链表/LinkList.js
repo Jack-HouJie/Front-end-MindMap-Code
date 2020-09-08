@@ -176,11 +176,9 @@ function deleteDuplication (pHead) {
     if (map[curNode.value] > 1) {
       // 如果不是链表末尾节点
       if (curNode.next) {
-        // 下一个节点覆盖当前节点
+        // 下一个节点覆盖当前节点*
         curNode.value = curNode.next.value
-        let nextNode = curNode.next
-        curNode.next = nextNode.next
-        nextNode.next = null
+        curNode.next = curNode.next.next
       }
       // 如果是链表末尾节点
       else {
@@ -195,14 +193,10 @@ function deleteDuplication (pHead) {
         else {
           // 找到倒数第二个节点
           let pre = pHead
-          while (pre.next) {
+          while (pre.next.next) {
             pre = pre.next
           }
-          curNode.next = null
           // 删除最后一个节点*
-          // 解除curNode和尾节点的关系
-          curNode = null
-          // 删除尾节点
           pre.next = null
         }
       }
