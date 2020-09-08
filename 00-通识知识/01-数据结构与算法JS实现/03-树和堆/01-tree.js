@@ -21,6 +21,9 @@ class BiTree {
     this.size = 1
   }
   /* 二叉树遍历问题 */
+  /** 深度优先先序遍历递归
+   * @param {TNode} node 
+   */
   preOrder (node) {
     if (!node) {
       return null
@@ -29,6 +32,9 @@ class BiTree {
     this.preOrder(node.left)
     this.preOrder(node.right)
   }
+  /** 深度优先中序遍历递归
+   * @param {TNode} node 
+   */
   midOrder (node) {
     if (!node) {
       return null
@@ -37,7 +43,7 @@ class BiTree {
     node.exec()
     this.midOrder(node.right)
   }
-  /** 中序遍历树并保存
+  /** 深度优先中序遍历递归并保存
    * 
    * @param {TNode} node 开始遍历的节点
    * @param {Array} result 存储遍历结果的数组 
@@ -50,6 +56,9 @@ class BiTree {
     node.save(result)
     this.saveMidOrder(node.right)
   }
+  /** 深度优先后序遍历递归
+   * @param {TNode} node 
+   */
   backOrder (node) {
     if (!node) {
       return null
@@ -58,6 +67,9 @@ class BiTree {
     this.backOrder(node.right)
     node.exec()
   }
+  /** 深度优先先序遍历非递归
+   * @param {TNode} node 
+   */
   preOrderNR (node) {
     // 0.鲁棒性：如果指定开始节点不存在
     if (!node) {
@@ -81,7 +93,7 @@ class BiTree {
       }
     }
   }
-  /** 深度优先遍历思路：中序 （非递归）
+  /** 深度优先中序遍历非递归*
    *  指定开始节点中序遍历
    *  0.指定开始节点不存在则返回
    *  1.构造辅助栈和当前结点设为根
@@ -132,36 +144,40 @@ class BiTree {
       }
     }
   }
+  /** 深度优先后序遍历非递归
+   * @param {TNode} node 
+   */
   backOrderNR (node) {
     // 0.如果指定开始节点不存在
     if (!node) {
-      return
+      return null
     }
     // 1.初始化：根节点入栈
-    let stack = []
-    stack.push(node)
-    // 1.5 结果逆序数组
-    let reverseArr = []
+    let curNode = node
+    let stack = [curNode]
+    // 1.5 结果数组
+    let result = []
     // 2.循环：栈中有节点时时
     while (stack.length) {
-      // 2.1 栈顶节点出栈存储
-      let node = stack.pop()
-      reverseArr.push(node)
+      // 2.1 栈顶节点出栈逆序存储
+      curNode = stack.pop()
+      result.unshift(curNode)
       // 2.2 左孩子存在则入栈
-      if (node.left) {
-        stack.push(node.left)
+      if (curNode.left) {
+        stack.push(curNode.left)
       }
       // 2.3 右孩子存在则入栈
-      if (node.right) {
-        stack.push(node.right)
+      if (curNode.right) {
+        stack.push(curNode.right)
       }
     }
-    // 3.打印逆序存储结果
-    while (reverseArr.length) {
-      let curNode = reverseArr.pop()
-      curNode.exec()
-    }
+    // 3.打印结果并返回
+    console.log(result)
+    return true
   }
+  /** 广度优先遍历
+   * @param {TNode} node 
+   */
   breTravesal (node) {
     if (!node) {
       return false
@@ -187,7 +203,6 @@ class BiTree {
 
   /* 二叉搜索树树问题 */
   /** 二叉搜索树插入节点
-   * 
    * @param {TNode} node 
    * @param {*} value 
    */
@@ -281,8 +296,8 @@ class BiTree {
   }
 }
 
-/** 二叉树遍历问题：
- * 已知前中遍历，重建二叉树
+/* 二叉树遍历问题 */
+/** 已知前中遍历，重建二叉树
  * @param {String} pre "1,2,4,7,3,5,6,8"
  * @param {String} mid "4,7,2,1,5,3,8,6"
  */
