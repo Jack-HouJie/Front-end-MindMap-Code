@@ -6,9 +6,9 @@ class ListNode {
   }
 }
 class LinkList {
-  constructor(size, pre_head) {
+  constructor(size, preHead) {
     this.size = size // 链表长度
-    this.pre_head = pre_head
+    this.preHead = preHead
   }
   /** 检查越界
    * 
@@ -22,46 +22,44 @@ class LinkList {
 
   /** 得到节点(指定索引)
    * 
-   * @param {ListNode} cur_node 
-   * @param {Number} cur_index 
-   * @param {Number} tar_index 
+   * @param {ListNode} curNode 开始查找节点
+   * @param {Number} curIndex 开始查找节点索引
+   * @param {Number} tarIndex 目标索引
    */
-  findNode (cur_node, cur_index, tar_index) {
+  findNode (curNode, curIndex, tarIndex) {
     this.checkIndex(cur_idx)
     this.checkIndex(tar_idx)
-    if (tar_index === cur_index) {
-      return cur_node
+    if (tarIndex === curIndex) {
+      return curNode
     } else {
-      return this.findNode(cur_node.next, cur_index + 1, tar_index)
+      return this.findNode(curNode.next, curIndex + 1, tarIndex)
     }
   }
 
   /** 添加节点(给定value、前一个位置index)
-   * 
    * @param {*} value 添加节点值
    * @param {*} index 添加节点索引-1
    */
   addNode (value, index) {
     this.checkIndex(index) // 检查越界
-    let pre = this.findNode(this.pre_head, 0, index) // 当前index位置节点作为前驱节点
-    let new_node = new ListNode(value, pre.next) // 创建插入节点
-    pre.next = new_node // 插入
+    let pre = this.findNode(this.preHead, 0, index) // 当前index位置节点作为前驱节点
+    let newNode = new ListNode(value, pre.next) // 创建插入节点
+    pre.next = newNode // 插入
     this.size++ // 更新链表长度
-    return new_node
+    return newNode
   }
 
   /** 删除指定index后节点
-   * 
    * @param {Number} index 删除节点索引-1
    */
   rmNode (index) {
     this.checkIndex(index + 1) // 检查越界
-    let pre = this.findNode(this.pre_head, 0, index) // 当前index位置节点作为前驱节点
-    let del_node = pre.next // 临时存储要删除节点
-    pre.next = del_node.next // 链表中删除指定节点
-    del_node.next = null // 删除的节点更新指针域
+    let pre = this.findNode(this.preHead, 0, index) // index位置节点作为前驱节点
+    let delNode = pre.next // 临时存储要删除节点
+    pre.next = delNode.next // 链表中删除指定节点
+    delNode.next = null // 删除的节点更新指针域
     this.size-- // 更新长度*
-    return del_node
+    return delNode
   }
 }
 
@@ -71,30 +69,31 @@ class LinkList {
  * @param {ListNode} head 链表头节点
  */
 function printListFromTailToHead (head) {
-  if (!head) return false
+  if (!head) {
+    return false
+  }
   // 辅助队列
   let temp = []
-  let cur_node = head
+  let curNode = head
   // 遍历用while而不是if
-  while (cur_node) {
+  while (curNode) {
     // 队头入队用unshift 而不是shift
-    temp.unshift(cur_node)
-    cur_node = cur_node.next
+    temp.unshift(curNode)
+    curNode = curNode.next
   }
   console.log(temp)
   return true
 }
-// let pre_head = new ListNode(undefined, null)
-// let link_list = new LinkList(1, pre_head)
+// let preHead = new ListNode(undefined, null)
+// let link_list = new LinkList(1, preHead)
 // link_list.addNode(1, 0)
 // link_list.addNode(2, 1)
 // link_list.addNode(3, 2)
 // link_list.addNode(4, 3)
-// let head = link_list.findNode(link_list.pre_head, 0, 1)
+// let head = link_list.findNode(link_list.preHead, 0, 1)
 // console.log(printListFromTailToHead(head))
 
-/** 反转链表
- * 
+/** 反转链表*
  * @param {ListNode} head 链表头节点
  */
 function reverseList (head) {
@@ -116,7 +115,9 @@ function reverseList (head) {
   return pre
 }
 /** 复杂链表复制
- * 
+ * 输入一个复杂链表（每个节点中有节点值，以及两个指针，
+ * 一个指向下一个节点，另一个特殊指针指向任意一个节点），
+ * 返回结果为复制后复杂链表的head。
  * @param {ListNode} pHead 
  */
 function clone (pHead) {
@@ -128,67 +129,66 @@ function clone (pHead) {
   return reconnetNodes(pHead)
 }
 function cloneNodes (pHead) {
-  let cur_node = pHead
-  while (cur_node) {
-    let node = new ListNode(cur_node.value, cur_node.next)
-    cur_node.next = node
-    cur_node = node.next
+  let curNode = pHead
+  while (curNode) {
+    let node = new ListNode(curNode.value, curNode.next)
+    curNode.next = node
+    curNode = node.next
   }
 }
 function cloneRandom (pHead) {
-  let cur_node = pHead
-  while (cur_node) {
-    // 这里cur_node.random.next 而不是cur_node.random
+  let curNode = pHead
+  while (curNode) {
+    // 这里curNode.random.next 而不是curNode.random
     // 因为要随机指向新链表中的节点
-    cur_node.next.random = cur_node.random.next
-    cur_node = cur_node.next.next
+    curNode.next.random = curNode.random.next
+    curNode = curNode.next.next
   }
 }
 function reconnetNodes (pHead) {
-  let cur_node = pHead
+  let curNode = pHead
   let clone_head = pHead.next
   let clone_node = pHead.next
-  while (cur_node) {
-    cur_node.next = clone_node.next
-    cur_node = clone_node.next
-    clone_node.next = cur_node.next
-    clone_node = cur_node.next
+  while (curNode) {
+    curNode.next = clone_node.next
+    curNode = clone_node.next
+    clone_node.next = curNode.next
+    clone_node = curNode.next
   }
   return clone_head
 }
-/** 删除链表重复节点
+/** 删除链表重复节点*
  * 出现次数大于1的节点
  * @param {ListNode} pHead 
  */
 function deleteDuplication (pHead) {
   let map = {}
-  let cur_node = pHead
+  let curNode = pHead
   // 统计次数
-  while (cur_node) {
-    let count = map[cur_node.value]
-    map[cur_node.value] = count ? count + 1 : 1
-    cur_node = cur_node.next
+  while (curNode) {
+    let count = map[curNode.value]
+    map[curNode.value] = count ? count + 1 : 1
+    curNode = curNode.next
   }
-  cur_node = pHead
-
-  while (cur_node) {
+  curNode = pHead
+  while (curNode) {
     // 如果当前是重复节点
-    if (map[cur_node.value] > 1) {
+    if (map[curNode.value] > 1) {
       // 如果不是链表末尾节点
-      if (cur_node.next) {
+      if (curNode.next) {
         // 下一个节点覆盖当前节点
-        cur_node.value = cur_node.next.value
-        let next_node = cur_node.next
-        cur_node.next = next_node.next
-        next_node.next = null
+        curNode.value = curNode.next.value
+        let nextNode = curNode.next
+        curNode.next = nextNode.next
+        nextNode.next = null
       }
       // 如果是链表末尾节点
       else {
         // 如果是唯一节点
-        if (cur_node == pHead) {
-          // 将其删除
-          cur_node = null
-          // 上一步只是解除了cur_node和pHead的关系
+        if (curNode == pHead) {
+          // 解除curNode和pHead的关系
+          curNode = null
+          // 删除节点
           pHead = null
         }
         // 如果不是唯一节点
@@ -198,16 +198,18 @@ function deleteDuplication (pHead) {
           while (pre.next) {
             pre = pre.next
           }
-          cur_node.next = null
+          curNode.next = null
           // 删除最后一个节点*
-          cur_node = null
+          // 解除curNode和尾节点的关系
+          curNode = null
+          // 删除尾节点
           pre.next = null
         }
       }
     }
     // 如果当前不是重复节点
     else {
-      cur_node = cur_node.next
+      curNode = curNode.next
     }
   }
   return pHead
@@ -217,13 +219,13 @@ function deleteDuplication (pHead) {
 //   console.log(clean_head.value);
 //   clean_head = clean_head.next
 // }
-/** 合并两个有序链表
+/** 合并两个有序链表*
  * 
  * @param {ListNode} pHead1 
  * @param {ListNode} pHead2 
  */
 function merge (pHead1, pHead2) {
-  // 迭代停止：一方为空返回对方
+  // 递归停止条件：一方为空返回对方
   if (!pHead1) {
     return pHead2
   }
@@ -234,7 +236,7 @@ function merge (pHead1, pHead2) {
   if (pHead1.value < pHead2.value) {
     // 小节点作为当前节点
     head = pHead1
-    // 递归：每次小节点作为下一个节点
+    // 递归的将较小节点作为下一个节点
     head.next = merge(pHead1.next, pHead2)
   }
   // 应考虑相等情况
@@ -246,8 +248,7 @@ function merge (pHead1, pHead2) {
 }
 
 /* 双指针问题 */
-/** 输入一个链表，输出该链表中倒数第k个结点。
- * 
+/** 找到链表倒数第k个结点*
  * @param {ListNode} head 
  * @param {Number} k 
  */
@@ -256,21 +257,21 @@ function findKthToTail (head, k) {
   if (!head || k == 0) {
     return null
   }
-  let after_node = head
-  let k_node = head
+  let afterNode = head
+  let kNode = head
   let i = 0
   for (i = 0; i < k - 1; i++) {
-    after_node = after_node.next
+    afterNode = afterNode.next
     // 鲁棒性：考虑k比链表长**
-    if (!after_node) {
+    if (!afterNode) {
       return null
     }
   }
-  while (after_node.next) {
-    after_node = after_node.next
-    k_node = k_node.next
+  while (afterNode.next) {
+    afterNode = afterNode.next
+    kNode = kNode.next
   }
-  return k_node
+  return kNode
 }
 // console.log(findKthToTail(head, 0))
 // console.log(findKthToTail(head, 1))
@@ -279,41 +280,41 @@ function findKthToTail (head, k) {
 // console.log(findKthToTail(head, 4))
 // console.log(findKthToTail(head, 5))
 
-/** 找到第一个公共节点
+/** 找到两链表第一个公共节点
  * 
  * @param {ListNode} pHead1 
  * @param {ListNode} pHead2 
  */
 function findFirstCommonNode (pHead1, pHead2) {
   // 1.获取长度
-  let cur_node1 = pHead1
+  let curNode1 = pHead1
   let length1 = 0
-  while (cur_node1) {
+  while (curNode1) {
     length1 += 1
-    cur_node1 = cur_node1.next
+    curNode1 = curNode1.next
   }
-  cur_node2 = pHead2
+  curNode2 = pHead2
   let length2 = 0
-  while (cur_node2) {
+  while (curNode2) {
     length2 += 1
-    cur_node2 = cur_node2.next
+    curNode2 = curNode2.next
   }
   // 2.起点对齐
   if (length1 < length2) {
     for (let i = 0; i < length2 - length1; i++) {
-      cur_node2 = cur_node2.next
+      curNode2 = curNode2.next
     }
   } else {
     for (let i = 0; i < length1 - length2; i++) {
-      cur_node1 = cur_node1.next
+      curNode1 = curNode1.next
     }
   }
   // 3.找到公共节点（第一个相遇点）
-  while (cur_node1 != cur_node2) {
-    cur_node1 = cur_node1.next
-    cur_node2 = cur_node2.next
+  while (curNode1 != curNode2) {
+    curNode1 = curNode1.next
+    curNode2 = curNode2.next
   }
-  return cur_node1
+  return curNode1
 }
 
 /* 环类题目 */
@@ -364,32 +365,33 @@ function entryNodeOfLoop (pHead) {
   return node1
 }
 /** 圆圈中最后剩下的数/约瑟夫环问题
- * 
+ * 0,1,...,n-1这n个数字排成一个圆圈，从数字0开始，
+ * 每次从这个圆圈里删除第m个数字。求出这个圆圈里剩下的最后一个数字。
  * @param {Number} n 总数
  * @param {Number} m 跨度
  */
 function lastRemainingSolution (n, m) {
   // 1.构造环形链表*
   let head = { value: 0 }
-  let cur_node = head
+  let curNode = head
   for (let i = 0; i < n; i++) {
     let node = { value: i }
-    cur_node.next = node
-    cur_node = cur_node.next
+    curNode.next = node
+    curNode = curNode.next
   }
-  cur_node.next = head
+  curNode.next = head
   //2.循环删除节点
   // 从头开始
-  cur_node = head
+  curNode = head
   // 当链表不止一个节点
-  while (cur_node != cur_node.next) {
+  while (curNode != curNode.next) {
     // 每次找到当前节点后m-1个节点
     for (let i = 0; i < m - 1; i++) {
-      cur_node = cur_node.next
+      curNode = curNode.next
     }
-    // 直接指向m+1个节点(删除第m个节点)
-    cur_node.next = cur_node.next.next
+    // 删除第m个节点(m-1直接指向m+1)
+    curNode.next = curNode.next.next
   }
   // 返回剩下节点的value
-  return cur_node.value
+  return curNode.value
 }

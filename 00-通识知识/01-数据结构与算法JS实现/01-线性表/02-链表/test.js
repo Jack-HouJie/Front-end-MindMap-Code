@@ -25,21 +25,21 @@ class LinkList {
 
   /** 得到指定位置节点(传入开始节点、开始节点索引、目标节点索引)
    * 思路：通过递归实现
-   * @param {NodeList} cur_node 
+   * @param {NodeList} curNode 
    * @param {Number} cur_idx 
    * @param {Number} tar_idx 
    */
-  findNode (cur_node, cur_idx, tar_idx) {
+  findNode (curNode, cur_idx, tar_idx) {
     // 类内部调用其他方法需使用this
     this.checkIndex(cur_idx)
     this.checkIndex(tar_idx)
     // 递归停止条件
     if (cur_idx === tar_idx) {
-      return cur_node
+      return curNode
     }
     else {
       // 调用自己也需要加this
-      return this.findNode(cur_node.next, cur_idx + 1, tar_idx)
+      return this.findNode(curNode.next, cur_idx + 1, tar_idx)
     }
   }
 
@@ -80,12 +80,12 @@ class LinkList {
 function printListFromTailToHead (head) {
   if (!head) return false
   let temp = []
-  let cur_node = head
+  let curNode = head
   // 遍历用while而不是if
-  while (cur_node) {
+  while (curNode) {
     // 队头入队用unshift 而不是shift
-    temp.unshift(cur_node)
-    cur_node = cur_node.next
+    temp.unshift(curNode)
+    curNode = curNode.next
   }
   console.log(temp)
   return true
@@ -99,7 +99,7 @@ link_list.addNode(3, 3)
 let head = link_list.findNode(link_list.pre_head, 0, 1)
 // console.log(printListFromTailToHead(head))
 
-/** 反转链表
+/** 反转链表*
  * 
  * @param {ListNode} head 链表头节点
  */
@@ -109,9 +109,8 @@ function reverseList (head) {
   }
   let pre = null
   let cur = head
-  let next = cur.next
-  while (cur) {
-    // 每次先更新next*
+  let next = head.next
+  while(cur){
     next = cur.next
     cur.next = pre
     pre = cur
@@ -119,11 +118,11 @@ function reverseList (head) {
   }
   return pre
 }
-// let reverse_head = reverseList(head)
-// while(reverse_head){
-//   console.log(reverse_head.value);
-//   reverse_head = reverse_head.next
-// }
+let reverse_head = reverseList(head)
+while(reverse_head){
+  console.log(reverse_head.value);
+  reverse_head = reverse_head.next
+}
 
 /** 复杂链表复制
  * 输入一个复杂链表（每个节点中有节点值，以及两个指针，一个指向下一个节点，另一个特殊指针指向任意一个节点），返回结果为复制后复杂链表的head。
@@ -138,28 +137,28 @@ function clone (pHead) {
   return reconnetNodes(pHead)
 }
 function cloneNodes (pHead) {
-  let cur_node = pHead
-  while (cur_node) {
-    let new_node = new ListNode(cur_node.value, cur_node.next)
-    cur_node.next = new_node
-    cur_node = new_node.next
+  let curNode = pHead
+  while (curNode) {
+    let new_node = new ListNode(curNode.value, curNode.next)
+    curNode.next = new_node
+    curNode = new_node.next
   }
 }
 function cloneRandom (pHead) {
-  let cur_node = pHead
-  while (cur_node) {
-    cur_node.next.random = cur_node.random.next
-    cur_node = cur_node.next.next
+  let curNode = pHead
+  while (curNode) {
+    curNode.next.random = curNode.random.next
+    curNode = curNode.next.next
   }
 }
 function reconnetNodes (pHead) {
-  let cur_node = pHead
+  let curNode = pHead
   let copy_head = pHead.next
-  while (cur_node) {
-    let copy_node = cur_node.next
-    cur_node.next = copy_node.next
-    cur_node = copy_node.next
-    copy_node.next = cur_node.next
+  while (curNode) {
+    let copy_node = curNode.next
+    curNode.next = copy_node.next
+    curNode = copy_node.next
+    copy_node.next = curNode.next
   }
   return copy_head
 }
@@ -171,32 +170,32 @@ function reconnetNodes (pHead) {
  */
 function deleteDuplication (pHead) {
   let map = {}
-  let cur_node = pHead
-  while (cur_node) {
-    let count = map[cur_node.value]
-    map[cur_node.value] = count ? count + 1 : 1
-    cur_node = cur_node.next
+  let curNode = pHead
+  while (curNode) {
+    let count = map[curNode.value]
+    map[curNode.value] = count ? count + 1 : 1
+    curNode = curNode.next
   }
-  cur_node = pHead
+  curNode = pHead
 
-  while (cur_node) {
+  while (curNode) {
     // 如果当前是重复节点
-    if (map[cur_node.value] > 1) {
+    if (map[curNode.value] > 1) {
       // 如果不是链表末尾节点
-      if (cur_node.next) {
+      if (curNode.next) {
         // 下一个节点覆盖当前节点
-        cur_node.value = cur_node.next.value
-        let next_node = cur_node.next
-        cur_node.next = next_node.next
+        curNode.value = curNode.next.value
+        let next_node = curNode.next
+        curNode.next = next_node.next
         next_node.next = null
       }
       // 如果是链表末尾节点
       else {
         // 如果是唯一节点
-        if (cur_node == pHead) {
+        if (curNode == pHead) {
           // 将其删除
-          cur_node = null
-          // 上一步只是解除了cur_node和pHead的关系
+          curNode = null
+          // 上一步只是解除了curNode和pHead的关系
           pHead = null
         }
         // 如果不是唯一节点
@@ -206,16 +205,16 @@ function deleteDuplication (pHead) {
           while (pre.next) {
             pre = pre.next
           }
-          cur_node.next = null
+          curNode.next = null
           // 删除最后一个节点*
-          cur_node = null
+          curNode = null
           pre.next = null
         }
       }
     }
     // 如果当前不是重复节点
     else {
-      cur_node = cur_node.next
+      curNode = curNode.next
     }
   }
   return pHead
@@ -278,12 +277,12 @@ function findKthToTail (head, k) {
   }
   return k_node
 }
-console.log(findKthToTail(head, 0))
-console.log(findKthToTail(head, 1))
-console.log(findKthToTail(head, 2))
-console.log(findKthToTail(head, 3))
-console.log(findKthToTail(head, 4))
-console.log(findKthToTail(head, 5))
+// console.log(findKthToTail(head, 0))
+// console.log(findKthToTail(head, 1))
+// console.log(findKthToTail(head, 2))
+// console.log(findKthToTail(head, 3))
+// console.log(findKthToTail(head, 4))
+// console.log(findKthToTail(head, 5))
 
 
 /** 找到第一个公共节点
@@ -293,35 +292,35 @@ console.log(findKthToTail(head, 5))
  */
 function findFirstCommonNode (pHead1, pHead2) {
   let list1_len = 0, list2_len = 0
-  let cur_node1 = pHead1
-  while (cur_node) {
+  let curNode1 = pHead1
+  while (curNode) {
     list1_len++
-    cur_node1 = cur_node1.next
+    curNode1 = curNode1.next
   }
-  let cur_node2 = pHead2
-  while (cur_node) {
+  let curNode2 = pHead2
+  while (curNode) {
     list2_len++
-    cur_node2 = cur_node2.next
+    curNode2 = curNode2.next
   }
   // 对齐
-  cur_node1 = pHead1
-  cur_node2 = pHead2
+  curNode1 = pHead1
+  curNode2 = pHead2
   if (list1_len > list2_len) {
     for (let i = 0; i < list1_len - list2_len; i++) {
-      cur_node1 = cur_node1.next
+      curNode1 = curNode1.next
     }
   }
   else if (list2_len > list1_len) {
     for (let i = 0; i < list2_len - list1_len; i++) {
-      cur_node2 = cur_node2.next
+      curNode2 = curNode2.next
     }
   }
 
-  while (cur_node1 !== cur_node2) {
-    cur_node1 = cur_node1.next
-    cur_node2 = cur_node2.next
+  while (curNode1 !== curNode2) {
+    curNode1 = curNode1.next
+    curNode2 = curNode2.next
   }
-  return cur_node1
+  return curNode1
 }
 
 /* 环类题目 */
@@ -379,25 +378,25 @@ function entryNodeOfLoop (pHead) {
 function lastRemainingSolution (n, m) {
   // 1.构造环形链表*
   let head = { value: 0 }
-  let cur_node = head
+  let curNode = head
   for (let i = 0; i < n; i++) {
     let node = { value: i }
-    cur_node.next = node
-    cur_node = cur_node.next
+    curNode.next = node
+    curNode = curNode.next
   }
-  cur_node.next = head
+  curNode.next = head
   //2.循环删除节点
   // 从头开始
-  cur_node = head
+  curNode = head
   // 当链表不止一个节点
-  while (cur_node != cur_node.next) {
+  while (curNode != curNode.next) {
     // 每次找到当前节点后m-1个节点
     for (let i = 0; i < m - 1; i++) {
-      cur_node = cur_node.next
+      curNode = curNode.next
     }
     // 直接指向m+1个节点(删除第m个节点)
-    cur_node.next = cur_node.next.next
+    curNode.next = curNode.next.next
   }
   // 返回剩下节点的value
-  return cur_node.value
+  return curNode.value
 }
