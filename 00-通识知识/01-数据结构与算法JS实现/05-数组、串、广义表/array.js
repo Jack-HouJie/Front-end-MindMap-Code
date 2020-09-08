@@ -1,31 +1,30 @@
 /* 双指针问题 */
-/** 调整数组顺序，使得奇数在前偶数在后
- * 
+/** 使数组奇数在前偶数在后*
  * @param {Array} array 
  */
 function reOrderArray (array) {
+  if (!Array.isArray(array)) {
+    return null
+  }
   let left = 0
   let right = array.length - 1
   while (left < right) {
-    if (array[left] % 2 == 0) {
-      // 交换值简写*
-      [array[left], array[right]] = [array[right], array[left]]
-      right--
-    }
-    else {
+    // 从做到右找到第一个偶数
+    while (array[left] % 2 === 1) {
       left++
-      if (array[right] % 2 !== 0) {
-        [array[left], array[right]] = [array[right], array[left]]
-        left++
-      }
-      else {
-        right--
-      }
+    }
+    // 从右到左找到第一个奇数
+    while (array[right] % 2 === 0) {
+      right--;
+    }
+    // 偶在前则交换位置
+    if (left < right) {
+      [array[left], array[right]] = [array[right], array[left]]
     }
   }
   return array
 }
-let result = reOrderArray([1,2,3,4,5,7])
+// let result = reOrderArray([1, 2, 3, 4, 5, 7])
 
 /** 找到和为sum的两个数字（多种情况取乘积最小）
  * 
@@ -51,89 +50,99 @@ function findNumbersWithSum (array, sum) {
 // let result = findNumbersWithSum([1, 2, 3, 4, 5], 3)
 
 /** 输出和为sum的连续正整数序列
- * 
  * @param {Number} sum 
  */
 function findContinuousSequence (sum) {
-  let result = [],
-    small = 1,
-    big = 2,
-    child = [1, 2],
-    cur_sum = 3
-  while (big <= Math.floor(sum / 2)) {
-    // 调整大小
-    while (cur_sum < sum) {
-      child = child.push(++big)
-      cur_sum += big
+  if (sum < 3 || typeof sum === Number) {
+    return null
+  }
+  let result = []
+  let child = [1, 2]
+  let big = 2
+  let small = 1
+  let curSum = 3
+  let max = (sum >> 1) + 1
+  while (big <= max) {
+    // 结果较小，则在范围内增大big
+    while (curSum < sum && big <= max) {
+      child.push(++big)
+      curSum += big
     }
-    // 调整大小
-    while (cur_sum > sum) {
-      child = child.shift()
-      cur_sum -= ++small
+    // 结果较大，则在范围内增大small
+    while (curSum > sum && small < big) {
+      child.shift()
+      curSum -= small++
     }
-    // 如果恰是结果
-    if (currentSum === sum) {
-      // 更新结果
-      result.push(child.toString())
-      // 更新当前和以跳出循环
-      cur_sum += ++big
+    // 得到结果时保存
+    if (curSum === sum && small < big) {
+      result = child.slice()
+      break
     }
   }
-  return result
+  return result;
 }
+// console.log(findContinuousSequence(100))
 
 /** n 个数的和问题 */
-/** 数组中两个数的和为sum
- * 
+/** 两数之和*
+ * 数组中两个数的和为sum：
+ * 给定一个整数数组 nums 和一个目标值 target，
+ * 请你在该数组中找出和为目标值的那两个整数，
+ * 并返回他们的数组下标。
+ * 你可以假设每种输入只会对应一个答案。
+ * 但是，你不能重复利用这个数组中同样的元素。
  * @param {Array} array 
  * @param {Number} sum 
+ * @return {Array} [idx1,idx2]
  */
 function twoSum (array, sum) {
   // 鲁棒性*
-  if (Array.isArray(array)) {
-    // 保存已经遍历过的 值 及其 索引
-    let map = {}
-    for (let i = 0; i < array.length; i++) {
-      // 如果有合适的值
-      if (map[sum - array[i]] != undefined) {
-        return [map[sum - array[i]], i] // 返回结果
-      }
-      else {
-        map[array[i]] = i // 当前值存入map
-      }
+  if (!Array.isArray(array)) {
+    return null
+  }
+  // 保存已经遍历过的 值 及其 索引
+  let map = {}
+  for (let i = 0; i < array.length; i++) {
+    // 如果存储过合适的值
+    if (map[sum - array[i]] !== undefined) {
+      return [map[sum - array[i]], i] // 返回结果
+    }
+    else {
+      map[array[i]] = i // 保存当前值及其索引
     }
   }
-  return []
 }
 
-/** 数组中所有三数合为0的不重复情况
- * 
+/** 三数之和*
+ * 数组中所有三数合为0的不重复情况
+ * 思路：第一个数作为基准数，后两个数和为基准数相反数
  * @param {Array} array 
  */
 function threeSum (array) {
   // 数组排序
-  array.sort((a, b) => a - b);
-  let result = [];
+  array.sort((a, b) => a - b)
+  let result = []
   for (let i = 0; i < array.length; i++) {
     // 跳过重复数字
-    if (i && array[i] === array[i - 1]) { continue; }
-    let left = i + 1;
-    let right = array.length - 1;
+    if (i && array[i] === array[i - 1]) {
+      continue
+    }
+    let left = i + 1
+    let right = array.length - 1
     while (left < right) {
-      let sum = array[i] + array[left] + array[right];
+      let sum = array[i] + array[left] + array[right]
       if (sum > 0) {
-        right--;
+        right--
       } else if (sum < 0) {
-        left++;
+        left++
       } else {
         result.push([array[i], array[left++], array[right--]]);
-        // 跳过重复数字
+        // 跳过重复数字，继续寻找可能的结果
         while (array[left] === array[left - 1]) {
-          left++;
+          left++
         }
-        // 跳过重复数字
         while (array[right] === array[right + 1]) {
-          right--;
+          right--
         }
       }
     }
@@ -141,8 +150,8 @@ function threeSum (array) {
   return result;
 }
 
-/** 数组中所有四数合为sum的不重复情况
- * 
+/** 四数之和
+ * 数组中所有四数合为sum的不重复情况
  * @param {Array} array 
  * @param {Number} sum 
  */
@@ -203,73 +212,82 @@ function fourSum (array, sum) {
 // console.log(fourSum([1, 2, 3, -1, -2, -3, -3, 1, 3]))
 
 /** 二维数组问题 */
-/** 构建乘积数组
- * 
+/** 构建乘积数组*
+ * 给定一个数组A[0,1,...,n-1],
+ * 请构建一个数组B,
+ * B[i]=A[0]*A[1]*...*A[i-1]*A[i+1]*...*A[n-1]。
+ * 不能使用除法。
  * @param {Array} array 
  */
-function multiply (array_a) {
+function multiply (arrA) {
+  // 0.鲁棒性*
+  if (Array.isArray(arrA) && arrA.length > 0) {
+    return null
+  }
   // 定长的数组才能fill*
-  let array_b = new Array(array_a.length)
-  array_b.fill(1)
-  // 鲁棒性*
-  if (Array.isArray(array_a) && array_a.length > 0) {
-    // 当前计算的B的下标
-    for (let i = 0; i < array_a.length; i++) {
-      for (let j = 0; j < i; j++) {
-        array_b[i] *= +array_a[j]
-      }
-      for (let j = array_a.length - 1; j > i; j--) {
-        array_b[i] *= +array_a[j]
-      }
+  let arrB = new Array(arrA.length)
+  arrB.fill(1)
+  // i为当前计算的B的下标
+  for (let i = 0; i < arrA.length; i++) {
+    // 乘属于下三角的数
+    for (let j = 0; j < i; j++) {
+      arrB[i] *= +arrA[j]
+    }
+    // 乘属于上三角的数
+    for (let j = arrA.length - 1; j > i; j--) {
+      arrB[i] *= +arrA[j]
     }
   }
-  return array_b
+  return arrB
 }
 // let result = multiply([1, 2, 3, 4, 5]);
 
-/** 顺时针打印矩阵
- * 
- * @param {Array} matrix 
+/** 顺时针打印矩阵*
+ * @param {Array} matrix 基础矩阵
  */
 function printMatrix (matrix) {
-  let circle = 0  // 第几圈
-  let rows = matrix.length // 矩阵行数
-  let colums = matrix[0].length // 矩阵列数
+  let circle = 0  // 当前圈数（从外向内）
+  let rows = matrix.length // 矩阵宽(行数)
+  let colums = matrix[0].length // 矩阵高(列数)
   let result = [] // 结果
-  // 当矩阵足够打印时
-  while (rows > circle * 2 - 1 && colums > circle * 2 - 1) {
+  // 当矩阵宽高足够打印时
+  while (rows > (circle << 1) - 1 && colums > (circle << 1) - 1) {
     printCircle(matrix, rows, colums, circle, result) // 打印一圈
     circle++ // 更新当前圈
   }
   return result
 }
 /** 矩阵顺时针打印一圈
- *
- * @param {Array} matrix
- * @param {Number} rows
- * @param {Number} coloums
- * @param {Number} circle
- * @param {Array} result 
+ * 思路：将打印一圈拆解为四步，
+ * 处理最后一圈的异常情况
+ * @param {Array} matrix 基础矩阵
+ * @param {Number} rows 基础矩阵宽(行数)
+ * @param {Number} coloums 基础矩阵高(列数)
+ * @param {Number} circle 要打印的圈数
+ * @param {Array} result 保存结果的数组
  */
 function printCircle (matrix, rows, colums, circle, result) {
-  // 本圈剩余矩阵大小
-  let cur_rows = rows - circle << 1
-  let cur_colums = colums - circle << 1
+  // 本圈剩余矩阵宽高（行数、列数）
+  let curRows = rows - circle << 1
+  let curColums = colums - circle << 1
   // 从左至右打印一行
   for (let i = 0; i < colums - circle * 2; i++) {
     result.push(matrix[circle][i])
   }
-  if (cur_rows > 2) {
+  // 如果结束行号大于开始行号
+  if (curRows > 2) {
     // 从上至下打印一列
     for (let i = circle + 1; i < rows - circle; i++) {
       result.push(matrix[i][colums - circle - 1])
     }
-    if (cur_colums > 2) {
+    // 结束列号大于开始列号
+    if (curColums > 2) {
       // 从右至左打印一行
       for (let i = colums - circle - 2; i > circle - 1; i--) {
         result.push(matrix[rows - circle - 1][i])
       }
-      if (cur_rows > 3) {
+      // 结束行号大于开始行号+1
+      if (curRows > 3) {
         // 从下至上打印一行
         for (let i = rows - circle - 2; i > circle; i--) {
           result.push(matrix[i][circle])
@@ -277,7 +295,6 @@ function printCircle (matrix, rows, colums, circle, result) {
       }
     }
   }
-
 }
 // let result = printMatrix([[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12], [13, 14, 15, 16]])
 
@@ -305,15 +322,15 @@ function moreThanHalfNum (array) {
 function findGreatestSumOfSubArray (array) {
   // 鲁棒性
   if (Array.isArray(array) && array.length > 0) {
-    let cur_sum = array[0]
+    let curSum = array[0]
     let max = array[0]
     for (let i = 1; i < array.length; i++) {
-      if (cur_sum < 0) {
-        cur_sum = array[i]
+      if (curSum < 0) {
+        curSum = array[i]
       }
       else {
-        cur_sum = cur_sum + array[i]
-        max = cur_sum > max ? cur_sum : max
+        curSum = curSum + array[i]
+        max = curSum > max ? curSum : max
       }
     }
     return max
