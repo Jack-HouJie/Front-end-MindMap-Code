@@ -6,32 +6,32 @@ function isNumeric (str) {
   if (!str) {
     return false
   }
-  let point_count = 0
-  let e_count = 0
-  let e_tag = false
+  let pointCount = 0
+  let eCount = 0
+  let eTag = false
   for (let i = 0; i < str.length; i++) {
     // 只能出现数字、符号位、小数点、指数位
-    let reg_all = /[0-9eE.+-]/
-    if (!reg_all.test(str[i])) {
+    let regAll = /[0-9eE.+-]/
+    if (!regAll.test(str[i])) {
       return false
     }
     // 小数点，指数符号不能出现在开头结尾
     if (i == 0 || i == str.length - 1) {
-      let reg_eE = /[eE.]/
-      if (reg_eE.test(str[i])) {
+      let regEe = /[eE.]/
+      if (regEe.test(str[i])) {
         return false
       }
     }
     // 统计 eE. 次数
     // 指数位出现后，小数点不允许在出现
     if (str[i] == '.') {
-      point_count++
-      if (e_tag) {
+      pointCount++
+      if (eTag) {
         return false
       }
     } else if (str[i] == 'e' || str[i] == 'E') {
-      e_count++
-      e_tag = true
+      eCount++
+      eTag = true
     }
     // 符号位只能出现在开头和指数位后面
     if (str[i] == '+' || str[i] == '-') {
@@ -41,88 +41,84 @@ function isNumeric (str) {
     }
   }
   // 小数点，指数符号只能出现一次
-  if (point_count > 1 || e_count > 1) {
+  if (pointCount > 1 || eCount > 1) {
     return false
   }
   return true
 }
 // let result = isNumeric("1+.21e3234")
 
-/** 正则表达式（.*）匹配递归函数
+/** 正则表达式（.*）匹配递归函数-困难
  * 
  * @param {String} str 字符串
  * @param {String} pattern 正则式
- * @param {Number} str_index 字符串开始索引
- * @param {Number} pattern_index 正则式开始索引
+ * @param {Number} strIndex 字符串开始索引
+ * @param {Number} patternIndex 正则式开始索引
  */
-function matchStr (str, pattern, str_index, pattern_index) {
+function matchStr (str, pattern, strIndex, patternIndex) {
   // 递归停止条件：
   // 如果为通用匹配
-  if (pattern_index + 1 < pattern.length && pattern[pattern_index] == '.' && pattern[pattern_index + 1] == '*') {
+  if (patternIndex + 1 < pattern.length && pattern[patternIndex] == '.' && pattern[patternIndex + 1] == '*') {
     return true
   }
   // 如果恰好匹配（索引都超出范围）
-  if (str_index === str.length && pattern_index === pattern.length) {
+  if (strIndex === str.length && patternIndex === pattern.length) {
     return true
   }
   // 如果字符串没匹配完
-  if (str_index !== str.length && pattern_index === pattern.length) {
+  if (strIndex !== str.length && patternIndex === pattern.length) {
     return false
   }
   // 如果存在下一个模式字符且是“*”
-  if (pattern_index + 1 < pattern.length && pattern[pattern_index + 1] == "*") {
+  if (patternIndex + 1 < pattern.length && pattern[patternIndex + 1] == "*") {
     // 如果当前字符匹配
-    if (str[str_index] === pattern[pattern_index]) {
+    if (str[strIndex] === pattern[patternIndex]) {
       // 或逻辑：有一种情况满足就可以
       // 模式后移两个字符：*代表出现0次
-      return matchStr(str, pattern, str_index, pattern_index + 2) ||
+      return matchStr(str, pattern, strIndex, patternIndex + 2) ||
         // 字符串后移1字符，模式后移2字符：*代表出现1次
-        matchStr(str, pattern, str_index + 1, pattern_index + 2) ||
+        matchStr(str, pattern, strIndex + 1, patternIndex + 2) ||
         // 字符串后移1字符，模式不变: *代表出现多次
-        matchStr(str, pattern, str_index + 1, pattern_index)
+        matchStr(str, pattern, strIndex + 1, patternIndex)
     }
     // 如果当前字符不匹配
     else {
       // 模式后移两个字符：*代表出现0次
-      return matchStr(str, pattern, str_index, pattern_index + 2)
+      return matchStr(str, pattern, strIndex, patternIndex + 2)
     }
   }
   // 如果字符串和模式都有剩余，且当前字符匹配成功
-  if (str_index !== str.length && pattern_index !== pattern.length && (str[str_index] === pattern[pattern_index] || pattern[pattern_index] === '.')) {
+  if (strIndex !== str.length && patternIndex !== pattern.length && (str[strIndex] === pattern[patternIndex] || pattern[patternIndex] === '.')) {
     // 字符串和模式后移1个字符：继续匹配
-    return matchStr(str, pattern, str_index + 1, pattern_index + 1)
+    return matchStr(str, pattern, strIndex + 1, patternIndex + 1)
   }
   return false
 }
 // let result = matchStr("123", "1.*", 0, 0)
 
 /** 字符串字符的所有排列***
- * 
  * @param {String} str 
  */
 function Permutation (str) {
-  const result = [];
+  const result = []
   if (str) {
     queue = str.split('')
-    PermutationCore(queue, result);
+    PermutationCore(queue, result)
   }
-  // result.sort();
+  // result.sort()
   return result
 }
 function PermutationCore (queue, result, temp = "", current = "") {
-  current += temp; // 排列当前字符
+  current += temp // 排列当前字符
   // 如果待排队列为空
   if (queue.length === 0) {
-    // console.log("结果：temp:" + temp + ",current:" + current + ",queue:" + queue);
-    result.push(current); // 增加一种结果
-    return;
+    result.push(current) // 增加一种结果
+    return
   }
   for (let i = 0; i < queue.length; i++) {
-    temp = queue.shift(); // 出队作为新字符
-    // console.log("递：temp:" + temp + ",current:" + current + ",queue:" + queue);
-    PermutationCore(queue, result, temp, current); // 待排队列中的元素依次加入
-    queue.push(temp);
-    // console.log("归：temp:" + temp + ",current:" + current + ",queue:" + queue);
+    temp = queue.shift() // 出队作为新字符
+    PermutationCore(queue, result, temp, current) // 待排队列中的元素依次加入
+    queue.push(temp)
   }
 }
 // let result = Permutation("abc")
@@ -140,6 +136,20 @@ function leftRotateString (str, n) {
   // let right_arr = right.split("").reverse()
   // return left_arr.concat(right_arr).reverse().join("")
 }
-let result = leftRotateString("abcde", 2)
+// let result = leftRotateString("abcde", 2)
 
-console.log(result);
+/** 找到第一个非重复字符
+ * 
+ * @param {String} str 
+ */
+function firstUniqChar (str) {
+  for (let char of new Set(str)) {
+    if (str.match(new RegExp(char, 'g')).length === 1) {
+      return char
+    }
+  }
+  return ' '
+}
+let result = firstUniqChar('1231234455566')
+
+console.log(result)
