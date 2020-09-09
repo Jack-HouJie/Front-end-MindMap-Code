@@ -38,11 +38,11 @@ let arr = [1, 1, 'true', 'true', true, true, 15, 15, false, false, undefined, un
 
 // // 迭代操作，无返回
 // let result3 = arr.forEach(function (item, index, array) {
-//   // console.log(item);
+//   // console.log(item)
 //   item += 1
 // })
-// console.log(result3);
-// console.log(arr);
+// console.log(result3)
+// console.log(arr)
 
 // // 迭代操作，返回新数组副本
 // let result4 = arr.map(function (item, index, array) {

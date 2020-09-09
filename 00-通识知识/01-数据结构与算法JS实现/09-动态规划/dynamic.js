@@ -73,21 +73,22 @@ function maxProfit (arr) {
 }
 // console.log(maxProfit([4, 3, 2, 3, 4, 5, 7, 3, 5, 2]));
 
-/** 打家劫舍
- * 
- * @param {Array} arr 
+/** 打家劫舍 
+ * https://leetcode-cn.com/problems/house-robber/
+ * @param {Array} nums
+ * @return {Number}
  */
-function rob (arr) {
-  let len = arr.length;
-  let dp = [];
-  if (len === 1) {
-    return arr[0];
+var rob = function (nums) {
+  const length = nums.length
+  if (length === 0) {
+    return 0
   }
-  dp[0] = 0
-  dp[1] = arr[0]
-  for (let i = 2; i <= len; i++) {
-    dp[i] = Math.max(dp[i - 1], dp[i - 2] + arr[i - 1]);
+  const dp = new Array(length)
+  dp[0] = nums[0]
+  dp[1] = Math.max(nums[0], nums[1])
+  for (let i = 2; i < length; i++) {
+    dp[i] = Math.max(dp[i - 1], dp[i - 2] + nums[i])
   }
-  return dp[len]
+  return dp[length - 1]
 }
 console.log(rob([1, 2, 3, 4, 5]));

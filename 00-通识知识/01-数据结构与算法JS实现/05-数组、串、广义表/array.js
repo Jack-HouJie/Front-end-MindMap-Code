@@ -381,7 +381,6 @@ function isContinuous (array) {
 function firstNotRepeatingChar (str) {
   if (str) {
     let arr = str.split("")
-    console.log(arr);
     let char_count = {}
     for (let idx in arr) {
       let old_count = char_count[arr[idx]]
@@ -393,7 +392,7 @@ function firstNotRepeatingChar (str) {
       }
     }
   }
-  return ""
+  return " "
 }
 // let result = firstNotRepeatingChar("123ssd36123f")
 console.log(result)
