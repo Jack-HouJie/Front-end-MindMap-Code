@@ -33,15 +33,19 @@ function minNumberInRotateArray (arr) {
   let end = arr.length - 1
   while (start < end) {
     let mid = Math.floor((start + end) >> 1)
-    // 出现这种情况的array类似[3,4,5,6,0,1,2]，此时最小数字一定在mid的右边。 
+    // 出现这种情况的array类似[3,4,5,6,0,1,2]，
+    // 此时最小数字一定在mid的右边。 
     if (arr[mid] > arr[end]) {
       start = mid + 1;
     }
-    // 出现这种情况的array类似 [1,0,1,1,1]或者[1,1,1,0,1]，此时最小数字不好判断在mid左边还是右边,这时只好一个一个试 。
+    // 出现这种情况的array类似 [1,0,1,1,1]或者[1,1,1,0,1]，
+    // 此时最小数字不好判断在mid左边还是右边,这时只好一个一个试 。
     else if (arr[mid] == arr[end]) {
       end = end - 1;
     }
-    // 出现这种情况的array类似[2,2,3,4,5,6,6],此时最小数字一定就是array[mid]或者在mid的左边。因为右边必然都是递增的。
+    // 出现这种情况的array类似[2,2,3,4,5,6,6],
+    // 此时最小数字一定就是array[mid]或者在mid的左边。
+    // 因为右边必然都是递增的。
     else {
       end = mid;
     }
