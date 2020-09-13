@@ -171,3 +171,24 @@ var majorityElement = function (nums) {
     }
   }
 }
+
+/** 1.两数之和
+ * @param {number[]} nums
+ * @param {number} target
+ * @return {number[]}
+ */
+var twoSum = function (nums, target) {
+  if (!Array.isArray(nums)) {
+    return []
+  }
+  let map = {}
+  let length = nums.length
+  for (let i = 0; i < length; i++) {
+    if (map[target - nums[i]] != undefined) {
+      return [map[target - nums[i]], i]
+    }
+    else {
+      map[nums[i]] = i
+    }
+  }
+}

@@ -1,10 +1,10 @@
 /**
  * 全局通用的同步try-catch方法
- * @param {Function} asyncFunc 
+ * @param {Function} func 
  */
-function tryCatchGlobal (asyncFunc) {
+function tryCatchGlobal (func) {
   try {
-    return asyncFunc()
+    return func()
   } catch (e) {
     console.log(`同步异常捕捉_error:${e}`)
   }
