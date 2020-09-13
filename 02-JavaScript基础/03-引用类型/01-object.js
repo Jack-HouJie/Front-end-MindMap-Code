@@ -24,14 +24,17 @@ function myNew () {
  * @param {Object} right 构造函数 
  */
 function myInstanceof (left, right) {
+  // 构造函数原型
   let rightPrototype = right.prototype
-  let left_prototype = left.__proto__
-  while (left_prototype) {
-    if (left_prototype === rightPrototype) {
+  // 实例对象原型
+  let leftPrototype = left.__proto__
+  while (leftPrototype) {
+    if (leftPrototype === rightPrototype) {
       return true
     }
     else {
-      left_prototype = left_prototype.__proto__
+      // 沿原型链查找
+      leftPrototype = leftPrototype.__proto__
     }
   }
   return false
