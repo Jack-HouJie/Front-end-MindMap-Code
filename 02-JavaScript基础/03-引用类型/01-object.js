@@ -2,20 +2,14 @@
  * https://zhuanlan.zhihu.com/p/84605717
  */
 function myNew () {
-  /** 1.创建一个新对象
-   *  2.将构造函数的作用域赋给新对象
-   * （因此this就指向了这个新对象）
-   */
+  /* 1.创建一个新对象为构造函数的原型（继承属性和方法）  */
   // 取得指定构造函数（第一个参数）
   let constructor = Array.prototype.shift.call(arguments)
   // 创建空对象其原型为指定构造函数的原型
   let obj = Object.create(constructor.prototype)
-  /** 3.为新对象添加属性:
-   *  执行构造函数中的代码,
-   *  获取返回值 */
+  /* 2.对象上执行构造函数（添加实例属性）*/
   let result = constructor.apply(obj, arguments)
-  /** 4.如果构造函数有返回值，则返回；
-   *  否则，就会默认返回新对象 */
+  /* 3.使用构造函数返回值或创建的新对象作为创建的实例对象返回 */
   return result instanceof Object ? result : obj
 }
 

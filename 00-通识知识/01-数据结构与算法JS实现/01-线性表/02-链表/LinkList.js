@@ -147,15 +147,15 @@ function cloneRandom (pHead) {
 }
 function reconnetNodes (pHead) {
   let curNode = pHead
-  let clone_head = pHead.next
-  let clone_node = pHead.next
+  let cloneHead = pHead.next
+  let cloneNode = pHead.next
   while (curNode) {
-    curNode.next = clone_node.next
-    curNode = clone_node.next
-    clone_node.next = curNode.next
-    clone_node = curNode.next
+    curNode.next = cloneNode.next
+    curNode = cloneNode.next
+    cloneNode.next = curNode.next
+    cloneNode = curNode.next
   }
-  return clone_head
+  return cloneHead
 }
 /** 删除链表重复节点*
  * 出现次数大于1的节点

@@ -86,7 +86,6 @@ class MyStack1 {
     }
   }
 }
-
 let stack = new MyStack()
 // stack.push(5)
 // stack.push(3)
