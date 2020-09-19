@@ -45,19 +45,17 @@
     .container {
       display: flex;
     }
-
     .center {
       flex: 1;
     }
 
 
     /* 网格布局  */
-    .container {
+    /* 行高需等于最高的列 */
+    /* .container {
       display: grid;
-      /* 行高需等于最高的列 */
-      grid-template-rows: 150px;
-      grid-template-columns: 100px auto 100px;
-    }
+      grid-template-columns: 100px 1fr 100px;
+    } */
   </style>
 
 </head>
@@ -65,8 +63,9 @@
 <body>
   <div class="container">
     <!-- 必须按顺序 -->
-    <div class="left">左区域</div>
     <div class="center">主区域</div>
+    <div class="left">左区域</div>
+    
     <div class="right">右区域</div>
   </div>
   <footer>底部</footer>

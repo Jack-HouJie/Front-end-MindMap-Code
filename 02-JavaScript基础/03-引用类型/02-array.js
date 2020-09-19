@@ -54,8 +54,8 @@ let arr = [1, 1, 'true', 'true', true, true, 15, 15, false, false, undefined, un
 
 // // 归并操作
 // let arr1 = [1, 2, 3, 4, 5]
-// let result5 = arr1.reduce(function (pre_item, cur_item, cur_index, arr) {
-//   return pre_item + cur_item
+// let result5 = arr1.reduce(function (preItem, curItem, curIndex, arr) {
+//   return preItem + curItem
 // }, 100)
 // console.log(result5);
 // console.log(arr1);
@@ -73,7 +73,7 @@ function unique (arr) {
     return arr.indexOf(item, 0) === index
   })
 }
-console.log(unique(arr));
+// console.log(unique(arr));
 
 
 // 快速的让一个数组乱序
@@ -88,7 +88,7 @@ console.log(unique(arr));
 // console.log(arr)
 
 
-let arr = [1, 1, [2, 3, [4]], "a", "b", ["c", "d"], "f", [["d"], "e"]]
+// let arr = [1, 1, [2, 3, [4]], "a", "b", ["c", "d"], "f", [["d"], "e"]]
 /** 数组扁平化/数组展开/数组降维
  * @param {Array} arr 
  */
@@ -99,4 +99,4 @@ function flatten (arr) {
   //  toString() 方法返回一个表示该对象的字符串
   return arr.toString().split(',')
 }
-let result = flatten(arr)
+// let result = flatten(arr)

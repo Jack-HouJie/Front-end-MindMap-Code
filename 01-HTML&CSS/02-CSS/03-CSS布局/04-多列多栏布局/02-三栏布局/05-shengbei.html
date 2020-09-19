@@ -49,13 +49,13 @@
       float: left;
     }
 
-    /* 清除浮动 */
+    /* 伪元素清除浮动 */
     .container::after {
       content: "";
       display: block;
-      height: 0;
+      height: 0px;
       clear: both;
-      visibility: hidden;
+      /* visibility: hidden; */
     }
 
     /* 中间区域宽度占满 */
