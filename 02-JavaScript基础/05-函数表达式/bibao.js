@@ -1,52 +1,52 @@
-/*特权方法-私有作用域实现*/
-(function () {
-  //私有变量和函数
-  var obj_id = 0; //静态私有变量
-  function setOk() {
-    console.log("current id : " + obj_id);
-    return true;
-  }
-  //使用匿名函数定义构造函数
-  //使用无var变量接收构造函数
-  //保证了构造函数可以在私有域外被访问
-  Person = function (value) {
-    //实例属性
-    this.name = value;
-  };
-  //共享方法(影响所有实例)
-  //一般方法
-  Person.prototype.sayName = function () {
-    console.log(this.name);
-  };
-  //特权方法
-  Person.prototype.setId = function () {
-    obj_id = 1;
-    return setOk();
-  };
-})();
-var per = new Person();
-per.name = "houjie";
-per.sayName();
-per.setId();
+// /*特权方法-私有作用域实现*/
+// (function () {
+//   //私有变量和函数
+//   var obj_id = 0; //静态私有变量
+//   function setOk () {
+//     console.log("current id : " + obj_id);
+//     return true;
+//   }
+//   //使用匿名函数定义构造函数
+//   //使用无var变量接收构造函数
+//   //保证了构造函数可以在私有域外被访问
+//   Person = function (value) {
+//     //实例属性
+//     this.name = value;
+//   };
+//   //共享方法(影响所有实例)
+//   //一般方法
+//   Person.prototype.sayName = function () {
+//     console.log(this.name);
+//   };
+//   //特权方法
+//   Person.prototype.setId = function () {
+//     obj_id = 1;
+//     return setOk();
+//   };
+// })();
+// var per = new Person();
+// per.name = "houjie";
+// per.sayName();
+// per.setId();
 
-//模块模式
-var application = (function () {
-  //私有
-  var components = new Array();
-  //初始化(假设有一基础内容)
-  components.push(new BaseComponent());
-  //公共
-  return {
-    getComponentCount: function () {
-      return components.length;
-    },
-    registerComponent: function (component) {
-      if (typeof component == "object") {
-        components.push(component);
-      }
-    },
-  };
-})();
+// //模块模式
+// var application = (function () {
+//   //私有
+//   var components = new Array();
+//   //初始化(假设有一基础内容)
+//   components.push(new BaseComponent());
+//   //公共
+//   return {
+//     getComponentCount: function () {
+//       return components.length;
+//     },
+//     registerComponent: function (component) {
+//       if (typeof component == "object") {
+//         components.push(component);
+//       }
+//     },
+//   };
+// })();
 
 // //增强模块模式
 // var application = (function () {
@@ -107,3 +107,23 @@ var application = (function () {
 
 // var per = new Person();
 // per.publicGetId();
+
+
+/* 单例模式和对象ID方法 */
+class SingleInstanceClass {
+  constructor(a, b) {
+    this.a = a
+    this.b = b
+  }
+  static getInstance () {
+    if (!SingleInstanceClass.instance) {
+      SingleInstanceClass.instance = new SingleInstanceClass()
+      return SingleInstanceClass.instance
+    } else {
+      return SingleInstanceClass.instance
+    }
+  }
+}
+let a = SingleInstanceClass.getInstance()
+let b = SingleInstanceClass.getInstance()
+console.log(a === b);

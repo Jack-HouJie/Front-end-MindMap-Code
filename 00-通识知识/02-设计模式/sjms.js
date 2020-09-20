@@ -1,19 +1,18 @@
-class SingleInstance {
-  constructor() {
+// 单例模式
+class SingleInstanceClass {
+  constructor(a, b) {
+    this.a = a
+    this.b = b
+  }
+  static getInstance () {
+    if (!SingleInstanceClass.instance) {
+      SingleInstanceClass.instance = new SingleInstanceClass()
+      return SingleInstanceClass.instance
+    } else {
+      return SingleInstanceClass.instance
+    }
   }
 }
-SingleInstance.getInstance = function () {
-  let instance
-  return (function () {
-    if (!instance) {
-      instance = new SingleInstance()
-    }
-    else {
-      return instance
-    }
-  })()
-}
-
-let instance1 = SingleInstance.getInstance()
-let instance2 = SingleInstance.getInstance()
-console.log(instance1 === instance2)
+let a = SingleInstanceClass.getInstance()
+let b = SingleInstanceClass.getInstance()
+console.log(a === b);
