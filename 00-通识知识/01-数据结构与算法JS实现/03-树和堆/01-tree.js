@@ -232,21 +232,23 @@ class BiTree {
    */
   getKthMin (node, k) {
     let result = []
+    // 中序遍历并保存
     tree.saveMidOrder(node, result)
     console.log(result[k - 1]);
   }
 
   /* 二叉树深度问题 */
   /** 得到节点最大深度
+   * 后序遍历取更深的子树深度
    * @param {TNode} node 起始节点
    * @param {Number} deep 起始节点深度 
    */
-  getDeepMax (pRoot) {
+  getDeepMax (node) {
     if (!node) {
       return 0
     }
-    let left = balance(node.left)
-    let right = balance(node.right)
+    let left = getDeepMax(node.left)
+    let right = getDeepMax(node.right)
     return Math.max(left, right) + 1
   }
   /** 二叉树的最小深度
@@ -276,12 +278,13 @@ class BiTree {
       depth++ // 肯定有下一层，如果没有早就return了
     }
   }
-  /** 判断平衡二叉树
+  /** 判断平衡二叉树(后序遍历应用)
+   * 后序遍历：判断是否子树不平衡，平衡时返回深度
    * http://www.conardli.top/docs/dataStructure/%E4%BA%8C%E5%8F%89%E6%A0%91/%E5%B9%B3%E8%A1%A1%E4%BA%8C%E5%8F%89%E6%A0%91.html
    * @param {TNode} pRoot 
    */
   isBalanced (pRoot) {
-    return balance(pRoot) != -1
+    return isBalancedCore(pRoot) != -1
   }
   isBalancedCore (node) {
     if (!node) {

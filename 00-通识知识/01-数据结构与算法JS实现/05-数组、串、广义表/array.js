@@ -75,7 +75,7 @@ function findContinuousSequence (sum) {
     }
     // 得到结果时保存
     if (curSum === sum && small < big) {
-      result = child.slice()
+      result = child.slice(0)
       break
     }
   }
@@ -214,7 +214,7 @@ function fourSum (array, sum) {
 /** 二维数组问题 */
 /** 构建乘积数组*
  * 给定一个数组A[0,1,...,n-1],
- * 请构建一个数组B,
+ * 请构建一个数组B满足
  * B[i]=A[0]*A[1]*...*A[i-1]*A[i+1]*...*A[n-1]。
  * 不能使用除法。
  * @param {Array} array 
@@ -304,11 +304,11 @@ function printCircle (matrix, rows, colums, circle, result) {
  * @param {Array} array 
  */
 function moreThanHalfNum (array) {
-  let num_count = {}
+  let numCount = {}
   for (let num in array) {
-    let old = num_count[array[num]]
-    num_count[array[num]] = old ? old + 1 : 1
-    if (num_count[array[num]] > array.length >> 1) {
+    let old = numCount[array[num]]
+    numCount[array[num]] = old ? old + 1 : 1
+    if (numCount[array[num]] > array.length >> 1) {
       return array[num]
     }
   }
@@ -375,19 +375,21 @@ function isContinuous (array) {
 }
 // let result = isContinuous([3, 8, 4, 0])
 /** 第一个只出现一次的字符
- * 
+ * 用一个map存储每个字符出现的字数,
+ * 第一次循环存储次数，
+ * 第二次循环找到第一个出现一次的字符。
  * @param {String} str 
  */
 function firstNotRepeatingChar (str) {
   if (str) {
     let arr = str.split("")
-    let char_count = {}
+    let charCount = {}
     for (let idx in arr) {
-      let old_count = char_count[arr[idx]]
-      char_count[arr[idx]] = old_count ? old_count + 1 : 1
+      let oldCount = charCount[arr[idx]]
+      charCount[arr[idx]] = oldCount ? oldCount + 1 : 1
     }
-    for (let char in char_count) {
-      if (char_count[char] == 1) {
+    for (let char in charCount) {
+      if (charCount[char] == 1) {
         return char
       }
     }
