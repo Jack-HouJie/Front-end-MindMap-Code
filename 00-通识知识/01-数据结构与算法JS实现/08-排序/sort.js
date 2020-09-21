@@ -6,7 +6,7 @@ function checkArray (array) {
   if (!Array.isArray(array)) {
     throw new Error('数据非数组')
   }
-  if (!array) {
+  if (!array.length) {
     throw new Error('数组不存在')
   }
 }
@@ -121,13 +121,13 @@ function selectionSort (array) {
   // 每趟选择最小值放最前
   for (let i = 0; i < length - 1; i++) {
     // 先把本趟第一个当作最小索引
-    let min_index = i
+    let minIndex = i
     // 从本趟第二个开始，找到最小索引
     for (let j = i + 1; j < length; j++) {
-      min_index = array[min_index] < array[j] ? min_index : j
+      minIndex = array[minIndex] < array[j] ? minIndex : j
     }
     // 直接把最小项换至本趟开头
-    swap(array, min_index, i)
+    swap(array, minIndex, i)
   }
   return array
 }

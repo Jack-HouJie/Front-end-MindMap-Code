@@ -26,7 +26,7 @@ function reOrderArray (array) {
 }
 // let result = reOrderArray([1, 2, 3, 4, 5, 7])
 
-/** 找到和为sum的两个数字（多种情况取乘积最小）
+/** 排序数组中找到和为sum的两个数字（多种情况取乘积最小）
  * 
  * @param {Array} array 
  * @param {Number} sum 
@@ -346,12 +346,12 @@ function isContinuous (array) {
   if (Array.isArray(array) && array.length > 1) {
     let arr = array
     arr.sort((a, b) => a - b)
-    let space_num = 0
-    let joker_num = 0
+    let spaceNum = 0
+    let jokerNum = 0
     for (let i = 0; i < arr.length; i++) {
       // 判断大小王
       if (arr[i] == 0) {
-        joker_num += 1
+        jokerNum += 1
       }
       // 除第一项
       else if (i > 0) {
@@ -361,11 +361,11 @@ function isContinuous (array) {
         }
         // 要考虑前一项是王的情况*
         else if (cur_space != arr[i] - 1) {
-          space_num += cur_space
+          spaceNum += cur_space
         }
       }
     }
-    if (space_num <= joker_num) {
+    if (spaceNum <= jokerNum) {
       return true
     } else {
       return false

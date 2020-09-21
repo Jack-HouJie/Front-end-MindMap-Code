@@ -103,7 +103,7 @@ function getFirstNum (data, arr, start, end) {
  * @param {*} start 
  * @param {*} end 
  */
-function getFirstNum (data, arr, start, end) {
+function getLastNum (data, arr, start, end) {
   if (start > end) {
     return -1
   }
@@ -113,13 +113,13 @@ function getFirstNum (data, arr, start, end) {
       return mid
     }
     else {
-      return getFirstNum(data, arr, mid + 1, end)
+      return getLastNum(data, arr, mid + 1, end)
     }
   }
   else if (arr[mid] > data) {
-    return getFirstNum(data, arr, start, mid - 1)
+    return getLastNum(data, arr, start, mid - 1)
   }
   else if (arr[mid] < data) {
-    return getFirstNum(data, arr, mid + 1, end)
+    return getLastNum(data, arr, mid + 1, end)
   }
 }

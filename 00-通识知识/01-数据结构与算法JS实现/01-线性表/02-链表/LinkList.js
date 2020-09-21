@@ -27,8 +27,8 @@ class LinkList {
    * @param {Number} tarIndex 目标索引
    */
   findNode (curNode, curIndex, tarIndex) {
-    this.checkIndex(cur_idx)
-    this.checkIndex(tar_idx)
+    this.checkIndex(curIndex)
+    this.checkIndex(tarIndex)
     if (tarIndex === curIndex) {
       return curNode
     } else {
