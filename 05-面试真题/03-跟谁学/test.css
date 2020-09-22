@@ -1,0 +1,16 @@
+.father{
+  display: flex;
+}
+div{
+  flex: 1;
+}
+#div1{
+  margin-left: 8px;
+}
+#div2{
+  margin-left: 8px;
+}
+#div3{
+  margin-left: 8px;
+  margin-right: 8px;
+}
