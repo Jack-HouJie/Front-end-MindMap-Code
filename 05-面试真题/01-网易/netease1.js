@@ -91,7 +91,6 @@ while (line = readline()) {
 // emh_count[0] += +lines[3]
 // emh_count[0] += +lines[4]
 
-
 // 3.铺瓷砖
 var n = parseInt(readline());
 var ans = 0;
@@ -123,8 +122,6 @@ for (var i = 0; i < n; i++) {
     }
   }
 }
-
-
 
 /**
  * 
