@@ -67,7 +67,6 @@ function Solution (a, b) {
     return cal(numA, numB, pointNum)
   }
 }
-
 function trim (str) {
   let arr = str.split('')
   let i = 0

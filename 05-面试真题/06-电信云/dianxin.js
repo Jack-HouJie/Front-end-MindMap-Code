@@ -1,3 +1,4 @@
+// 实现单例模式
 class SingleInstance {
   constructor() {
   }
