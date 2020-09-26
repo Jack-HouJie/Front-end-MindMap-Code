@@ -59,7 +59,11 @@ function jumpFloorPlus (n) {
 
 /* 买卖股票类问题 */
 /**买卖股票的最佳时机
- * 
+ * 给定一个数组，它的第 i 个元素是一支给定股票第 i 天的价格。
+如果你最多只允许完成一笔交易（即买入和卖出一支股票一次），设计一个算法来计算你所能获取的最大利润。
+注意：你不能在买入股票前卖出股票。
+思路：最大利润：前一项的最大利润(前一项出手) 和 当前项(当前项出手)与最小值差 的较大值
+      最小值为：当前项 和 当前最小值 的较小值 
  * @param {Array} arr 
  */
 function maxProfit (arr) {
@@ -75,10 +79,11 @@ function maxProfit (arr) {
 
 /** 打家劫舍 
  * https://leetcode-cn.com/problems/house-robber/
+ * 思路：最大钱数：前一项的最大钱数(本项不偷) 和 当前钱(本项偷)和前两项最大钱数 的较大值
  * @param {Array} nums
  * @return {Number}
  */
-var rob = function (nums) {
+function rob (nums) {
   const length = nums.length
   if (length === 0) {
     return 0
