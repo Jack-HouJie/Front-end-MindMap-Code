@@ -3,47 +3,51 @@
 
 <head>
   <title>02-float+fix+float</title>
+  <!-- 初始化 -->
   <style type="text/css">
-    .container {
-      position: relative;
-    }
 
     .left {
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: 100px;
-
       background-color: green;
       height: 100px;
     }
 
     .middle {
-      margin: 0 100px;
-
       background-color: red;
       height: 150px;
     }
 
     .right {
-      position: absolute;
-      top: 0;
-      right: 0;
-      /* float: right; */
-      width: 100px;
-
       background-color: blue;
       height: 200px;
     }
   </style>
+  <style type="text/css">
+    .container {
+      overflow: hidden;
+    }
+    .left {
+      float: left;
+      width: 100px;
+    }
+    .right {
+      float: right;
+      width: 100px;
+    }
+    .middle {
+      margin: 0 100px;
+    }
+
+
+  </style>
 </head>
 
 <body style="margin:0;">
+  <!-- 容器创建BFC -->
   <div class="container">
+    <!-- 浮动元素必须在前 -->
     <div class="left">I am left</div>
-    <div class="middle">I am middle</div>
     <div class="right">I am right</div>
-
+    <div class="middle">I am middle</div>
   </div>
   <div style="height: 100px; background-color: yellow;"></div>
 </body>

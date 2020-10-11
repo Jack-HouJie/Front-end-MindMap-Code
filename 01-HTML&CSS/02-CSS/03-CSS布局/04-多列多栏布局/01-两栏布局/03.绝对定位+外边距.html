@@ -3,31 +3,31 @@
 
 <head>
   <title>absolute+margin</title>
+  <!-- 初始化样式 -->
   <style type="text/css">
-    .contailer {
-      position: relative;
-    }
-
     .left {
-      overflow: hidden;
-      margin-right: 100px;
-
       height: 100px;
-      background-color: green;
       line-height: 100px;
       text-align: center;
+      background-color: green;
     }
 
+    .right {
+      height: 200px;
+      line-height: 100px;
+      text-align: center;
+      background-color: rgba(0, 0, 255, 0.5);
+    }
+  </style>
+  <style type="text/css">
+    .left {
+      margin-right: 100px;
+    }
     .right {
       position: absolute;
       top: 0;
       right: 0;
       width: 100px;
-
-      height: 200px;
-      background-color: blue;
-      line-height: 100px;
-      text-align: center;
     }
   </style>
 </head>

@@ -23,18 +23,18 @@
     }
 
     .left {
-      width: 100px;
+      width: 50px;
       height: 150px;
       background: red;
     }
 
     .center {
-      height: 100px;
+      height: 50px;
       background: yellow;
     }
 
     .right {
-      width: 100px;
+      width: 50px;
       height: 130px;
       background: greenyellow;
     }
@@ -42,20 +42,17 @@
 
   <!-- 圣杯布局 -->
   <style>
-    /* 左中右区域一行显示 */
+    /* 三栏浮动 */
     .center,
     .left,
     .right {
       float: left;
     }
 
-    /* 伪元素清除浮动 */
-    .container::after {
-      content: "";
-      display: block;
-      height: 0px;
-      clear: both;
-      /* visibility: hidden; */
+
+    /* 中间区域宽度占满 */
+    .center {
+      width: 100%;
     }
 
     /* 中间区域宽度占满 */
@@ -65,21 +62,29 @@
 
     /* 给左右区域留出空间 */
     .container {
-      padding: 0 100px;
+      padding: 0 50px;
     }
 
     /* 左区域移到指定位置 */
     .left {
       margin-left: -100%;
       position: relative;
-      left: -100px;
+      left: -50px;
     }
 
     /* 右区域移到指定位置 */
     .right {
-      margin-left: -100px;
+      margin-left: -50px;
       position: relative;
-      right: -100px;
+      right: -50px;
+    }
+
+    /* 伪元素清除浮动 */
+    .container::after {
+      content: "";
+      display: block;
+      height: 0px;
+      clear: both;
     }
   </style>
 

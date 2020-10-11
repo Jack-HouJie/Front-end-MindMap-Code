@@ -4,7 +4,7 @@ html {
 }
 
 p {
-  /* 盒子容器 */
+  /* 盒模型 */
   width: 200px;
   height: 20px;
   padding: 10px 0px 10px 0px;

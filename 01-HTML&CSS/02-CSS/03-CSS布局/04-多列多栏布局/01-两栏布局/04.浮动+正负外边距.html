@@ -3,35 +3,37 @@
 
 <head>
   <title>BFC</title>
+  <!-- 初始化 -->
   <style type="text/css">
-    /* 内容容器创建BFC */
-    .container {
-      position: relative;
-      overflow: hidden;
-    }
-
-    /* 容器浮动 */
     .left_container {
-      float: left;
-      width: 100%;
-      margin-left: -100px;
-
       height: 100px;
       background-color: green;
     }
-    /* 内容修正位置 */
-    .left {
-      margin-left: 100px;
-    }
 
     .right {
-      float: right;
-      width: 100px;
-
       height: 200px;
       background-color: rgba(0, 0, 255, 0.2);
       line-height: 100px;
       text-align: center;
+    }
+  </style>
+  <style type="text/css">
+    .right {
+      float: right;
+      width: 100px;
+    }
+    .left_container {
+      float: left;
+      width: 100%;
+      margin-left: -100px;
+    }
+    .left {
+      margin-left: 100px;
+    }
+
+    /* 创建BFC：页脚换行 */
+    .container {
+      overflow: hidden;
     }
   </style>
 </head>

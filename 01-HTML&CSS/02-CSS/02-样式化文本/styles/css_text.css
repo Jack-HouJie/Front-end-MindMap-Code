@@ -9,6 +9,7 @@ body {
   margin: 0 auto;
   min-width: 1000px;
   max-width: 1400px;
+  /* 文本样式 */
   font-family: serif;
   font-size: 1.2rem;
   line-height: 1.5rem;

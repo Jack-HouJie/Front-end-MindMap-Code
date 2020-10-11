@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>02-float+fix+float</title>
+  <!-- 初始化 -->
+  <style type="text/css">
+    .left {
+      background-color: rgba(255, 0, 0, 0.5);
+      height: 100px;
+    }
+    .middle {
+      background-color: rgba(0, 255, 0, 0.5);
+      height: 150px;
+    }
+    .right {
+      background-color: rgba(0, 0, 255, 0.5);
+      height: 200px;
+    }
+  </style>  
+  <style type="text/css">
+    /* 左右定宽栏绝对定位 */
+    .left {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100px;
+    }
+    .right {
+      position: absolute;
+      top: 0;
+      right: 0;
+      /* float: right; */
+      width: 100px;
+    }
+
+    /* 中间自适应栏设置外边距 */
+    .middle {
+      margin: 0 100px;
+    }
+
+  </style>
+</head>
+
+<body style="margin:0;">
+  <div class="container">
+    <div class="middle">I am middle</div>
+    <div class="left">I am left</div>
+    <div class="right">I am right</div>
+  </div>
+  <div style="height: 100px; background-color: yellow;">
+  I am footer
+  </div>
+</body>
+
+</html>

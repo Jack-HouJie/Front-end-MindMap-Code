@@ -23,7 +23,6 @@
     }
 
     .left {
-      width: 100px;
       height: 150px;
       background: red;
     }
@@ -34,7 +33,6 @@
     }
 
     .right {
-      width: 100px;
       height: 130px;
       background: greenyellow;
     }
@@ -42,30 +40,36 @@
 
   <style>
     /* 弹性布局  */
-    .container {
+    /* .container {
       display: flex;
     }
+
     .center {
       flex: 1;
     }
 
+    .left {
+      width: 50px;
+    }
+
+    .right {
+      width: 50px;
+    } */
 
     /* 网格布局  */
     /* 行高需等于最高的列 */
-    /* .container {
+    .container {
       display: grid;
-      grid-template-columns: 100px 1fr 100px;
-    } */
+      grid-template-columns: 50px 1fr 50px;
+    }
   </style>
 
 </head>
 
 <body>
   <div class="container">
-    <!-- 必须按顺序 -->
-    <div class="center">主区域</div>
     <div class="left">左区域</div>
-    
+    <div class="center">主区域</div>
     <div class="right">右区域</div>
   </div>
   <footer>底部</footer>

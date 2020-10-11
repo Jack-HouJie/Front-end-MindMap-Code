@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!-- 参考https://www.jianshu.com/p/4c01c7913b40 -->
+  <title>float+margin_or_BFC</title>
+  <style type="text/css">
+    /* 初始化 */
+    .left {
+      height: 100px;
+      line-height: 100px;
+      text-align: center;
+      background-color: green;
+    }
+
+    .right {
+      height: 200px;
+      line-height: 100px;
+      text-align: center;
+      background-color: rgba(0, 0, 255, 0.5);
+    }
+  </style>
+  <style type="text/css">
+    .container {
+      /* 创建BFC:清除浮动对header和footer的影响 */
+      overflow: hidden;
+    }
+
+    .left {
+      /* 创建BFC实现自适应：
+         BFC的区域不会与浮动元素发生重叠 */
+      overflow: hidden;
+    }
+
+    .right {
+      float: right;
+      width: 100px;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- 创建容器（设置BFC） -->
+  <div class="container">
+    <!-- 浮动的一边要优先渲染 -->
+    <div class="right">I am right</div>
+    <div class="left">I am left</div>
+  </div>
+  <div style="height: 100px; background-color: red;"> i am footer</div>
+</body>
+
+</html>

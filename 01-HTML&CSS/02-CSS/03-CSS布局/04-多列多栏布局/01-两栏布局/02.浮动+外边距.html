@@ -5,16 +5,8 @@
   <!-- 参考https://www.jianshu.com/p/4c01c7913b40 -->
   <title>float+margin_or_BFC</title>
   <style type="text/css">
-    .container {
-      overflow: hidden;
-    }
-
+    /* 初始化 */
     .left {
-      /* BFC实现 */
-      /* overflow: hidden; */
-      /* 外边距实现 */
-      margin-right: 100px;
-
       height: 100px;
       line-height: 100px;
       text-align: center;
@@ -22,13 +14,23 @@
     }
 
     .right {
-      float: right;
-      width: 100px;
-
       height: 200px;
       line-height: 100px;
       text-align: center;
       background-color: rgba(0, 0, 255, 0.5);
+    }
+  </style>
+  <style type="text/css">
+    .right {
+      float: right;
+      width: 100px;
+    }
+    .left {
+      /* 外边距留出定宽位置 */
+      margin-right: 100px;
+    }
+    .container {
+      overflow: hidden;
     }
   </style>
 </head>
