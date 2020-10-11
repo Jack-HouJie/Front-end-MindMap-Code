@@ -1,81 +1,62 @@
-// 排序通用：检查数组，交换数组项
-function checkArray (arr) {
-  if (!arr) {
-    return
+// 1.线性表
+// 1.2.1 实现单链表
+class ListNode {
+  constructor(val, next) {
+    this.value = val
+    this.next = next
+  }
+  exec () {
+    console.log(this.value)
   }
 }
-function swap (arr, left, right) {
-  let temp = arr[left]
-  arr[left] = arr[right]
-  arr[right] = temp
-}
-// 冒泡排序
-function bubbleSort (arr) {
-  // 每趟找到最大放最后
-  let length = arr.length
-  // 从length-1个开始(全部)* 
-  for (let i = length - 1; i > 0; i--) {
-    for (let j = 0; j < i; j++) {
-      if (arr[j] > arr[j + 1]) {
-        swap(arr, j, j + 1)
-      }
+class LinkList {
+  constructor(headNode) {
+    this.preHead = new LinkList(undefined, headNode)
+    this.size = 0
+  }
+  /**
+   * 检查越界直接抛出错误*
+   * @param {Number} idx 
+   */
+  checkIdx (idx) {
+    // 考虑idx小于0*
+    if (idx >= this.size || idx < 0) {
+      throw new Error('idx error!')
     }
   }
-  return arr
-}
-// 插入排序
-function insertSort (arr) {
-  // 从每趟把当前值插入正确位置
-  for (let i = 1; i < length; i++) {
-    for (let j = i - 1; j >= 0; j--) {
-      // 比前一个小则交换
-      if (arr[j] > arr[j + 1]) {
-        swap(arr, j, j + 1)
-      }
-    }
-  }
-  return arr
-}
-// 选择排序
-function selectionSort (arr) {
-  // 每趟找到最小项索引，直接放最前
-  for (let i = 0; i < arr.length; i++) {
-    let min_idx = i
-    for (let j = i; j < arr.length; j++) {
-      if (arr[min_idx] > arr[j]) {
-        min_idx = j
-      }
-    }
-    swap(arr, min_idx, i)
-  }
-}
-// 归并排序
 
-// 快速排序
-function quickSort (arr) {
-  length = arr.length
-  // 递归到只有一个元素,此元素即为结果
-  if (length < 2) {
-    return arr
-  }
-  // 保存每次递归的较大、较小值
-  let less = []
-  let more = []
-  // 将中位项的值作为tag
-  let tag_idx = Math.floor(length / 2)
-  let tag_val = arr[tag_indx]
-  // 找到比tag小的值和大的值
-  for (let i = 0; i < length; i++) {
-    // 0629优化：没把arr[i]提出括号
-    let cur_val = arr[i]
-    if (cur_val < tag_val){
-      less.push(cur_val)
-    } else if ( cur_val > tag_val) {
-      more.push(cur_val)
+  /**
+   * 抽象一个找节点方法*
+   * @param {*} curNode 
+   * @param {*} curIdx 
+   * @param {*} tarIdx 
+   */
+  findNode (curNode, curIdx, tarIdx) {
+    this.checkIdx(curIdx)
+    this.checkIdx(tarIdx)
+    if (curIdx === tarIdx) {
+      return curNode
+    } else {
+      return this.findNode(curNode.next, curIdx + 1, tarIdx)
     }
   }
-  // 递归的将小数组、tag、大数组拼接*
-  return quickSort(less).concat([tag_val], quickSort(more))
-}
-// 斐波那契(递归+动态规划)
 
+  insert (value, preIdx) {
+    this.checkIdx(preIdx)
+    let preNode = this.findNode(this.preHead.next, 0, preIdx)
+    let newNode = new ListNode(value, preNode.next)
+    preNode.next = newNode
+    this.size++
+    return newNode // 返回新节点*
+  }
+
+  delete (tarIdx) {
+    this.checkIdx(tarIdx)
+    let preNode = this.findNode(this.preHead.next, 0, tarIdx - 1)
+    delNode = preNode.next // 需要处理删除的节点*
+    preNode.next = delNode.next
+    delNode.next = null // 解引用*
+    this.size--
+    return delNode // 返回删除的节点*
+  }
+}

@@ -11,7 +11,6 @@ class LinkList {
     this.preHead = preHead
   }
   /** 检查越界
-   * 
    * @param {Number} index 索引值
    */
   checkIndex (index) {
@@ -21,7 +20,6 @@ class LinkList {
   }
 
   /** 得到节点(指定索引)
-   * 
    * @param {ListNode} curNode 开始查找节点
    * @param {Number} curIndex 开始查找节点索引
    * @param {Number} tarIndex 目标索引
