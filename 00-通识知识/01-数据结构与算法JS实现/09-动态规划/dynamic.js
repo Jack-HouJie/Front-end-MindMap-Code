@@ -97,3 +97,30 @@ function rob (nums) {
   return dp[length - 1]
 }
 console.log(rob([1, 2, 3, 4, 5]));
+
+/**
+ * 最长重复子序列
+ * @param {String} str1 
+ * @param {String} str2 
+ */
+function maxSeq (str1, str2) {
+  // 二维数组初始化
+  var arr = [];
+  for (var i = 0; i < str1.length + 1; i++) {
+    arr[i] = [];
+    for (var j = 0; j < str2.length + 1; j++) {
+      arr[i][j] = 0;
+    }
+  }
+  for (var i = 1; i < str1.length + 1; i++) {
+    for (var j = 1; j < str2.length + 1; j++) {
+      if (str1[i - 1] == str2[j - 1]) {
+        arr[i][j] = arr[i - 1][j - 1] + 1;
+      } else if (arr[i - 1][j] >= arr[i][j - 1]) {
+        arr[i][j] = arr[i - 1][j];
+      } else {
+        arr[i][j] = arr[i][j - 1];
+      }
+    }
+  }
+}
