@@ -105,8 +105,10 @@ function reverseList (head) {
   let next = head.next
   // 当 当前节点 存在时
   while (cur) {
-    next = cur.next // 拿到后继节点
+    next = cur.next // 更新后继节点
+
     cur.next = pre // 更新当前指针域名
+    
     pre = cur // 更新前驱节点
     cur = next // 更新当前节点
   }
@@ -211,6 +213,7 @@ function deleteDuplication (pHead) {
 //   console.log(clean_head.value);
 //   clean_head = clean_head.next
 // }
+
 /** 合并两个有序链表*
  * 
  * @param {ListNode} pHead1 
@@ -224,7 +227,7 @@ function merge (pHead1, pHead2) {
   if (!pHead2) {
     return pHead1
   }
-  let head // 结果链表中每次迭代处理的节点
+  let head // 结果链表中每次递归处理的节点
   if (pHead1.value < pHead2.value) {
     // 小节点作为当前节点
     head = pHead1

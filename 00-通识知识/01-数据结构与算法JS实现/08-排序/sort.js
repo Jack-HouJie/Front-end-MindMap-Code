@@ -56,8 +56,8 @@ function insertSort (array) {
 
 /** 交换类排序 */
 /** 冒泡排序
- * 循环数组，如果前大后小则交换位置。
- * 每趟对未排序数 进行循环
+ *  循环数组，如果前大后小则交换位置。
+ *  每趟对未排序数 进行循环
  * @param {Array} array 
  */
 function bubbleSort (array) {

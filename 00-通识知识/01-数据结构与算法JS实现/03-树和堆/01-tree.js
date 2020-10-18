@@ -318,10 +318,10 @@ function reConstructBinaryTree (pre, mid) {
   let curIdx = mid.indexOf(curValue)
   let leftMid = pre.slice(0, curIdx)
   let rightMid = pre.slice(curIdx + 1)
-  let lfetPre = pre.slice(1, curIdx + 1)
+  let leftPre = pre.slice(1, curIdx + 1)
   let rightPre = pre.slice(curIdx + 1)
   let node = new TNode(curValue)
-  node.left = reConstructBinaryTree(lfetPre, leftMid)
+  node.left = reConstructBinaryTree(leftPre, leftMid)
   node.right = reConstructBinaryTree(rightPre, rightMid)
   return node
 }
