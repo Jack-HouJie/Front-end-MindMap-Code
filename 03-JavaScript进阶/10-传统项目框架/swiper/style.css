@@ -1,8 +1,0 @@
-*{
-  padding: 0;
-  margin: 0;
-}
-.swiper-container{
-  width: 100vw;       /*100vw的意思是宽度和浏览器窗口的宽度一样*/
-  height: 100vh;      /*100vh的意思是宽度和浏览器窗口的高度一样*/
-}
